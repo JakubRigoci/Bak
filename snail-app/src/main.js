@@ -9,6 +9,13 @@ Vue.config.productionTip = false
 
 Axios.defaults.baseURL = 'http://192.168.0.106:8081/api/v1/'
 Axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+Vue.prototype.$http = Axios;
+const token = localStorage.getItem('token')
+if (token) {
+  Vue.prototype.$http.defaults.headers.common['Authorization'] = token
+}
+
+
 
 new Vue({
   router,

@@ -1,29 +1,19 @@
 <template>
+<v-main>
   <v-app class='primary'>
-    <v-app-bar
-      app
-      class='secondary'
-    >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Snail App</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
-    </v-app-bar>
+    <Header></Header>
 
     <v-main>
       <SnailContainer></SnailContainer>
     </v-main>
   </v-app>
+  </v-main>
 </template>
 
 <script>
 //import BoxContainer from '@/components/Box/BoxContainer.vue'
 import SnailContainer from '@/components/Snail/SnailContainer.vue'
+import Header from '@/components/Header/Header.vue'
 //const axios = require('axios');
   export default {
     data() {
@@ -36,9 +26,15 @@ import SnailContainer from '@/components/Snail/SnailContainer.vue'
         ]
       }
     },
-    components: {SnailContainer},
-    // created: function() {
-    //   axios.get(/)
-    // }
+    components: {SnailContainer, Header},
+    created: function () {
+    this.$http.interceptors.response.use(undefined, function (err) {
+      return new Promise(function () {
+        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+          this.$store.dispatch('logout')
+        }
+        throw err;
+      });
+    });}
   }
 </script>
