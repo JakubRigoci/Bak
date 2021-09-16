@@ -1,19 +1,13 @@
 <template>
-<v-main>
-  <v-app class='primary'>
-    <Header></Header>
+<v-container fluid>
+      <BoxContainer></BoxContainer>
 
-    <v-main>
-      <SnailContainer></SnailContainer>
-    </v-main>
-  </v-app>
-  </v-main>
+</v-container>
 </template>
 
 <script>
-//import BoxContainer from '@/components/Box/BoxContainer.vue'
-import SnailContainer from '@/components/Snail/SnailContainer.vue'
-import Header from '@/components/Header/Header.vue'
+import BoxContainer from '@/components/Box/BoxContainer.vue'
+//import SnailContainer from '@/components/Snail/SnailContainer.vue'
 //const axios = require('axios');
   export default {
     data() {
@@ -26,7 +20,7 @@ import Header from '@/components/Header/Header.vue'
         ]
       }
     },
-    components: {SnailContainer, Header},
+    components: {BoxContainer},
     created: function () {
     this.$http.interceptors.response.use(undefined, function (err) {
       return new Promise(function () {

@@ -1,10 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index.js'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
+import BoxView from '../views/BoxView.vue'
 import App from '../App.vue'
 
 Vue.use(VueRouter)
+
+const ifNotAuthenticated = (to, from, next) => {
+  if (!store.getters.isLoggedIn) {
+    next()
+    return
+  }
+  next('/')
+}
+
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isLoggedIn) {
+    next()
+    return
+  }
+  next('/login')
+}
 
 const routes = [
   {
@@ -15,12 +33,20 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    beforeEnter: ifAuthenticated,
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter: ifNotAuthenticated,
+  },
+  {
+    path: '/box/:id',
+    name: 'boxView',
+    component: BoxView,
+    beforeEnter: ifAuthenticated,
   },
   // {
   //   path: '/about',

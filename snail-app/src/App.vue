@@ -1,8 +1,10 @@
 <template>
   <v-app>
     <Header></Header>
-    <v-main>
-                  <router-view></router-view>
+    <v-main class="primary">
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -17,3 +19,9 @@ export default {
   }),
 };
 </script>
+
+<style>
+.primary {
+  padding-top: 56px !important;
+}
+</style>

@@ -1,20 +1,16 @@
 <template>
     <v-app-bar
-      app
       class='secondary'
+      app
     >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
       <v-toolbar-title>Snail App</v-toolbar-title>
       
-      <router-link to="/login">login</router-link> |
-      <router-link to="/home">home</router-link>
+     
       
       <v-spacer></v-spacer>
+       <router-link to="/home">home</router-link>
         <span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span>
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+        <span v-if="!isLoggedIn"> | <a @click="login">Login</a></span>
     </v-app-bar>
 </template>
 
@@ -29,6 +25,9 @@
         .then(() => {
           this.$router.push('/login')
         })
+      },
+      login: function () {
+        this.$router.push('/login')
       }
     },
     mounted : function () {

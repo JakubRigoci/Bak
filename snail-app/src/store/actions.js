@@ -1,29 +1,51 @@
 import axios from 'axios';
-
+var token;
 export const getSnails = ({commit}) => {
-    axios.get('/snek', {
-        headers: {
+  return new Promise((resolve, reject) => {
+    axios.get('/snek').then(response =>{
+      commit('GET_SNAILS', response.data)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
 
-        }
-    }).then(response =>{
-        commit('SNAILS', response.data)
-    })
+export const getGroupsForBox = ({commit}, boxId) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`/box/${boxId}/skupina`).then(response =>{
+      commit('GET_GROUPS_FOR_BOX', { id: boxId, data: response.data})
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+
+}
+
+export const getBoxes = ({commit}) => {
+  return new Promise((resolve, reject) => {
+    axios.get('/box').then(response =>{
+      commit('GET_BOXES', response.data)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
 }
 
 export const login = ({commit}, user) => {
     return new Promise((resolve, reject) => {
       commit('auth_request')
       console.log(user)
-      axios({url: 'http://192.168.109:8081/api/v1/auth/signin', headers: {'Access-Control-Allow-Origin' : '*'} 
-            , data:{ 'username' : user.name, 'password' : user.password}, method: 'POST' })
+      axios.post('auth/signin', { 'username' : user.name, 'password' : user.password})
       .then(resp => {
         console.log(resp.data)
-        const token = resp.data.accessToken
-        console.log(token)
-        const user = resp.data
+        token = resp.data.accessToken
+        const user = {
+          userId : resp.data.id, 
+          userName : resp.data.name, 
+          userEmail : resp.data.email, 
+          userRoles : resp.data.roles
+        }
+
         localStorage.setItem('token', token)
-        axios.defaults.headers.common['Authorization'] = token
-        commit('auth_success', token, user)
+        axios.defaults.headers.common = {'Authorization' : `Bearer ${token}`}
+        commit('auth_success', {token: token, user: user} )
         console.log(user)
         resolve(resp)
       })
@@ -43,4 +65,4 @@ export const logout = ({commit}) => {
       delete axios.defaults.headers.common['Authorization']
       resolve()
     })
-  }
+}

@@ -1,5 +1,9 @@
 export default {
     status: '',
     token: localStorage.getItem('token') || '',
-    user : {}
+    user: {},
+    snails: {},
+    boxes: {},
+    groups: {},
+    groupsForBox:{},
 }

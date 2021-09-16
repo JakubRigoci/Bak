@@ -17,29 +17,42 @@
      <v-icon x-large class="pr-8"> mdi-archive </v-icon>
     </v-list-item>
     <v-card-actions class="d-flex justify-space-around mb-6">
-      <v-btn outlined rounded text depressed class="info"> Detaily </v-btn>
+      <v-btn @click="details" outlined rounded text depressed class="info"> Detaily </v-btn>
       <v-btn outlined rounded text depressed class="info"> Uprav </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 <script>
+
+// data() {
+//     return {
+//       boxes: {
+//         boxId: 0,
+//         komentar: "cerveny box",
+//         jmeno: "muj box 1",
+//         vyska: "12.2",
+//         sirka: "12.2",
+//         hloubka: "12.2",
+//         datumPorizeni: "2021-01-01",
+//         prodejce: "alza",
+//       },
+//     };
+//   },
 export default {
   props: {
     id: Number,
   },
-  data() {
-    return {
-      box: {
-        boxId: 0,
-        komentar: "cerveny box",
-        jmeno: "muj box 1",
-        vyska: "12.2",
-        sirka: "12.2",
-        hloubka: "12.2",
-        datumPorizeni: "2021-01-01",
-        prodejce: "alza",
-      },
-    };
+  methods: {
+    details(){
+      this.$router.push(`/box/${this.id}`)
+    }
+  },
+  computed: {
+    box() {
+      return this.$store.state.boxes.find( b => {
+        return b.boxId === this.id
+      });
+    }
   },
 };
 </script>
