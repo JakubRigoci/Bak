@@ -16,12 +16,10 @@
           <v-col>
           <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-          <v-card allign="center" class="mx-auto primary justify-center d-flex" max-width="344" outlined>
-          <v-avatar v-bind="attrs"
-          v-on="on" :click="showBoxPopup" class="d-flex " color="secondary" size='120'>
-              <v-icon x-large> mdi-archive-plus </v-icon>
-          </v-avatar>
-          </v-card>
+            <div v-bind="attrs"
+          v-on="on">
+              <BoxAddPopup></BoxAddPopup>
+            </div>
           </template>
           <span>Pridat box</span>
           </v-tooltip>  
@@ -32,8 +30,9 @@
 </template>
 <script>
 import Box from "@/components/Box/Box.vue";
+import BoxAddPopup from '@/components/Box/BoxAddPopup.vue';
 export default {
-  components: { Box },
+  components: { Box, BoxAddPopup },
   data() {
     return {
       boxes: [
@@ -74,9 +73,6 @@ export default {
     printId() {
       console.log(this.box[0].boxId);
     },
-    showBoxPopup() {
-      
-    }
   },
 };
 </script>

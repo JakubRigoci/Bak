@@ -11,14 +11,14 @@
 
     <v-card-subtitle class="mx-auto" max-width='100'> {{snail.komentar}} </v-card-subtitle>
 
-    <div class="container">
-  <div class="name"></div>
-  <div class="komentar"></div>
-  <div class="barva-ulita"></div>
-  <div class="barva-rtelo"></div>
-  <div class="aaa"></div>
-</div>
-    <div class="snail-info">
+  <div class="container">
+    <div class="name"></div>
+    <div class="komentar"></div>
+    <div class="barva-ulita"></div>
+    <div class="barva-rtelo"></div>
+    <div class="aaa"></div>
+    </div>
+  <div class="snail-info">
           <v-card-subtitle class="allign-right"> <b>Barva ulity:</b> {{snail.barvaUlita}} </v-card-subtitle>
     <v-card-subtitle flex> <b>Barva tela:</b> {{snail.barvaTelo}} </v-card-subtitle>
     </div>

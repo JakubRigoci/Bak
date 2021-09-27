@@ -1,17 +1,12 @@
 <template lang="">
     <div >
-        <v-btn @click="log" outlined rounded text depressed class="info"> Uprav </v-btn>
-        BOXVIEW
-        {{this.$route.params.id}}
-        <div v-for="group in groups" :key="group.skupinaId">
-            <Group :id="group.skupinaId"></Group>
-        </div>
+        <GroupContainer :ids="groups.map(g => g.skupinaId)"></GroupContainer>
     </div>
 </template>
 <script>
-import Group from '@/components/Group/Group.vue'
+import GroupContainer from '@/components/Group/GroupContainer.vue'
 export default {
-    components: {Group},
+    components: {GroupContainer},
     async created(){
         await this.$store.dispatch('getGroupsForBox', this.$route.params.id)
     },

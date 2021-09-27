@@ -1,13 +1,14 @@
 <template>
+<v-container fluid class="pt-4">
   <v-row justify="center">
     <v-expansion-panels popout>
       <v-expansion-panel
         v-for="item in dummy"
         :key="item.id"
       >
-      <v-expansion-panel-header v-slot="{ open }">
+      <v-expansion-panel-header  class="info" v-slot="{ open }">
         <v-row no-gutters>
-          <v-col cols="4" v-if="!open">
+          <v-col cols="4">
             {{item.name}}
           </v-col>
           <v-col
@@ -34,12 +35,13 @@
           </v-col>
         </v-row>
       </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        <v-expansion-panel-content class="info">
             <Snail></Snail>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
   </v-row>
+  </v-container>
 </template>
 
 <script>

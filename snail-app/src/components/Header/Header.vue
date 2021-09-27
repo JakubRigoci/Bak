@@ -3,7 +3,7 @@
       class='secondary'
       app
     >
-      <v-toolbar-title>Snail App</v-toolbar-title>
+      <v-toolbar-title @click="goHome" >Snail App</v-toolbar-title>
       
      
       
@@ -28,6 +28,9 @@
       },
       login: function () {
         this.$router.push('/login')
+      },
+      goHome: function () {
+        this.$router.push('/home');
       }
     },
     mounted : function () {

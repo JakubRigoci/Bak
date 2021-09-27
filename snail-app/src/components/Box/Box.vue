@@ -2,9 +2,9 @@
   <v-card class="mx-auto secondary" max-width="344" outlined>
     <v-list-item three-line>
       <v-list-item-content class="pa-8">
-        <div class="text-overline mb-4">Box</div>
-        <v-list-item-title class="text-h5 mb-1">
-          {{box.jmeno}}
+        <div class="text-overline mb-4">{{box.jmeno}}</div>
+        <v-list-item-title class="mb-1">
+          {{box.komentar}}
         </v-list-item-title>
         <v-list-item-subtitle>
           Vyska: {{box.vyska}}
