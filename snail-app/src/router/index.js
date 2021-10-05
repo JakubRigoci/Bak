@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import store from '../store/index.js'
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
-import BoxView from '../views/BoxView.vue'
-import App from '../App.vue'
+import Vue from "vue"
+import VueRouter from "vue-router"
+import store from "../store/index.js"
+import Home from "../views/Home.vue"
+import Login from "../views/Login.vue"
+import BoxView from "../views/BoxView.vue"
+import App from "../App.vue"
 
 Vue.use(VueRouter)
 
@@ -13,7 +13,7 @@ const ifNotAuthenticated = (to, from, next) => {
     next()
     return
   }
-  next('/')
+  next("/")
 }
 
 const ifAuthenticated = (to, from, next) => {
@@ -21,30 +21,30 @@ const ifAuthenticated = (to, from, next) => {
     next()
     return
   }
-  next('/login')
+  next("/login")
 }
 
 const routes = [
   {
-    path: '/',
-    name: 'App',
+    path: "/",
+    name: "App",
     component: App
   },
   {
-    path: '/home',
-    name: 'Home',
+    path: "/home",
+    name: "Home",
     component: Home,
     beforeEnter: ifAuthenticated,
   },
   {
-    path: '/login',
-    name: 'Login',
+    path: "/login",
+    name: "Login",
     component: Login,
     beforeEnter: ifNotAuthenticated,
   },
   {
-    path: '/box/:id',
-    name: 'boxView',
+    path: "/box/:id",
+    name: "boxView",
     component: BoxView,
     beforeEnter: ifAuthenticated,
   },
@@ -60,7 +60,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
 })

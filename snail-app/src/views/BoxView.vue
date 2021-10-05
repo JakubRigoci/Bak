@@ -1,14 +1,17 @@
 <template lang="">
-    <div >
-        <GroupContainer :ids="groups.map(g => g.skupinaId)"></GroupContainer>
-    </div>
+<div>
+    <GroupContainer :ids="groups.map(g => g.skupinaId)"></GroupContainer>
+</div>
 </template>
+
 <script>
-import GroupContainer from '@/components/Group/GroupContainer.vue'
+import GroupContainer from "@/components/Group/GroupContainer.vue"
 export default {
-    components: {GroupContainer},
-    async created(){
-        await this.$store.dispatch('getGroupsForBox', this.$route.params.id)
+    components: {
+        GroupContainer
+    },
+    created() {
+        this.$store.dispatch("getGroupsForBox", this.$route.params.id)
     },
     computed: {
         groups() {
@@ -23,6 +26,7 @@ export default {
     }
 }
 </script>
+
 <style lang="">
-    
+
 </style>

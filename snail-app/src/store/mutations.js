@@ -11,13 +11,13 @@ export const GET_GROUPS = (state, groups) => {
 }
 
 export const GET_GROUPS_FOR_BOX = (state, groups) => {
-  state.groupsForBox = groups.data.filter(g => {
-    return g.datumDo === null;
-  });
+  const allGroups = state.groups
+  const groupIds = groups.map(g => g.skupinaId)
+  state.groupsForBox = allGroups.filter(g => groupIds.includes(g.skupinaId))
 }
 
 export const GET_SNAILS_FOR_GROUP = (state, snails) => {
-  state.snailsForGroup = snails;
+  state.snailsForGroup[snails.id] = snails.data;
 }
 
 export const ADD_BOX = (state, box) => {
@@ -25,22 +25,40 @@ export const ADD_BOX = (state, box) => {
   state.groupsForBox.push(box);
 }
 
-export const auth_request = (state) => {
-  state.status = 'loading'
+export const ADD_GROUP = (state, group) => {
+  state.groups.push(group);
+  state.groupsForBox.push(group);
 }
 
-export const auth_success = (state, payload) => {
-  state.status = 'success'
+export const REMOVE_GROUP = (state, groupId) => {
+    state.groups = state.groups.filter(g => g.skupinaId !== groupId)
+    state.groupsForBox = state.groupsForBox.filter(g => g.skupinaId !== groupId)
+}
+
+export const REMOVE_BOX = (state, boxId) => {
+    state.boxes = state.boxes.filter(b => b.boxId !== boxId)
+}
+
+export const SET_ACTIVE_BOX = (state, boxId) => {
+  state.activeBox = boxId
+}
+
+export const AUTH_REQUEST = (state) => {
+  state.status = "loading"
+}
+
+export const AUTH_SUCCESS = (state, payload) => {
+  state.status = "success"
   state.token = payload.token
   state.user = payload.user
 }
 
-export const auth_error = (state) => {
-  state.status = 'error'
+export const AUTH_ERROR = (state) => {
+  state.status = "error"
 }
 
-export const logout = (state) => {
-  state.status = ''
-  state.token = ''
+export const LOGOUT = (state) => {
+  state.status = ""
+  state.token = ""
 }
 

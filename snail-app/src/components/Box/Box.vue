@@ -1,59 +1,48 @@
 <template>
-  <v-card class="mx-auto secondary" max-width="344" outlined>
+<v-card class="mx-auto secondary" max-width="344" outlined>
     <v-list-item three-line>
-      <v-list-item-content class="pa-8">
-        <div class="text-overline mb-4">{{box.jmeno}}</div>
-        <v-list-item-title class="mb-1">
-          {{box.komentar}}
-        </v-list-item-title>
-        <v-list-item-subtitle>
-          Vyska: {{box.vyska}}
-        </v-list-item-subtitle>
-        <v-list-item-subtitle>
-          Sirka: {{box.sirka}}
-        </v-list-item-subtitle>
-      </v-list-item-content>
+        <v-list-item-content class="pa-8">
+            <div class="text-overline mb-4">{{box.jmeno}}</div>
+            <v-list-item-title class="mb-1">
+                {{box.komentar}}
+            </v-list-item-title>
+            <v-list-item-subtitle>
+                Vyska: {{box.vyska}}
+            </v-list-item-subtitle>
+            <v-list-item-subtitle>
+                Sirka: {{box.sirka}}
+            </v-list-item-subtitle>
+        </v-list-item-content>
 
-     <v-icon x-large class="pr-8"> mdi-archive </v-icon>
+        <v-icon x-large class="pr-8"> mdi-archive </v-icon>
     </v-list-item>
     <v-card-actions class="d-flex justify-space-around mb-6">
-      <v-btn @click="details" outlined rounded text depressed class="info"> Detaily </v-btn>
-      <v-btn outlined rounded text depressed class="info"> Uprav </v-btn>
+        <v-btn @click="details" outlined rounded text depressed class="info"> Detaily </v-btn>
+        <BoxRemovePopup :id="box.boxId" :name="box.jmeno"></BoxRemovePopup>
     </v-card-actions>
-  </v-card>
+</v-card>
 </template>
-<script>
 
-// data() {
-//     return {
-//       boxes: {
-//         boxId: 0,
-//         komentar: "cerveny box",
-//         jmeno: "muj box 1",
-//         vyska: "12.2",
-//         sirka: "12.2",
-//         hloubka: "12.2",
-//         datumPorizeni: "2021-01-01",
-//         prodejce: "alza",
-//       },
-//     };
-//   },
+<script>
+import BoxRemovePopup from "@/components/Box/BoxRemovePopup.vue"
 export default {
-  props: {
-    id: Number,
-  },
-  methods: {
-    details(){
-      this.$router.push(`/box/${this.id}`)
-    }
-  },
-  computed: {
-    box() {
-      return this.$store.state.boxes.find( b => {
-        return b.boxId === this.id
-      });
-    }
-  },
+    props: {
+        id: Number,
+    },
+    methods: {
+        details() {
+            this.$store.dispatch("setActiveBox", this.box.boxId)
+            this.$router.push(`/box/${this.id}`)
+        }
+    },
+    computed: {
+        box() {
+            return this.$store.state.boxes.find(b => {
+                return b.boxId === this.id;
+            });
+        }
+    },
+    components: {BoxRemovePopup}
 };
 </script>
 

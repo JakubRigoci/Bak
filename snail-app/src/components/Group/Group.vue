@@ -1,21 +1,16 @@
 <template lang="">
 <div>
-    <SnailContainer></SnailContainer>
+    <SnailContainer :groupId="id"></SnailContainer>
 </div>
 </template>
 <script>
-import SnailContainer from '@/components/Snail/SnailContainer.vue'
+import SnailContainer from "@/components/Snail/SnailContainer.vue"
 export default {
     props: {
         id: Number,
     },
     created() {
-        this.$store.dispatch('getSnailsForGroup')
-    },
-    computed: {
-        snails() {
-            return this.$store.state.snailsForGroup
-        }
+        this.$store.dispatch("getSnails")
     },
     methods: {
         log(){
