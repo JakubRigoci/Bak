@@ -26,16 +26,18 @@
                     </v-row>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content class="info">
-                    <Snail :id="snail.snekId"></Snail>
+                    <Snail :groupId="groupId" :snailId="snail.snekId"></Snail>
                 </v-expansion-panel-content>
             </v-expansion-panel>
         </v-expansion-panels>
+        <SnailAddPopup :groupId="groupId"></SnailAddPopup>
     </v-row>
 </v-container>
 </template>
 
 <script>
 import Snail from "@/components/Snail/Snail.vue"
+import SnailAddPopup from "@/components/Snail/SnailAddPopup.vue"
 export default {
     created() {
       this.$store.dispatch("getSnailsForGroup", this.groupId)
@@ -46,7 +48,8 @@ export default {
       }
     },
     components: {
-        Snail
+        Snail,
+        SnailAddPopup
     },
     props: {
         groupId: Number

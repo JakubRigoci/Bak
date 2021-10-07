@@ -5,7 +5,7 @@
             <v-card allign="center" class="mx-auto primary justify-center d-flex" max-width="344" outlined>
 
                 <v-avatar v-bind="attrs" v-on="on" class="d-flex " color="secondary" size='120'>
-                    <v-icon x-large> mdi-archive-plus </v-icon>
+                    <v-icon x-large> mdi-plus-thick </v-icon>
                 </v-avatar>
             </v-card>
         </template>

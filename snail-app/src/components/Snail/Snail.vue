@@ -1,6 +1,25 @@
 <template>
 <v-card>
-    <v-data-table :headers="headers" :items="mereni" :items-per-page="5" class="elevation-1"></v-data-table>
+    <v-card-actions>
+        <v-btn color="orange lighten-2" text> Mereni </v-btn>
+
+        <v-spacer></v-spacer>
+
+        <v-btn icon @click="showTable = !showTable">
+            <v-icon>{{ showTable ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
+        </v-btn>
+    </v-card-actions>
+
+    
+    <v-expand-transition>
+        <div v-show="showTable">
+            <v-divider></v-divider>
+                <v-data-table :headers="headers" :items="mereni" :items-per-page="5" class="elevation-1"></v-data-table>
+            <v-card-text>
+                TEXT?
+            </v-card-text>
+        </div>
+    </v-expand-transition>
 
     <v-card-title> {{snail.jmeno}}</v-card-title>
 
@@ -17,6 +36,8 @@
         <v-card-subtitle class="allign-right"> <b>Barva ulity:</b> {{snail.barvaUlita}} </v-card-subtitle>
         <v-card-subtitle flex> <b>Barva tela:</b> {{snail.barvaTelo}} </v-card-subtitle>
     </div>
+
+    <SnailRemovePopup :groupId="groupId" :snailId="snailId"></SnailRemovePopup>
 
     <v-card-actions>
         <v-btn color="orange lighten-2" text> Galeria </v-btn>
@@ -42,21 +63,25 @@
 
 <script>
 import Gallery from "@/components/Gallery/Gallery.vue"
+import SnailRemovePopup from "@/components/Snail/SnailRemovePopup.vue"
 export default {
     props: {
-        id: Number,
+        snailId: Number,
+        groupId: Number
     },
     components: {
-        Gallery
+        Gallery,
+        SnailRemovePopup
     },
     computed: {
         snail() {
-            return this.$store.getters.snailById(this.id)
+            return this.$store.getters.snailById(this.snailId)
         }
     },
     data() {
         return {
             show: false,
+            showTable: false,
             headers: [{
                     text: "Komentar",
                     value: "komentar",
@@ -103,23 +128,6 @@ export default {
                     ulita: "8",
                 },
             ],
-            // snail: {
-            //   snekId: 0,
-            //   jmeno: "Snek",
-            //   komentar: "Snek mi tu snekuje",
-            //   barvaUlita: "Cervena",
-            //   barvaTelo: "Cierna",
-            //   vzorecUlita: "Kruh",
-            //   narozen: "2021-01-04",
-            //   zemrel: "2021-01-04",
-            //   prodan: "2021-01-04",
-            //   puvodSneka: "od kamosa",
-            //   zverejnit: true,
-            //   aktivni: true,
-            //   taxonomyId: 0,
-            //   snuskaId: 0,
-            //   galerieId: 0,
-            // },
         };
     },
 };

@@ -14,9 +14,12 @@
                         <v-col cols="4" class="text--secondary">
                             Velikost: {{group.velikost}}
                         </v-col>
-                        <v-col cols="4">
+                        </v-row>
+                        <v-row>
+                        <v-col cols="12">
+                            <v-spacer></v-spacer>
                             <GroupRemovePopup :id="group.skupinaId" :name="group.jmeno" ></GroupRemovePopup>
-                            <v-btn outlined rounded text depressed class="info"> Uprav </v-btn>
+                            <v-btn outlined width="100px" depressed class="ma-2 width:100px info"> Uprav   </v-btn>
                         </v-col>
 
                     </v-row>
@@ -43,9 +46,7 @@ export default {
     props: {
         ids: []
     },
-    async created() {
-        await this.$store.dispatch("getGroups")
-    },
+
     computed: {
         groups() {
             return this.$store.state.groupsForBox

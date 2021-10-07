@@ -6,17 +6,11 @@
         max-width="600px"
         >
         <template v-slot:activator="{ on, attrs }">
-          <v-card  v-bind="attrs"
-          v-on="on" allign="center" class="mx-auto primary justify-center d-flex" max-width="344" outlined>
-          
-          <v-avatar class="d-flex " color="secondary" size='120'>
-              <v-icon x-large> mdi-plus-thick </v-icon>
-          </v-avatar>
-          </v-card>
+          <v-btn v-bind="attrs" v-on="on" outlined block width="150px" text depressed class="mt-4 info"> Pridat sneka </v-btn>
         </template>
         <v-card>
           <v-card-title>
-            <span class="text-h5">Pridat box</span>
+            <span class="text-h5">Pridat sneka</span>
           </v-card-title>
           <v-card-text>
             <v-container>
@@ -25,7 +19,7 @@
                   cols="12"
                 >
                   <v-text-field
-                    v-model="box.jmeno"
+                    v-model="snail.jmeno"
                     label="Jmeno*"
                     required
                   ></v-text-field>
@@ -34,7 +28,7 @@
                   cols="12"
                 >
                   <v-text-field
-                    v-model="box.komentar"
+                    v-model="snail.komentar"
                     label="Komentar"
                     hint="example of helper text only on focus"
                   ></v-text-field>
@@ -43,8 +37,8 @@
                   cols="12"
                 >
                   <v-text-field
-                    v-model="box.vyska"
-                    label="Vyska*"
+                    v-model="snail.barvaUlita"
+                    label="Barva ulity*"
                     hint="example of persistent helper text"
                     persistent-hint
                     required
@@ -52,29 +46,53 @@
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
-                    v-model="box.sirka"
-                    label="Sirka*"
+                    v-model="snail.barvaTelo"
+                    label="Barva tela*"
                     required
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
-                    v-model="box.depth"
-                    label="Hlbka*"
+                    v-model="snail.vzorecUlita"
+                    label="vzor ulity*"
                     required
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12">
                   <v-text-field
-                    v-model="box.datumPorizeni"
+                    v-model="snail.narozen"
                     label="Datum porizeni*"
                     required
                   ></v-text-field>
                 </v-col>
+                <v-col
+                cols="12"
+                >
+                <v-select
+                  v-model="snail.snuskaId"
+                  :items="snuskas"
+                  item-text="komentar"
+                  item-value="snuskaId"
+                  label="Snuska*"
+                  required
+                ></v-select>
+              </v-col>
+              <v-col
+                cols="12"
+                >
+                <v-select
+                  v-model="snail.taxonomyId"
+                  :items="taxonomies"
+                  item-text="jmeno"
+                  item-value="taxonomyId"
+                  label="Taxonomie*"
+                  required
+                ></v-select>
+              </v-col>
                 <v-col cols="12">
                 <v-text-field
-                    v-model="box.prodejce"
-                    label="prodejce*"
+                    v-model="snail.puvodSneka"
+                    label="Puvod sneka*"
                     required
                 ></v-text-field>
               </v-col>
@@ -108,25 +126,43 @@ export default {
   props: {
     id: Number,
   },
+  created() {
+    this.$store.dispatch("getSnuskas")
+    this.$store.dispatch("getTaxonomies")
+  },
   data: () => ({
     dialog: false,
-    box: {
-        id: 0,
+    snail: {
+        snekId: 0,
         jmeno: "",
         komentar: "",
-        vyska: "",
-        sirka: "",
-        hlbka: "",
-        datumPorizeni: "",
-        prodejce: "",
+        barvaUlita: "",
+        barvaTelo: "",
+        vzorecUlita: "",
+        narozen: "",
+        zemrel: "",
+        prodan: "",
+        puvodSneka: "",
+        zverejnit: true,
+        aktivni: true,
+        taxonomyId: 0,
+        snuskaId: 0,
+        galerieId: 0
     }
 
   }),
+  computed: {
+    snuskas() {
+      return this.$store.state.snuskas
+    },
+    taxonomies() {
+      return this.$store.state.taxonomies
+    }
+  },
   methods:{
       save() {
           this.dialog = false
-          this.$store.dispatch("addBox", this.box)
-          this.$store.dispatch("getBoxes")
+          this.$store.dispatch("addSnail", {id: this.id, snail: this.snail})
       }
   }
 };

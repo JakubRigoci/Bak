@@ -6,11 +6,11 @@
         </template>
         <v-card>
             <v-card-title>
-                <span class="text-h5">Odobrat Skupinu</span>
+                <span class="text-h5">Odobrat Sneka</span>
             </v-card-title>
             <v-card-text>
                 <span>
-                    Naozaj si prajete odobrat skupinu s nazvom {{name}}?
+                    Naozaj si prajete odobrat Sneka s nazvom {{name}}?
                 </span>
             </v-card-text>
             <v-card-actions>
@@ -30,7 +30,8 @@
 <script>
 export default {
     props: {
-        id: Number,
+        snailId: Number,
+        groupId: Number,
         name: String
     },
     data: () => ({
@@ -39,7 +40,7 @@ export default {
     methods: {
         save() {
             this.dialog = false
-            this.$store.dispatch("removeGroup", this.id)
+            this.$store.dispatch("removeSnail", {snailId: this.snailId, groupId: this.groupId})
         }
     }
 };

@@ -13,6 +13,10 @@ export const groupById = (state, id) => state.groups.filter(g => g.skupinaId ===
 
 export const activeBox = (state) => state.activeBox
 
+export const snuskasComment = (state) => {
+    return state.snuskas.map(s => s.komentar)
+}
+
 export const activeGroupsForBox = (state) => () => {
-    return state.groups.filter(g => g.aktivni === true);
+    return state.geoupsForBox.filter(g => g.aktivni === true);
 }

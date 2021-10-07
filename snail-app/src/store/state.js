@@ -5,6 +5,8 @@ export default {
     user: {},
     snails: [],
     snailsForGroup: [],
+    snuskas: [],
+    taxonomies: [],
     boxes: [],
     groups: [],
     groupsForBox:[],

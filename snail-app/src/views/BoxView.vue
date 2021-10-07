@@ -11,7 +11,9 @@ export default {
         GroupContainer
     },
     created() {
-        this.$store.dispatch("getGroupsForBox", this.$route.params.id)
+        this.$store.dispatch("getGroups").then(() => {
+            this.$store.dispatch("getGroupsForBox", this.$route.params.id)
+        })
     },
     computed: {
         groups() {

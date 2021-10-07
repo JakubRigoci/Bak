@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 export const GET_SNAILS = (state, snails) => {
     state.snails = snails;
 }
@@ -17,7 +19,20 @@ export const GET_GROUPS_FOR_BOX = (state, groups) => {
 }
 
 export const GET_SNAILS_FOR_GROUP = (state, snails) => {
-  state.snailsForGroup[snails.id] = snails.data;
+  Vue.set(state.snailsForGroup, snails.id, snails.data)
+}
+
+export const GET_SNUSKAS = (state, snuskas) => {
+  state.snuskas = snuskas;
+}
+
+export const GET_TAXONOMIES = (state, taxonomies) => {
+  state.taxonomies = taxonomies;
+}
+
+export const ADD_SNAIL = (state, payload) => {
+  state.snails.push(payload.snail)
+  state.snailsForGroup[payload.groupId].push(payload.snail)
 }
 
 export const ADD_BOX = (state, box) => {
@@ -30,15 +45,20 @@ export const ADD_GROUP = (state, group) => {
   state.groupsForBox.push(group);
 }
 
+export const REMOVE_SNAIL = (state, payload) => {
+  state.snails = state.snails.filter(s => s.snekId !== payload.snailId)
+  Vue.set(state.snailsForGroup, payload.groupId, state.snailsForGroup[payload.groupId].filter(s => s.snekId !== payload.snailId))
+  //state.snailsForGroup[payload.groupId] = state.snailsForGroup[payload.groupId].filter(s => s.snekId !== payload.snailId)
+}
+
 export const REMOVE_GROUP = (state, groupId) => {
     state.groups = state.groups.filter(g => g.skupinaId !== groupId)
     state.groupsForBox = state.groupsForBox.filter(g => g.skupinaId !== groupId)
 }
 
 export const REMOVE_BOX = (state, boxId) => {
-    state.boxes = state.boxes.filter(b => b.boxId !== boxId)
+  state.boxes = state.boxes.filter(b => b.boxId !== boxId)
 }
-
 export const SET_ACTIVE_BOX = (state, boxId) => {
   state.activeBox = boxId
 }

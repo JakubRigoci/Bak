@@ -40,6 +40,7 @@ export default {
         save() {
             this.dialog = false
             this.$store.dispatch("removeBox", this.id)
+            this.$store.dispatch("getBoxes")
         }
     }
 };
