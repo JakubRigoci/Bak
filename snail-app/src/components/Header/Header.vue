@@ -3,12 +3,13 @@
       class="secondary"
       app
     >
-      <v-toolbar-title @click="home" >Snail App</v-toolbar-title>
+      <v-toolbar-title @click="boxes" >Snail App</v-toolbar-title>
       
      
       
       <v-spacer></v-spacer>
-        <span><a @click="home">Home</a></span>
+        <span><a @click="snuskas">Snusky</a></span>
+        <span>|<a @click="boxes">Boxy</a></span>
         <span v-if="isLoggedIn">|<a @click="logout">Logout</a></span>
         <span v-if="!isLoggedIn">|<a @click="login">Login</a></span>
     </v-app-bar>
@@ -30,7 +31,10 @@
       login() {
         this.$router.push("/login")
       },
-      home() {
+      snuskas() {
+        this.$router.push("/snuskas")
+      },
+      boxes() {
         this.$router.push("/home");
       }
     },

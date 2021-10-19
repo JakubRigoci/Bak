@@ -2,7 +2,7 @@
   <v-app>
     <Header></Header>
     <v-main class="primary">
-      <v-container fluid>
+      <v-container fluid class="mx-4">
         <router-view></router-view>
       </v-container>
       <Footer></Footer>

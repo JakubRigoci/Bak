@@ -4,6 +4,8 @@ import store from "../store/index.js"
 import Home from "../views/Home.vue"
 import Login from "../views/Login.vue"
 import BoxView from "../views/BoxView.vue"
+import Snuskas from "../views/Snuskas.vue"
+import SnuskaView from "../views/SnuskaView.vue"
 import App from "../App.vue"
 
 Vue.use(VueRouter)
@@ -46,6 +48,18 @@ const routes = [
     path: "/box/:id",
     name: "boxView",
     component: BoxView,
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: "/snuskas",
+    name: "Snuskas",
+    component: Snuskas,
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: "/snuska/:id",
+    name: "SnuskaView",
+    component: SnuskaView,
     beforeEnter: ifAuthenticated,
   },
   // {

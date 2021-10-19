@@ -11,37 +11,36 @@
         </template>
         <v-card>
             <v-card-title>
-                <span class="text-h5">Pridat box</span>
+                <span class="text-h5">Pridat Snusku</span>
             </v-card-title>
             <v-card-text>
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field v-model="box.jmeno" label="Jmeno*" required></v-text-field>
+                            <v-text-field v-model="snuska.komentar" label="Komentar*" required></v-text-field>
                         </v-col>
-                        <v-col cols="12">
-                            <v-text-field v-model="box.komentar" label="Komentar" hint="example of helper text only on focus"></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field v-model="box.vyska" label="Vyska*" hint="example of persistent helper text" persistent-hint required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field v-model="box.sirka" label="Sirka*" required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field v-model="box.depth" label="Hlbka*" required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
+                                                <v-col cols="12">
                             <v-menu transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{on}">
-                                    <v-text-field v-model="box.datumPorizeni" v-on="on" label="Datum porizeni"></v-text-field>
+                                    <v-text-field v-model="snuska.datumSneseni" v-on="on" label="Datum sneseni"></v-text-field>
                                 </template>
-                                <v-date-picker color="secondary" v-model="box.datumPorizeni"></v-date-picker>
+                                <v-date-picker color="secondary" v-model="snuska.datumSneseni"></v-date-picker>
                             </v-menu>
                         </v-col>
-
                         <v-col cols="12">
-                            <v-text-field v-model="box.prodejce" label="prodejce*" required></v-text-field>
+                            <v-text-field v-model="snuska.velikost" label="velikost" hint="example of helper text only on focus"></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-text-field v-model="snuska.periodaVylihnutiStart" label="Perioda vylihnuti start*" hint="example of persistent helper text" persistent-hint required></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-text-field v-model="snuska.periodaVylihnutiKonec" label="Perioda vylihnuti konec*" required></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-text-field v-model="snuska.skupinaId" label="Skupina*" required></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-text-field v-model="snuska.matkaId" label="Matka*" required></v-text-field>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -68,24 +67,23 @@ export default {
     },
     data: () => ({
         dialog: false,
-        menu: false,
-        box: {
-            id: 0,
-            jmeno: "",
+        snuska: {
+            snuskaId: 0,
             komentar: "",
-            vyska: "",
-            sirka: "",
-            hlbka: "",
-            datumPorizeni: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-            prodejce: "",
+            datumSneseni: "",
+            ponechana: true,
+            velikost: 0,
+            periodaVylihnutiStart: "",
+            periodaVylihnutiKonec: "",
+            skupinaId: 0,
+            matkaId: ""
         }
 
     }),
     methods: {
         save() {
             this.dialog = false
-            this.$store.dispatch("addBox", this.box)
-            this.$store.dispatch("getBoxes")
+            this.$store.dispatch("addSnuska", this.snuska)
         }
     }
 };

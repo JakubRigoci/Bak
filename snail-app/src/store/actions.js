@@ -65,6 +65,15 @@ export const getTaxonomies = ({commit}) => {
   })
 }
 
+export const getMeasuresForSnail = ({commit}, snailId) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`mereni/${snailId}`).then(response => {
+      commit("GET_MEASURES_FOR_SNAIL", response.data)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
 export const addSnail = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     axios.post(`snek/${payload.id}`, payload.snail).then(response =>{
@@ -95,6 +104,15 @@ export const addGroup = ({commit}, payload) => {
   })
 }
 
+export const addSnuska = ({commit}, snuska) => {
+  return new Promise((resolve, reject) => {
+    axios.post(`snuska/${snuska.velikost}`, snuska).then(response => {
+      commit("ADD_SNUSKA", response.data)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
 export const removeSnail = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     axios.delete(`snek/${payload.snailId}`).then(response => {
@@ -117,6 +135,15 @@ export const removeBox = ({commit}, boxId) => {
   return new Promise((resolve, reject) => {
     axios.delete(`box/${boxId}`).then(response => {
       commit("REMOVE_BOX", boxId)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
+export const removeSnuska = ({commit}, snuskaId) => {
+  return new Promise((resolve, reject) => {
+    axios.delete(`snuska/${snuskaId}`).then(response => {
+      commit("REMOVE_SNUSKA", snuskaId)
       resolve(response)
     }).catch(error => reject(error))
   })

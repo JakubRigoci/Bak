@@ -6,6 +6,7 @@ export default {
     snails: [],
     snailsForGroup: [],
     snuskas: [],
+    measuresForSnail: [],
     taxonomies: [],
     boxes: [],
     groups: [],

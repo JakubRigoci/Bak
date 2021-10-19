@@ -4,17 +4,15 @@
         <v-btn color="orange lighten-2" text> Mereni </v-btn>
 
         <v-spacer></v-spacer>
-
         <v-btn icon @click="showTable = !showTable">
             <v-icon>{{ showTable ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
         </v-btn>
     </v-card-actions>
 
-    
     <v-expand-transition>
         <div v-show="showTable">
             <v-divider></v-divider>
-                <v-data-table :headers="headers" :items="mereni" :items-per-page="5" class="elevation-1"></v-data-table>
+            <Measures :snailId="snailId"></Measures>
             <v-card-text>
                 TEXT?
             </v-card-text>
@@ -64,72 +62,28 @@
 <script>
 import Gallery from "@/components/Gallery/Gallery.vue"
 import SnailRemovePopup from "@/components/Snail/SnailRemovePopup.vue"
+import Measures from "@/components/Snail/Measures/Measures.vue"
 export default {
     props: {
         snailId: Number,
         groupId: Number
     },
+    data() {
+        return {
+            show: false,
+            showTable: false,
+        }
+    },
     components: {
         Gallery,
-        SnailRemovePopup
+        SnailRemovePopup,
+        Measures
     },
     computed: {
         snail() {
             return this.$store.getters.snailById(this.snailId)
         }
-    },
-    data() {
-        return {
-            show: false,
-            showTable: false,
-            headers: [{
-                    text: "Komentar",
-                    value: "komentar",
-                },
-                {
-                    text: "Datum",
-                    value: "datum",
-                },
-                {
-                    text: "Vaha",
-                    value: "vaha",
-                },
-                {
-                    text: "Ulita",
-                    value: "ulita",
-                }
-            ],
-            mereni: [{
-                    mereniId: 0,
-                    komentar: "mereno rano",
-                    datum: "2021-01-01",
-                    vaha: "10.2",
-                    ulita: "7.5",
-                },
-                {
-                    mereniId: 1,
-                    komentar: "mereno na obed",
-                    datum: "2021-01-01",
-                    vaha: "10.2",
-                    ulita: "70.5",
-                },
-                {
-                    mereniId: 2,
-                    komentar: "mereno vecer",
-                    datum: "2021-01-01",
-                    vaha: "1.2",
-                    ulita: "7.5",
-                },
-                {
-                    mereniId: 3,
-                    komentar: "mereno v noc",
-                    datum: "2021-01-01",
-                    vaha: "10",
-                    ulita: "8",
-                },
-            ],
-        };
-    },
+    }
 };
 </script>
 
