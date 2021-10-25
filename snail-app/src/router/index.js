@@ -51,7 +51,7 @@ const routes = [
     beforeEnter: ifAuthenticated,
   },
   {
-    path: "/snuskas",
+    path: "/snuskas/:groupId?",
     name: "Snuskas",
     component: Snuskas,
     beforeEnter: ifAuthenticated,

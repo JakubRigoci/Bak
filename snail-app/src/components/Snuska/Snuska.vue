@@ -14,10 +14,10 @@
             </v-list-item-subtitle>
         </v-list-item-content>
 
-        <v-icon x-large class="pr-8"> mdi-archive </v-icon>
+        <v-icon x-large class="pr-8"> mdi-egg </v-icon>
     </v-list-item>
     <v-card-actions class="d-flex justify-space-around mb-6">
-        <v-btn @click="details" outlined rounded text depressed class="info"> Detaily </v-btn>
+        <v-btn @click="details" width="100px" outlined text depressed class="ma-2  width:100px info"> Detaily </v-btn>
         <SnuskaRemovePopup :id="snuskaId" :reroute="false"></SnuskaRemovePopup>
     </v-card-actions>
 </v-card>

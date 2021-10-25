@@ -11,6 +11,9 @@ export const snailsByGroup = (state) => (id) => {
 }
 export const groupById = (state, id) => state.groups.filter(g => g.skupinaId === id)
 
+export const boxById = (state) => (id) => {
+    return state.boxes.find(b => b.boxId === id)
+}
 export const activeBox = (state) => state.activeBox
 
 export const snuskasComment = (state) => {

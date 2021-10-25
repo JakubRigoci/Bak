@@ -31,7 +31,8 @@
 export default {
     props: {
         id: Number,
-        name: String
+        name: String,
+        reroute: Boolean
     },
         data: () => ({
         dialog: false,
@@ -41,6 +42,10 @@ export default {
             this.dialog = false
             this.$store.dispatch("removeBox", this.id)
             this.$store.dispatch("getBoxes")
+
+            if (this.reroute) {
+                this.$router.push("/home")
+            }
         }
     }
 };

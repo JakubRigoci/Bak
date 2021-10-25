@@ -19,7 +19,7 @@
                         <v-col cols="12">
                             <v-text-field v-model="snuska.komentar" label="Komentar*" required></v-text-field>
                         </v-col>
-                                                <v-col cols="12">
+                        <v-col cols="12">
                             <v-menu transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{on}">
                                     <v-text-field v-model="snuska.datumSneseni" v-on="on" label="Datum sneseni"></v-text-field>
@@ -31,10 +31,12 @@
                             <v-text-field v-model="snuska.velikost" label="velikost" hint="example of helper text only on focus"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="snuska.periodaVylihnutiStart" label="Perioda vylihnuti start*" hint="example of persistent helper text" persistent-hint required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field v-model="snuska.periodaVylihnutiKonec" label="Perioda vylihnuti konec*" required></v-text-field>
+                            <v-menu :close-on-content-click="false" transition="scale-transition" offset-y min-width="auto">
+                                <template v-slot:activator="{on}">
+                                    <v-text-field v-model="hatchingPeriodText" v-on="on" label="Datum sneseni"></v-text-field>
+                                </template>
+                                <v-date-picker color="secondary" range v-model="hatchingPeriod"></v-date-picker>
+                            </v-menu>
                         </v-col>
                         <v-col cols="12">
                             <v-text-field v-model="snuska.skupinaId" label="Skupina*" required></v-text-field>
@@ -61,28 +63,38 @@
 </template>
 
 <script>
+const currDate =  (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
 export default {
     props: {
         id: Number,
     },
-    data: () => ({
-        dialog: false,
-        snuska: {
-            snuskaId: 0,
-            komentar: "",
-            datumSneseni: "",
-            ponechana: true,
-            velikost: 0,
-            periodaVylihnutiStart: "",
-            periodaVylihnutiKonec: "",
-            skupinaId: 0,
-            matkaId: ""
+    data() {
+        return {
+            dialog: false,
+            hatchingPeriod: [currDate, currDate],
+            snuska: {
+                snuskaId: 0,
+                komentar: "",
+                datumSneseni: currDate,
+                ponechana: true,
+                velikost: 0,
+                periodaVylihnutiStart:  currDate,
+                periodaVylihnutiKonec: currDate,
+                skupinaId: 0,
+                matkaId: ""
+            }
         }
-
-    }),
+    },
+    computed: {
+        hatchingPeriodText() {
+            return this.hatchingPeriod.join(" - ")
+        }
+    },
     methods: {
         save() {
             this.dialog = false
+            this.snuska.periodaVylihnutiStart = this.hatchingPeriod[0]
+            this.snuska.periodaVylihnutiKonec = this.hatchingPeriod[1]
             this.$store.dispatch("addSnuska", this.snuska)
         }
     }

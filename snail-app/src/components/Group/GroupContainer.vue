@@ -14,15 +14,20 @@
                         <v-col cols="4" class="text--secondary">
                             Velikost: {{group.velikost}}
                         </v-col>
-                        </v-row>
-                        <v-row>
+                    </v-row>
+                    <v-spacer></v-spacer>
+                    <v-row>
                         <v-col cols="12">
-                            <v-spacer></v-spacer>
-                            <GroupRemovePopup :id="group.skupinaId" :name="group.jmeno" ></GroupRemovePopup>
-                            <v-btn outlined width="100px" depressed class="ma-2 width:100px info"> Uprav   </v-btn>
+                            <GroupRemovePopup :id="group.skupinaId" :name="group.jmeno"></GroupRemovePopup>
+                            <v-btn outlined width="100px" depressed class="ma-2 info"> Uprav</v-btn>
                         </v-col>
 
+
                     </v-row>
+                    
+                        <v-col cols="12">
+                             <v-btn outlined width="150px" @click="showSnuskas(group.skupinaId)" depressed class="ma-2 info"> Zobraz snusky</v-btn>
+                        </v-col>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content class="secondary">
                     <Group :id="group.skupinaId"></Group>
@@ -46,7 +51,6 @@ export default {
     props: {
         ids: []
     },
-
     computed: {
         groups() {
             return this.$store.state.groupsForBox
@@ -56,6 +60,11 @@ export default {
         Group,
         GroupAddPopup,
         GroupRemovePopup
+    },
+    methods: {
+        showSnuskas(skupinaId) {
+            this.$router.push(`/snuskas/${skupinaId}`)
+        }
     }
 }
 </script>

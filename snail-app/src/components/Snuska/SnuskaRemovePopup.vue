@@ -33,9 +33,11 @@ export default {
         id: Number,
         reroute: Boolean
     },
-    data: () => ({
-        dialog: false,
-    }),
+    data() {
+        return {
+            dialog: false,
+        }
+    },
     methods: {
         save() {
             this.dialog = false

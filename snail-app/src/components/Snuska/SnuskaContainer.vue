@@ -29,11 +29,18 @@ export default {
         SnuskaAddPopup,
         Snuska
     },
+    props: {
+        groupId: Number
+    },
     created() {
         this.$store.dispatch("getSnuskas")
     },
     computed: {
         snuskas() {
+            if (this.groupId && Number.isInteger(this.groupId)){
+                return this.$store.state.snuskas.filter(s => s.skupinaId === this.groupId)
+            }
+
             return this.$store.state.snuskas;
         }
     },

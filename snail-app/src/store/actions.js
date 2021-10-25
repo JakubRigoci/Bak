@@ -89,6 +89,14 @@ export const addBox = ({commit}, box) => {
   return new Promise((resolve, reject) => {
     axios.post("box", box).then(response => {
       commit("ADD_BOX", response.data)
+      console.log("ADDING BOX")
+      console.log(response.data)
+      const group = {
+        skupinaId: 0,
+        jmeno: "Zakladni skupina",
+        komentar: "Skupina pro vsechny sneky",
+      }
+      addGroup({commit},{group: group, boxId: response.data.boxId})
       resolve(response)
     }).catch(error => reject(error))
   })
