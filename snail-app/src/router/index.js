@@ -6,6 +6,7 @@ import Login from "../views/Login.vue"
 import BoxView from "../views/BoxView.vue"
 import Snuskas from "../views/Snuskas.vue"
 import SnuskaView from "../views/SnuskaView.vue"
+import SnailView from "../views/SnailView.vue"
 import App from "../App.vue"
 
 Vue.use(VueRouter)
@@ -48,6 +49,12 @@ const routes = [
     path: "/box/:id",
     name: "boxView",
     component: BoxView,
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: "/group/:groupId/snail/:snailId",
+    name: "SnailView",
+    component: SnailView,
     beforeEnter: ifAuthenticated,
   },
   {

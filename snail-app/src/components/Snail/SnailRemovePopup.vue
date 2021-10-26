@@ -32,7 +32,8 @@ export default {
     props: {
         snailId: Number,
         groupId: Number,
-        name: String
+        name: String,
+        redirect: Boolean
     },
     data: () => ({
         dialog: false,
@@ -41,6 +42,10 @@ export default {
         save() {
             this.dialog = false
             this.$store.dispatch("removeSnail", {snailId: this.snailId, groupId: this.groupId})
+            if(this.reroute)
+            {
+                this.$router.push(`/home`)
+            }
         }
     }
 };

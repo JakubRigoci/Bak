@@ -2,7 +2,7 @@
 <div>
     <h1 class="subheading grey--text">Box</h1>
     <v-divider></v-divider>
-    <v-container class="my-5">
+    <v-container  v-if="box"  class="my-5">
         <div class="params">
             <p> <b>Jmeno:</b> {{box.jmeno}}</p>
             <p> <b>Komentar:</b> {{box.komentar}}</p>

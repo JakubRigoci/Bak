@@ -26,7 +26,7 @@
                     </v-row>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content class="info">
-                    <Snail :groupId="groupId" :snailId="snail.snekId"></Snail>
+                    <SnailPreview :groupId="groupId" :snailId="snail.snekId"></SnailPreview>
                 </v-expansion-panel-content>
             </v-expansion-panel>
         </v-expansion-panels>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import Snail from "@/components/Snail/Snail.vue"
+import SnailPreview from "@/components/Snail/SnailPreview.vue"
 import SnailAddPopup from "@/components/Snail/SnailAddPopup.vue"
 export default {
     created() {
@@ -48,7 +48,7 @@ export default {
       }
     },
     components: {
-        Snail,
+        SnailPreview,
         SnailAddPopup
     },
     props: {

@@ -3,7 +3,7 @@ export const isLoggedIn =  (state) => !!state.token
 export const authStatus = (state) => state.status
 
 export const snailById = (state) => (id) => {
-    return state.snails.find(s => s.snekId === id)
+    return state.snails.find(s => s.snekId === id) || null
 }
 
 export const snailsByGroup = (state) => (id) => {
@@ -12,7 +12,7 @@ export const snailsByGroup = (state) => (id) => {
 export const groupById = (state, id) => state.groups.filter(g => g.skupinaId === id)
 
 export const boxById = (state) => (id) => {
-    return state.boxes.find(b => b.boxId === id)
+    return state.boxes.find(b => b.boxId === id) || null
 }
 export const activeBox = (state) => state.activeBox
 
