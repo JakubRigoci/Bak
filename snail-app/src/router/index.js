@@ -6,6 +6,7 @@ import Login from "../views/Login.vue"
 import BoxView from "../views/BoxView.vue"
 import Snuskas from "../views/Snuskas.vue"
 import SnuskaView from "../views/SnuskaView.vue"
+import Taxonomies from "../views/Taxonomies.vue"
 import App from "../App.vue"
 
 Vue.use(VueRouter)
@@ -20,6 +21,14 @@ const ifNotAuthenticated = (to, from, next) => {
 
 const ifAuthenticated = (to, from, next) => {
   if (store.getters.isLoggedIn) {
+    next()
+    return
+  }
+  next("/login")
+}
+
+const ifAdmin = (to, from, next) => {
+  if (store.getters.isLoggedIn && store.state.user.userRoles && store.state.user.userRoles.includes("ADMIN")) {
     next()
     return
   }
@@ -61,6 +70,12 @@ const routes = [
     name: "SnuskaView",
     component: SnuskaView,
     beforeEnter: ifAuthenticated,
+  },
+  {
+    path: "/taxonomies",
+    name: "Taxonomies",
+    component: Taxonomies,
+    beforeEnter: ifAdmin,
   },
   // {
   //   path: '/about',

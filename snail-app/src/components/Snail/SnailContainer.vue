@@ -1,7 +1,7 @@
 <template>
 <v-container fluid class="pt-4">
     <v-row justify="center">
-        <v-expansion-panels tile popout>
+        <v-expansion-panels accordion tile popout>
             <v-expansion-panel v-for="snail in snails" :key="snail.snekId">
                 <v-expansion-panel-header class="info" v-slot="{ open }">
                     <v-row no-gutters>

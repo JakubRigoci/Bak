@@ -8,7 +8,8 @@
      
       
       <v-spacer></v-spacer>
-        <span><a @click="snuskas">Snusky</a></span>
+        <span><a @click="taxonomies">Taxonomie</a></span>
+        <span>|<a @click="snuskas">Snusky</a></span>
         <span>|<a @click="boxes">Boxy</a></span>
         <span v-if="isLoggedIn">|<a @click="logout">Logout</a></span>
         <span v-if="!isLoggedIn">|<a @click="login">Login</a></span>
@@ -36,6 +37,9 @@
       },
       boxes() {
         this.$router.push("/home");
+      },
+      taxonomies() {
+        this.$router.push("/taxonomies")
       }
     },
     mounted() {
