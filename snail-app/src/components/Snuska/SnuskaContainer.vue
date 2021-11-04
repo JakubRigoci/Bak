@@ -1,5 +1,10 @@
 <template lang="">
 <v-container fluid>
+    <v-row class="d-flex justify-end ma-8 pa-2">
+        <SnuskaFilter v-on:filter="(value) => this.filter(value)"></SnuskaFilter>
+        <v-spacer></v-spacer>
+        <SnuskaSorter v-on:sort="(value) => this.sort(value)"></SnuskaSorter>
+    </v-row>
     <v-row allign="center">
         <v-col v-for="snuska in snuskas" :key="snuska.snuskaId" :cols='12' :md='6' :lg="4">
             <div>
@@ -24,9 +29,19 @@
 <script>
 import SnuskaAddPopup from "@/components/Snuska/SnuskaAddPopup.vue"
 import Snuska from "@/components/Snuska/Snuska.vue"
+import SnuskaSorter from "@/components/Snuska/SnuskaSorter.vue"
+import SnuskaFilter from "@/components/Snuska/SnuskaFilter.vue"
 export default {
+    data() {
+        return {
+            commentaryFilter: "",
+            sortType: ""
+        }
+    },
     components: {
         SnuskaAddPopup,
+        SnuskaSorter,
+        SnuskaFilter,
         Snuska
     },
     props: {
@@ -37,16 +52,49 @@ export default {
     },
     computed: {
         snuskas() {
-            if (this.groupId && Number.isInteger(this.groupId)){
-                return this.$store.state.snuskas.filter(s => s.skupinaId === this.groupId)
+            let unsorted = []
+            if (this.groupId && Number.isInteger(this.groupId)) {
+                unsorted = this.$store.state.snuskas.filter(s => s.komentar.includes(this.commentaryFilter) && s.skupinaId === this.groupId)
+            } else {
+                unsorted = this.$store.state.snuskas.filter(s => s.komentar.includes(this.commentaryFilter));
             }
 
-            return this.$store.state.snuskas;
+            switch (this.sortType) {
+                case "":
+                    return unsorted;
+                case "CommentaryUp":
+                    return unsorted.sort((a, b) => a.komentar.localeCompare(b.komentar))
+                case "CommentaryDown":
+                    return unsorted.sort((a, b) => b.komentar.localeCompare(a.komentar))
+                case "PeriodUp":
+                    return unsorted.sort((a, b) => {
+                        const left = new Date(a.periodaVylihnutiStart)
+                        const right = new Date(b.periodaVylihnutiStart)
+                        return left - right
+                    })
+                case "PeriodDown":
+                    return unsorted.sort((a, b) => {
+                        const left = new Date(a.periodaVylihnutiStart)
+                        const right = new Date(b.periodaVylihnutiStart)
+                        return right - left
+                    })
+                case "SizeUp":
+                    return unsorted.sort((a, b) => a.velikost - b.velikost)
+                case "SizeDown":
+                    return unsorted.sort((a, b) => b.velikost - a.velikost)
+
+            }
+
+            return unsorted
         }
     },
     methods: {
-        log() {
-            console.log(this.groups)
+        sort(value) {
+            console.log(value)
+            this.sortType = value
+        },
+        filter(value) {
+            this.commentaryFilter = value
         }
     }
 }

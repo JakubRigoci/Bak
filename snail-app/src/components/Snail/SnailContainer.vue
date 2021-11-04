@@ -1,7 +1,7 @@
 <template>
 <v-container fluid class="pt-4">
     <v-row justify="center">
-        <v-expansion-panels accordion tile popout>
+        <v-expansion-panels tile popout>
             <v-expansion-panel v-for="snail in snails" :key="snail.snekId">
                 <v-expansion-panel-header class="info" v-slot="{ open }">
                     <v-row no-gutters>
@@ -25,7 +25,7 @@
                         </v-col>
                     </v-row>
                 </v-expansion-panel-header>
-                <v-expansion-panel-content class="info">
+                <v-expansion-panel-content id="innerExPan" class="info">
                     <Snail :groupId="groupId" :snailId="snail.snekId"></Snail>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -58,6 +58,8 @@ export default {
 }
 </script>
 
-<style lang="">
-
+<style lang="scss">
+#innerExPan > * {
+        padding: 2px
+}
 </style>

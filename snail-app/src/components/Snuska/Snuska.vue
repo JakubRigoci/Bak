@@ -4,13 +4,16 @@
         <v-list-item-content class="pa-8">
             <div class="text-overline mb-4">{{snuska.komentar}}</div>
             <v-list-item-title class="mb-1">
-                {{snuska.velikost}}
+                Velikost: {{snuska.velikost}}
             </v-list-item-title>
             <v-list-item-subtitle>
                 Datum sneseni: {{snuska.datumSneseni}}
             </v-list-item-subtitle>
-            <v-list-item-subtitle>
-                Perioda vylihnuti: {{snuska.periodaVylihnutiStart}} - {{snuska.periodaVylihnutiKones}} 
+            <v-list-item-subtitle v-if="snuska.periodaVylihnutiKonec">
+                Perioda vylihnuti: {{snuska.periodaVylihnutiStart}} ~ {{snuska.periodaVylihnutiKonec}} 
+            </v-list-item-subtitle>
+            <v-list-item-subtitle v-if="!snuska.periodaVylihnutiKonec">
+                Perioda vylihnuti: {{snuska.periodaVylihnutiStart}}
             </v-list-item-subtitle>
         </v-list-item-content>
 

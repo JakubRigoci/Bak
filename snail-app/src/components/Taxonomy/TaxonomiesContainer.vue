@@ -10,10 +10,10 @@
             <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
                     <div v-bind="attrs" v-on="on">
-                        <SnuskaAddPopup></SnuskaAddPopup>
+                        <TaxonomyAddPopup></TaxonomyAddPopup>
                     </div>
                 </template>
-                <span>Pridat snusku</span>
+                <span>Pridat Taxonomii</span>
             </v-tooltip>
         </v-col>
 
@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import SnuskaAddPopup from "@/components/Snuska/SnuskaAddPopup.vue"
+import TaxonomyAddPopup from "@/components/Taxonomy/TaxonomyAddPopup.vue"
 import Taxonomy from "@/components/Taxonomy/Taxonomy.vue"
 export default {
     components: {
-        SnuskaAddPopup,
+        TaxonomyAddPopup,
         Taxonomy
     },
     props: {

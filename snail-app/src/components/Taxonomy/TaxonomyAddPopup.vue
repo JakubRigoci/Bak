@@ -11,16 +11,16 @@
         </template>
         <v-card>
             <v-card-title>
-                <span class="text-h5">Pridat Skupinu</span>
+                <span class="text-h5">Pridat Taxonomii</span>
             </v-card-title>
             <v-card-text>
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field v-model="group.jmeno" label="Jmeno*" required></v-text-field>
+                            <v-text-field color="secondary" v-model="taxonomy.jmeno" label="Jmeno*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="group.komentar" label="Komentar" hint="example of helper text only on focus"></v-text-field>
+                            <v-text-field color="secondary" v-model="taxonomy.popis" label="Popis" hint="example of helper text only on focus"></v-text-field>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -43,21 +43,22 @@
 <script>
 export default {
     props: {
-        boxId: Number,
+        id: Number,
     },
     data: () => ({
         dialog: false,
-        group: {
-            skupinaId: 0,
+        taxonomy: {
+            taxonomyId: 0,
             jmeno: "",
-            komentar: "",
+            popis: "",
+            level: 0
         }
 
     }),
     methods: {
         save() {
             this.dialog = false
-            this.$store.dispatch("addGroup",{ group: this.group, boxId: this.boxId})
+            this.$store.dispatch("addTaxonomy",this.taxonomy)
         }
     }
 };

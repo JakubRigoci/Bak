@@ -74,6 +74,15 @@ export const getMeasuresForSnail = ({commit}, snailId) => {
   })
 }
 
+export const getEventTypes = ({commit}) => {
+  return new Promise((resolve, reject) => {
+    axios.get("udalost-typ").then(response => {
+      commit("GET_EVENT_TYPES", response.data)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
 export const addSnail = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     axios.post(`snek/${payload.id}`, payload.snail).then(response =>{
@@ -112,10 +121,28 @@ export const addGroup = ({commit}, payload) => {
   })
 }
 
+export const addTaxonomy = ({commit}, taxonomy) => {
+  return new Promise((resolve, reject) => {
+    axios.post("/taxonomy/admin", taxonomy).then(response => {
+      commit("ADD_TAXONOMY", response.data)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
 export const addSnuska = ({commit}, snuska) => {
   return new Promise((resolve, reject) => {
     axios.post(`snuska/${snuska.velikost}`, snuska).then(response => {
       commit("ADD_SNUSKA", response.data)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
+export const addEventType = ({commit}, event) => {
+  return new Promise((resolve, reject) => {
+    axios.post(`udalost-typ/admin`, event).then(response => {
+      commit("ADD_EVENT_TYPE", response.data)
       resolve(response)
     }).catch(error => reject(error))
   })
@@ -152,6 +179,24 @@ export const removeSnuska = ({commit}, snuskaId) => {
   return new Promise((resolve, reject) => {
     axios.delete(`snuska/${snuskaId}`).then(response => {
       commit("REMOVE_SNUSKA", snuskaId)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
+export const removeTaxonomy = ({commit}, taxonomyId) => {
+  return new Promise((resolve, reject) => {
+    axios.delete(`/taxonomy/admin/${taxonomyId}`).then(response => {
+      commit("REMOVE_TAXONOMY", taxonomyId)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
+export const removeEventType = ({commit}, eventTypeId) => {
+  return new Promise((resolve, reject) => {
+    axios.delete(`udalost-typ/admin/${eventTypeId}`).then(response => {
+      commit("REMOVE_EVENT_TYPE", eventTypeId)
       resolve(response)
     }).catch(error => reject(error))
   })
@@ -197,9 +242,9 @@ export const login = ({commit}, user) => {
 
 export const logout = ({commit}) => {
     return new Promise((resolve) => {
-      commit("LOGOUT")
       localStorage.removeItem("token")
       delete axios.defaults.headers.common["Authorization"]
+      commit("LOGOUT")
       resolve()
     })
 }

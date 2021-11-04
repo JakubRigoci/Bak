@@ -17,32 +17,32 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field v-model="snuska.komentar" label="Komentar*" required></v-text-field>
+                            <v-text-field color="secondary" v-model="snuska.komentar" label="Komentar*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-menu transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{on}">
-                                    <v-text-field v-model="snuska.datumSneseni" v-on="on" label="Datum sneseni"></v-text-field>
+                                    <v-text-field color="secondary" v-model="snuska.datumSneseni" v-on="on" label="Datum sneseni"></v-text-field>
                                 </template>
                                 <v-date-picker color="secondary" v-model="snuska.datumSneseni"></v-date-picker>
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="snuska.velikost" label="velikost" hint="example of helper text only on focus"></v-text-field>
+                            <v-text-field color="secondary" v-model="snuska.velikost" label="velikost" hint="example of helper text only on focus"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-menu :close-on-content-click="false" transition="scale-transition" offset-y min-width="auto">
                                 <template v-slot:activator="{on}">
-                                    <v-text-field v-model="hatchingPeriodText" v-on="on" label="Datum sneseni"></v-text-field>
+                                    <v-text-field color="secondary" v-model="hatchingPeriodText" v-on="on" label="Datum sneseni"></v-text-field>
                                 </template>
                                 <v-date-picker color="secondary" range v-model="hatchingPeriod"></v-date-picker>
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="snuska.skupinaId" label="Skupina*" required></v-text-field>
+                            <v-text-field color="secondary" v-model="snuska.skupinaId" label="Skupina*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="snuska.matkaId" label="Matka*" required></v-text-field>
+                            <v-text-field color="secondary" v-model="snuska.matkaId" label="Matka*" required></v-text-field>
                         </v-col>
                     </v-row>
                 </v-container>

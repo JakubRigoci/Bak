@@ -11,16 +11,16 @@
         </template>
         <v-card>
             <v-card-title>
-                <span class="text-h5">Pridat Skupinu</span>
+                <span class="text-h5">Pridat typ udalosti</span>
             </v-card-title>
             <v-card-text>
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field v-model="group.jmeno" label="Jmeno*" required></v-text-field>
+                            <v-text-field color="secondary" v-model="eventType.popis" label="Popis*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="group.komentar" label="Komentar" hint="example of helper text only on focus"></v-text-field>
+                            <v-select v-model="eventType.typ" item-color="secondary" color="secondary" :items="targets" item-text="Typ" label="Typ*" required></v-select>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -42,22 +42,20 @@
 
 <script>
 export default {
-    props: {
-        boxId: Number,
-    },
     data: () => ({
         dialog: false,
-        group: {
-            skupinaId: 0,
-            jmeno: "",
-            komentar: "",
+        targets: ["BOX", "SNUSKA", "SNEK", "SKUPINA"],
+        eventType: {
+            udalostTypId: 0,
+            popis: "",
+            typ: "BOX"
         }
 
     }),
     methods: {
         save() {
             this.dialog = false
-            this.$store.dispatch("addGroup",{ group: this.group, boxId: this.boxId})
+            this.$store.dispatch("addEventType", this.eventType)
         }
     }
 };

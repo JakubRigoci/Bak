@@ -11,4 +11,5 @@ export default {
     boxes: [],
     groups: [],
     groupsForBox:[],
+    events: [],
 }

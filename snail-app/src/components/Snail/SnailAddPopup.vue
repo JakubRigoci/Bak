@@ -12,19 +12,19 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field v-model="snail.jmeno" label="Jmeno*" required></v-text-field>
+                            <v-text-field color="secondary" v-model="snail.jmeno" label="Jmeno*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="snail.komentar" label="Komentar" hint="example of helper text only on focus"></v-text-field>
+                            <v-text-field color="secondary" v-model="snail.komentar" label="Komentar" hint="example of helper text only on focus"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="snail.barvaUlita" label="Barva ulity*" hint="example of persistent helper text" persistent-hint required></v-text-field>
+                            <v-text-field color="secondary" v-model="snail.barvaUlita" label="Barva ulity*" hint="example of persistent helper text" persistent-hint required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="snail.barvaTelo" label="Barva tela*" required></v-text-field>
+                            <v-text-field color="secondary" v-model="snail.barvaTelo" label="Barva tela*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="snail.vzorecUlita" label="vzor ulity*" required></v-text-field>
+                            <v-text-field color="secondary" v-model="snail.vzorecUlita" label="vzor ulity*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-menu transition="scale-transition" offset-y min-width="auto">
@@ -41,7 +41,7 @@
                             <v-select v-model="snail.taxonomyId" :items="taxonomies" item-text="jmeno" item-value="taxonomyId" label="Taxonomie*" required></v-select>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="snail.puvodSneka" label="Puvod sneka*" required></v-text-field>
+                            <v-text-field color="secondary" v-model="snail.puvodSneka" label="Puvod sneka*" required></v-text-field>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -79,7 +79,7 @@ export default {
             barvaUlita: "",
             barvaTelo: "",
             vzorecUlita: "",
-            narozen: "",
+            narozen: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             zemrel: "",
             prodan: "",
             puvodSneka: "",

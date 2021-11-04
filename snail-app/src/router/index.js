@@ -7,6 +7,7 @@ import BoxView from "../views/BoxView.vue"
 import Snuskas from "../views/Snuskas.vue"
 import SnuskaView from "../views/SnuskaView.vue"
 import Taxonomies from "../views/Taxonomies.vue"
+import Events from "../views/Events.vue"
 import App from "../App.vue"
 
 Vue.use(VueRouter)
@@ -75,6 +76,12 @@ const routes = [
     path: "/taxonomies",
     name: "Taxonomies",
     component: Taxonomies,
+    beforeEnter: ifAdmin,
+  },
+  {
+    path: "/events",
+    name: "Events",
+    component: Events,
     beforeEnter: ifAdmin,
   },
   // {
