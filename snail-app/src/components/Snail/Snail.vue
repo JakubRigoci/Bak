@@ -1,7 +1,7 @@
 <template>
-<v-card>
+<v-card class=" primary" outlined>
     <v-card-actions>
-        <v-btn color="orange lighten-2" text> Mereni </v-btn>
+        <v-btn color="secondary" @click="showTable = !showTable" text> Mereni </v-btn>
 
         <v-spacer></v-spacer>
         <v-btn icon @click="showTable = !showTable">
@@ -13,9 +13,6 @@
         <div v-show="showTable">
             <v-divider></v-divider>
             <Measures :snailId="snailId"></Measures>
-            <v-card-text>
-                TEXT?
-            </v-card-text>
         </div>
     </v-expand-transition>
 
@@ -38,22 +35,36 @@
     <SnailRemovePopup :groupId="groupId" :snailId="snailId"></SnailRemovePopup>
 
     <v-card-actions>
-        <v-btn color="orange lighten-2" text> Galeria </v-btn>
+        <v-btn color="secondary" @click="showEvents = !showEvents" text> Udalosti </v-btn>
 
         <v-spacer></v-spacer>
 
-        <v-btn icon @click="show = !show">
-            <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
+        <v-btn icon @click="showEvents = !showEvents">
+            <v-icon>{{ showEvents ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
         </v-btn>
     </v-card-actions>
 
     <v-expand-transition>
-        <div v-show="show">
+        <div v-show="showEvents">
+            <v-divider></v-divider>
+            <SnailEvents :snailId="snailId"></SnailEvents>
+        </div>
+    </v-expand-transition>
+
+    <v-card-actions>
+        <v-btn color="secondary" @click="showGallery = !showGallery" text> Galerie </v-btn>
+
+        <v-spacer></v-spacer>
+
+        <v-btn icon @click="showGallery = !showGallery">
+            <v-icon>{{ showGallery ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
+        </v-btn>
+    </v-card-actions>
+
+    <v-expand-transition>
+        <div v-show="showGallery">
             <v-divider></v-divider>
             <Gallery></Gallery>
-            <v-card-text>
-                TEXT?
-            </v-card-text>
         </div>
     </v-expand-transition>
 </v-card>
@@ -63,6 +74,8 @@
 import Gallery from "@/components/Gallery/Gallery.vue"
 import SnailRemovePopup from "@/components/Snail/SnailRemovePopup.vue"
 import Measures from "@/components/Snail/Measures/Measures.vue"
+import SnailEvents from "@/components/Snail/SnailEvents.vue"
+
 export default {
     props: {
         snailId: Number,
@@ -70,14 +83,16 @@ export default {
     },
     data() {
         return {
-            show: false,
+            showGallery: false,
             showTable: false,
+            showEvents: false,
         }
     },
     components: {
         Gallery,
         SnailRemovePopup,
-        Measures
+        Measures,
+        SnailEvents
     },
     computed: {
         snail() {

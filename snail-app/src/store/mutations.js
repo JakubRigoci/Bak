@@ -38,6 +38,30 @@ export const GET_EVENT_TYPES = (state, eventTypes) => {
   state.eventTypes = eventTypes
 }
 
+export const GET_BOX_EVENTS = (state, eventsForBox) => {
+  state.eventsForBox = eventsForBox.sort((a, b) => {
+    const left = new Date(a.datum)
+    const right = new Date(b.datum)
+    return left - right
+})
+}
+
+export const GET_SNUSKA_EVENTS = (state, eventsForSnuska) => {
+  state.eventsForSnuska = eventsForSnuska.sort((a, b) => {
+    const left = new Date(a.datum)
+    const right = new Date(b.datum)
+    return left - right
+})
+}
+
+export const GET_SNAIL_EVENTS = (state, eventsForSnail) => {
+  state.eventsForSnail = eventsForSnail.sort((a, b) => {
+    const left = new Date(a.datum)
+    const right = new Date(b.datum)
+    return left - right
+})
+}
+
 export const ADD_SNAIL = (state, payload) => {
   state.snails.push(payload.snail)
   state.snailsForGroup[payload.groupId].push(payload.snail)
@@ -63,6 +87,25 @@ export const ADD_TAXONOMY = (state, taxonomy) => {
 
 export const ADD_EVENT_TYPE = (state, event) => {
   state.eventTypes.push(event)
+}
+
+export const ADD_EVENT = (state, event) => {
+  if (event.boxId) {
+    state.eventsForBox.push(event)
+    return
+  }
+  if (event.skupinaId) {
+    state.eventsForGroup.push(event)
+    return
+  }
+  if (event.snuskaId) {
+    state.eventsForSnuska.push(event)
+    return
+  }
+  if (event.snekId) {
+    state.eventsForSnail.push(event)
+    return
+  }
 }
 
 export const REMOVE_SNAIL = (state, payload) => {
@@ -91,6 +134,25 @@ export const REMOVE_EVENT_TYPE = (state, eventTypeId) => {
   state.eventTypes = state.eventTypes.filter(e => e.udalostTypId !== eventTypeId)
 }
 
+export const REMOVE_EVENT = (state, event) => {
+  console.log("BEFORE SWITCH")
+  switch(event.type){
+    case "box":
+      console.log("REMOVE BOX EVENT")
+      console.log(event)
+      state.eventsForBox = state.eventsForBox.filter(e => event.id !== e.udalostId)
+      return
+    case "group":
+      state.eventsForGroup = state.eventsForGroup.filter(e => event.id !== e.udalostId)
+      return
+    case "snuska":
+      state.eventsForSnuska = state.eventsForSnuska.filter(e => event.id !== e.udalostId)
+      return
+    case "snail":
+      state.eventsForSnail = state.eventsForSnail.filter(e => event.id !== e.udalostId)
+      return
+  }
+}
 export const SET_ACTIVE_BOX = (state, boxId) => {
   state.activeBox = boxId
 }

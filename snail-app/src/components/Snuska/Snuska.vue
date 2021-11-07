@@ -28,13 +28,14 @@
 
 <script>
 import SnuskaRemovePopup from "@/components/Snuska/SnuskaRemovePopup.vue"
+
 export default {
     props: {
         snuskaId: Number,
     },
     components: {
-        SnuskaRemovePopup
-    },
+        SnuskaRemovePopup,
+            },
     methods: {
          details() {
             this.$router.push(`/snuska/${this.snuskaId}`)

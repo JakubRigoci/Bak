@@ -83,6 +83,33 @@ export const getEventTypes = ({commit}) => {
   })
 }
 
+export const getBoxEvents = ({commit}, boxId) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`box/${boxId}/udalost`).then(response => {
+      commit("GET_BOX_EVENTS", response.data)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
+export const getSnuskaEvents = ({commit}, snuskaId) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`snuska/${snuskaId}/udalost`).then(response => {
+      commit("GET_SNUSKA_EVENTS", response.data)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
+export const getSnailEvents = ({commit}, snailId) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`snek/${snailId}/udalost`).then(response => {
+      commit("GET_SNAIL_EVENTS", response.data)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
 export const addSnail = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     axios.post(`snek/${payload.id}`, payload.snail).then(response =>{
@@ -148,6 +175,15 @@ export const addEventType = ({commit}, event) => {
   })
 }
 
+export const addEvent = ({commit}, event) => {
+  return new Promise((resolve, reject) => {
+    axios.post("udalost", event).then(response => {
+      commit("ADD_EVENT", response.data)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
 export const removeSnail = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     axios.delete(`snek/${payload.snailId}`).then(response => {
@@ -197,6 +233,15 @@ export const removeEventType = ({commit}, eventTypeId) => {
   return new Promise((resolve, reject) => {
     axios.delete(`udalost-typ/admin/${eventTypeId}`).then(response => {
       commit("REMOVE_EVENT_TYPE", eventTypeId)
+      resolve(response)
+    }).catch(error => reject(error))
+  })
+}
+
+export const removeEvent = ({commit}, event) => {
+  return new Promise((resolve, reject) => {
+    axios.delete(`udalost/${event.id}`).then(response => {
+      commit("REMOVE_EVENT", event)
       resolve(response)
     }).catch(error => reject(error))
   })
