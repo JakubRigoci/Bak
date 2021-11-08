@@ -1,26 +1,36 @@
 <template>
-<v-app-bar class="secondary" app>
-    <v-toolbar-title @click="boxes">Snail App</v-toolbar-title>
+<div class="nav">
+    <v-app-bar class="secondary" app flat>
+        <v-app-bar-nav-icon  @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-toolbar-title class="text-uppercase">
+            <span class="primary--text">
+                Snail app
+            </span>
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+    </v-app-bar>
+    <v-navigation-drawer app v-model="drawer" class="secondary">
+        <RouteLinksList></RouteLinksList>
+    </v-navigation-drawer>
+</div>
 
-    <v-spacer></v-spacer>
-    <div v-if="isLoggedIn">
-        <span><a @click="taxonomies">Taxonomie</a></span>
-        <span>|<a @click="events">Udalosti</a></span>
-        <span>|<a @click="snuskas">Snusky</a></span>
-        <span>|<a @click="boxes">Boxy</a></span>
-        <span v-if="isLoggedIn">|<a @click="logout">Logout</a></span>
-    </div>
-
-    <span v-if="!isLoggedIn">|<a @click="login">Login</a></span>
-</v-app-bar>
 </template>
 
 <script>
+import RouteLinksList from '@/components/Header/RouteLinksList.vue';
 export default {
     computed: {
         isLoggedIn() {
             return this.$store.getters.isLoggedIn
         }
+    },
+        components: {
+        RouteLinksList,
+    },
+    data() {
+        return {
+            drawer: false,
+        };
     },
     methods: {
         logout() {

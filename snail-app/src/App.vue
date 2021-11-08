@@ -27,9 +27,6 @@ export default {
 </script>
 
 <style>
-.primary {
-    padding-top: 56px !important;
-}
 
 .v-alert {
     position: fixed;
