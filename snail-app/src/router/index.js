@@ -33,7 +33,7 @@ const ifAdmin = (to, from, next) => {
     next()
     return
   }
-  next("/login")
+  next("/home")
 }
 
 const routes = [

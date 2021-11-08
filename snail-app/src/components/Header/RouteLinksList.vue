@@ -11,7 +11,7 @@
             </v-list-item-content>
         </v-list-item>
     </v-list-item-group>
-    <div class="admin">
+    <div class="admin" v-if="userAdmin">
         <v-subheader>Admin</v-subheader>
         <v-list-item-group v-model="selectedItem" color="primary">
             <v-list-item v-for="(item, i) in adminItems" :key="i" router :to="item.route">
@@ -61,6 +61,11 @@ export default {
             ],
         };
     },
+    computed: {
+        userAdmin() {
+            return this.$store.state.user.userRoles.includes("ADMIN")
+        }
+    }
 };
 </script>
 

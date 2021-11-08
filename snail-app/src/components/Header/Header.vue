@@ -8,8 +8,10 @@
             </span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
+        <span v-if="isLoggedIn"><a @click="logout">Logout</a></span>
+        <span v-if="!isLoggedIn"><a @click="login">Login</a></span>
     </v-app-bar>
-    <v-navigation-drawer app v-model="drawer" class="secondary">
+    <v-navigation-drawer v-if="this.$store.getters.isLoggedIn" app v-model="drawer" class="secondary">
         <RouteLinksList></RouteLinksList>
     </v-navigation-drawer>
 </div>
