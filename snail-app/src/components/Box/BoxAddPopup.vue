@@ -9,54 +9,56 @@
                 </v-avatar>
             </v-card>
         </template>
-        <v-card>
-            <v-card-title>
-                <span class="text-h5">Pridat box</span>
-            </v-card-title>
-            <v-card-text>
-                <v-container>
-                    <v-row>
-                        <v-col cols="12">
-                            <v-text-field v-model="box.jmeno" label="Jmeno*" required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field v-model="box.komentar" label="Komentar" hint="example of helper text only on focus"></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field v-model="box.vyska" label="Vyska*" hint="example of persistent helper text" persistent-hint required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field v-model="box.sirka" label="Sirka*" required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field v-model="box.depth" label="Hlbka*" required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-menu transition="scale-transition" offset-y min-width="auto">
-                                <template v-slot:activator="{on}">
-                                    <v-text-field v-model="box.datumPorizeni" v-on="on" label="Datum porizeni"></v-text-field>
-                                </template>
-                                <v-date-picker color="secondary" v-model="box.datumPorizeni"></v-date-picker>
-                            </v-menu>
-                        </v-col>
+        <v-form v-model="valid">
+            <v-card>
+                <v-card-title>
+                    <span class="text-h5">Pridat box</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container>
+                        <v-row>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" :rules="nameRules" :counter="15" v-model="box.jmeno" label="Jmeno*" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" :rules="commentRules" :counter="60" v-model="box.komentar" label="Komentar"></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" :rules="numberRules" type="number" v-model="box.vyska" label="Vyska*" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" v-model="box.sirka" type="number" label="Sirka*" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" v-model="box.depth" type="number" label="Hlbka*" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-menu transition="scale-transition" offset-y min-width="auto">
+                                    <template v-slot:activator="{on}">
+                                        <v-text-field v-model="box.datumPorizeni" v-on="on" label="Datum porizeni"></v-text-field>
+                                    </template>
+                                    <v-date-picker color="secondary" v-model="box.datumPorizeni"></v-date-picker>
+                                </v-menu>
+                            </v-col>
 
-                        <v-col cols="12">
-                            <v-text-field v-model="box.prodejce" label="prodejce*" required></v-text-field>
-                        </v-col>
-                    </v-row>
-                </v-container>
-                <small>*indicates required field</small>
-            </v-card-text>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">
-                    Close
-                </v-btn>
-                <v-btn color="blue darken-1" text @click="save">
-                    Save
-                </v-btn>
-            </v-card-actions>
-        </v-card>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" v-model="box.prodejce" label="prodejce*" required></v-text-field>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                    <small>*indicates required field</small>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="dialog = false">
+                        Close
+                    </v-btn>
+                    <v-btn color="blue darken-1" text @click="save">
+                        Save
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-form>
     </v-dialog>
 </div>
 </template>
@@ -69,6 +71,18 @@ export default {
     data: () => ({
         dialog: false,
         menu: false,
+        valid: false,
+        nameRules: [
+        v => !!v || 'Jméno je povinné',
+        v => v.length <= 15 || 'Jméno musí být méně než 15 znaků',
+        ],
+        commentRules: [
+        v => !!v || 'Kometář je povinný',
+        v => v.length <= 60 || 'Komentář musí být méně než 15 znaků',
+        ],
+        numberRules: [
+        v => v < 1000000 || 'Velikost musí být méně než 7 cifer'
+        ],
         box: {
             id: 0,
             jmeno: "",

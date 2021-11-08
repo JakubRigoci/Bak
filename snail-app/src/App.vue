@@ -1,29 +1,38 @@
 <template>
-  <v-app>
+<v-app>
     <Header></Header>
     <v-main class="primary">
-      <v-container fluid class="mx-4">
-        <router-view></router-view>
-      </v-container>
-      <Footer></Footer>
+      <ErrorMessage></ErrorMessage>
+        <v-container fluid class="mx-4">
+            <router-view></router-view>
+        </v-container>
+        <Footer></Footer>
     </v-main>
-  </v-app>
+</v-app>
 </template>
 
 <script>
 import Header from "@/components/Header/Header.vue"
 import Footer from "@/components/Footer/Footer.vue"
+import ErrorMessage from "@/components/Shared/ErrorMessage.vue"
+
 export default {
-  name: "App",
-  components: {Header, Footer},
-  data: () => ({
-    //
-  }),
-};
+    name: "App",
+    components: {
+        Header,
+        Footer,
+        ErrorMessage
+    },
+}
 </script>
 
 <style>
 .primary {
-  padding-top: 56px !important;
+    padding-top: 56px !important;
+}
+
+.v-alert {
+    position: fixed;
+
 }
 </style>

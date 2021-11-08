@@ -2,7 +2,7 @@
 <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" width="100px" outlined text depressed class="ma-2  width:100px info"> Vymazat </v-btn>
+            <v-btn v-bind="attrs" v-on="on" width="100px" outlined text depressed class="ma-2  width:100px info"> Vymazat </v-btn>
         </template>
         <v-card>
             <v-card-title>
@@ -34,18 +34,39 @@ export default {
         name: String,
         reroute: Boolean
     },
-        data: () => ({
+    data: () => ({
         dialog: false,
     }),
     methods: {
-        save() {
+        async save() {
             this.dialog = false
-            this.$store.dispatch("removeBox", this.id)
-            this.$store.dispatch("getBoxes")
+            if (await this.checkDependenciesOrRemoveGroup()) {
+                this.$store.dispatch("removeBox", this.id)
+            } else {
+                this.$store.dispatch("error", "Box má závislosti!")
+            }
+            //this.$store.dispatch("getBoxes")
 
             if (this.reroute) {
                 this.$router.push("/home")
             }
+        },
+        async checkDependenciesOrRemoveGroup() {
+            await this.$store.dispatch("getGroups")
+            await this.$store.dispatch("getGroupsForBox", this.id)
+            const groupsInBox = this.$store.state.groupsForBox
+
+            if (groupsInBox.length !== 1) {
+                return false
+            }
+            const group = groupsInBox[0]
+
+            if (group.velikost !== 0) {
+                return false
+            }
+
+            await this.$store.dispatch("removeGroup", group.skupinaId)
+            return true
         }
     }
 };

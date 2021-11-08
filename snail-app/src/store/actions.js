@@ -47,6 +47,18 @@ export const getGroups = ({commit}) => {
   })
 }
 
+export const test = ({commit}) => {
+  return new Promise((resolve, reject) => {
+    axios.get("skupinasdasdasdasd").then(response =>{
+      commit("GET_GROUPS", response.data)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.message)
+      reject(e)
+    })
+  })
+}
+
 export const getSnuskas = ({commit}) => {
   return new Promise((resolve, reject) => {
     axios.get("snuska").then(response =>{
@@ -207,7 +219,9 @@ export const removeBox = ({commit}, boxId) => {
     axios.delete(`box/${boxId}`).then(response => {
       commit("REMOVE_BOX", boxId)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)})
   })
 }
 
@@ -254,6 +268,17 @@ export const setActiveBox = ({commit}, boxId) => {
   })
 
 }
+
+export const error = ({commit}, message) => {
+  try {
+    commit("ERROR", message)
+    setTimeout(() => commit("REMOVE_ERROR"), 5000)
+  }
+  catch (e) {
+    console.log(e)
+  }
+}
+
 
 export const login = ({commit}, user) => {
     return new Promise((resolve, reject) => {

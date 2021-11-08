@@ -157,6 +157,14 @@ export const SET_ACTIVE_BOX = (state, boxId) => {
   state.activeBox = boxId
 }
 
+export const ERROR = (state, message) => {
+  state.errorMessage = message
+}
+
+export const REMOVE_ERROR = (state) => {
+  state.errorMessage = ''
+}
+
 export const AUTH_REQUEST = (state) => {
   state.status = "loading"
 }
