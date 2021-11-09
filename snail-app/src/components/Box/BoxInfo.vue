@@ -2,23 +2,37 @@
 <div>
     <h1 class="subheading grey--text">Box</h1>
     <v-divider></v-divider>
-    <v-container class="my-5">
+    <v-container>
         <div class="params">
-            <p> <b>Jmeno:</b> {{box.jmeno}}</p>
-            <p> <b>Komentar:</b> {{box.komentar}}</p>
-            <p> <b>Vyska:</b> {{box.vyska}}</p>
-            <p> <b>Sirka:</b> {{box.sirka}}</p>
-            <p> <b>Hlbka:</b> {{box.hlbka}}</p>
-            <p> <b>Datum porizeni</b> {{box.datumPorizeni}}</p>
-            <p> <b>Prodejce:</b> {{box.prodejce}}</p>
+            <v-row>
+                <v-col>
+                    <b>Jmeno:</b> {{box.jmeno}}</v-col>
+                <v-col> <b>Komentar:</b> {{box.komentar}}</v-col>
+            </v-row>
+            <v-row>
+                <v-col> <b>Prodejce:</b> {{box.prodejce}} </v-col>
+                <v-col><b>Datum porizeni</b> {{box.datumPorizeni}}</v-col>
+            </v-row>
+            <v-row>
+                <v-col> <b>Vyska:</b> {{box.vyska}}</v-col>
+                <v-col><b>Sirka:</b> {{box.sirka}}</v-col>
+                
+            </v-row>
+            <v-row>
+                <v-col><b>Hlbka:</b> {{box.hlbka}}</v-col>
+            </v-row>
+
         </div>
         <div class="buttons">
-            <v-btn  width="100px" outlined text depressed class="ma-2  width:100px info"> Uprav </v-btn>
+            <v-row>
+            <v-btn width="100px" outlined text depressed class="mr-8 ma-2 width:100px info"> Uprav </v-btn>
             <BoxRemovePopup :id="boxId" :name="box.jmeno" :reroute="true"></BoxRemovePopup>
+            </v-row>
         </div>
     </v-container>
 </div>
 </template>
+
 <script>
 import BoxRemovePopup from "@/components/Box/BoxRemovePopup.vue"
 export default {
@@ -33,9 +47,10 @@ export default {
             return this.$store.getters.boxById(this.boxId)
         }
     }
-    
+
 }
 </script>
+
 <style lang="">
-    
+
 </style>

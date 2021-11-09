@@ -1,12 +1,13 @@
 <template lang="">
 <div>
 <div v-if="events.length > 0">
+<EventAddPopup type="box" :id="boxId"></EventAddPopup>
 <v-timeline dense>
     <v-timeline-item color="secondary" fill-dot v-for="event in events" :key="event.udalostId">
         <Event type="box" :id="event.udalostId"></Event>
     </v-timeline-item>
   </v-timeline>
-  <EventAddPopup type="box" :id="boxId"></EventAddPopup>
+
 </div>
 <div v-if="events.length === 0">
     <span> Zatim nejsou zadne udalosti</span>

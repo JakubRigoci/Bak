@@ -60,7 +60,10 @@ export default {
             return this.$store.state.groupsForBox;
         },
         showSnails() {
-            return this.$store.state.groupsForBox.length <= 1
+            if(this.groups)
+                return this.groups.length <= 1
+            
+            return false
         }
     },
     methods: {

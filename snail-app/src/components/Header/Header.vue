@@ -1,9 +1,9 @@
 <template>
 <div class="nav">
     <v-app-bar class="secondary" app flat>
-        <v-app-bar-nav-icon  @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title class="text-uppercase">
-            <span class="primary--text">
+            <span @click="home" class="primary--text">
                 Snail app
             </span>
         </v-toolbar-title>
@@ -15,7 +15,6 @@
         <RouteLinksList></RouteLinksList>
     </v-navigation-drawer>
 </div>
-
 </template>
 
 <script>
@@ -26,7 +25,7 @@ export default {
             return this.$store.getters.isLoggedIn
         }
     },
-        components: {
+    components: {
         RouteLinksList,
     },
     data() {
@@ -44,21 +43,10 @@ export default {
         login() {
             this.$router.push("/login")
         },
-        snuskas() {
-            this.$router.push("/snuskas")
+        home() {
+            const path = `/home`
+            if (this.$route.path !== path) this.$router.push(path)
         },
-        boxes() {
-            this.$router.push("/home");
-        },
-        taxonomies() {
-            this.$router.push("/taxonomies")
-        },
-        events() {
-            this.$router.push("/events")
-        }
     },
-    mounted() {
-        console.log(this.isLoggedIn)
-    }
 }
 </script>

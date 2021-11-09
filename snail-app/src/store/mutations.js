@@ -42,7 +42,7 @@ export const GET_BOX_EVENTS = (state, eventsForBox) => {
   state.eventsForBox = eventsForBox.sort((a, b) => {
     const left = new Date(a.datum)
     const right = new Date(b.datum)
-    return left - right
+    return right - left
 })
 }
 
@@ -50,7 +50,7 @@ export const GET_SNUSKA_EVENTS = (state, eventsForSnuska) => {
   state.eventsForSnuska = eventsForSnuska.sort((a, b) => {
     const left = new Date(a.datum)
     const right = new Date(b.datum)
-    return left - right
+    return right - left
 })
 }
 
@@ -58,7 +58,7 @@ export const GET_SNAIL_EVENTS = (state, eventsForSnail) => {
   state.eventsForSnail = eventsForSnail.sort((a, b) => {
     const left = new Date(a.datum)
     const right = new Date(b.datum)
-    return left - right
+    return right - left
 })
 }
 
