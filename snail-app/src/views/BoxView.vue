@@ -2,7 +2,7 @@
 <v-container fluid>
     <BoxInfo :boxId="Number.parseInt(this.$route.params.id)"></BoxInfo>
     <h1 v-if="!showSnails" class="subheading grey--text">Skupiny</h1>
-    <h1 v-if="showSnails" class="subheading grey--text">Sneci</h1>
+    <h1 v-if="showSnails" class="subheading grey--text">Šneci</h1>
     <v-btn class="secondary" @click="showGroups = !showGroups">
         <v-icon>{{ showGroups ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
     </v-btn>
@@ -15,7 +15,7 @@
             <GroupAddPopup v-if="showSnails" :boxId="Number.parseInt(this.$route.params.id)"></GroupAddPopup>
         </div>
     </v-expand-transition>
-    <h1 class="pt-8 subheading grey--text">Udalosti</h1>
+    <h1 class="pt-8 subheading grey--text">Události</h1>
     <v-btn class="secondary" @click="showEvents = !showEvents">
         <v-icon>{{ showEvents ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
     </v-btn>

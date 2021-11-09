@@ -14,17 +14,16 @@
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
-                        <p>Sign in with your username and password:</p>
                         <v-form>
-                            <v-text-field outline label="Username" type="text" v-model="name"></v-text-field>
-                            <v-text-field outline hide-details label="Password" type="password" v-model="password"></v-text-field>
+                            <v-text-field outline label="Přihlasovací jméno" type="text" v-model="name"></v-text-field>
+                            <v-text-field outline hide-details label="Heslo" type="password" v-model="password"></v-text-field>
                         </v-form>
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
                         <v-spacer></v-spacer>
-                        <v-btn color="info" @click="login" :large="$vuetify.breakpoint.smAndUp">
-                            Login
+                        <v-btn color="secondary" @click="login" :large="$vuetify.breakpoint.smAndUp">
+                            Přihlásit
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -41,8 +40,8 @@ export default {
     name: "Login",
     data() {
         return {
-            name: "name",
-            password: "password",
+            name: "Jméno",
+            password: "",
         };
     },
     methods: {

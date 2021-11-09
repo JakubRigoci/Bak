@@ -6,7 +6,7 @@
     <v-expand-transition>
         <div v-if="showFilter">
             Filter
-            <v-text-field @change="emitValue" color="secondary" label="Komentar" v-model="commentaryFilter"></v-text-field>
+            <v-text-field @change="emitValue" color="secondary" label="Komentář" v-model="commentaryFilter"></v-text-field>
         </div>
     </v-expand-transition>
 </div>

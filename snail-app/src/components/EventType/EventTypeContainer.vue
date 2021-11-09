@@ -15,7 +15,7 @@
                         <EventTypeAddPopup></EventTypeAddPopup>
                     </div>
                 </template>
-                <span>Pridat typ udalosti</span>
+                <span>Přidat typ události</span>
             </v-tooltip>
         </v-col>
 

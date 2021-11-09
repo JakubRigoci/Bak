@@ -3,7 +3,7 @@
     <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
             <v-btn color="secondary" dark v-bind="attrs" v-on="on">
-                Zorad
+                Zoraď
             </v-btn>
         </template>
         <v-list>

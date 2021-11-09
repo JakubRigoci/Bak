@@ -18,7 +18,7 @@
                         <SnuskaAddPopup></SnuskaAddPopup>
                     </div>
                 </template>
-                <span>Pridat snusku</span>
+                <span>Přidat snúšku</span>
             </v-tooltip>
         </v-col>
 

@@ -1,6 +1,6 @@
 <template lang="">
 <v-container fluid>
-    <h1 class="subheading grey--text">Snusky</h1>
+    <h1 class="subheading grey--text">Snúšky</h1>
     <v-divider></v-divider>
     <SnuskaContainer :groupId="Number.parseInt(groupId)"></SnuskaContainer>
 </v-container>

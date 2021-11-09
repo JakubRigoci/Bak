@@ -7,10 +7,10 @@
                 {{box.komentar}}
             </v-list-item-title>
             <v-list-item-subtitle>
-                Vyska: {{box.vyska}}
+                Výška: {{box.vyska}}
             </v-list-item-subtitle>
             <v-list-item-subtitle>
-                Sirka: {{box.sirka}}
+                Šírka: {{box.sirka}}
             </v-list-item-subtitle>
         </v-list-item-content>
 
@@ -18,7 +18,7 @@
     </v-list-item>
     <v-card-actions class="d-flex justify-space-around mb-6">
         <v-btn @click="details" width="100px" outlined text depressed class="ma-2  width:100px info"> Detaily </v-btn>
-        <BoxRemovePopup :id="box.boxId" :name="box.jmeno"></BoxRemovePopup>
+        <BoxRemovePopup :id="box.boxId"></BoxRemovePopup>
     </v-card-actions>
 </v-card>
 </template>

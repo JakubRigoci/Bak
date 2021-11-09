@@ -18,12 +18,12 @@
                     <v-spacer></v-spacer>
                     <v-row class="mx-auto">
                         <v-col cols="12">
-                            <GroupRemovePopup :id="group.skupinaId" :name="group.jmeno"></GroupRemovePopup>
+                            <GroupRemovePopup :id="group.skupinaId"></GroupRemovePopup>
                             <v-btn outlined width="100px" depressed class="ma-2 info"> Uprav</v-btn>
                         </v-col>
                     </v-row>
                     <v-col cols="12">
-                        <v-btn outlined width="150px" @click="showSnuskas(group.skupinaId)" depressed class="ma-2 info"> Zobraz snusky</v-btn>
+                        <v-btn outlined width="150px" @click="showSnuskas(group.skupinaId)" depressed class="ma-2 info">Zobrazit snúšky</v-btn>
                     </v-col>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content id="innerExPan" class="secondary">

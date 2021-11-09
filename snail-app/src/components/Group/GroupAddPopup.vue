@@ -11,28 +11,28 @@
         </template>
         <v-card>
             <v-card-title>
-                <span class="text-h5">Pridat Skupinu</span>
+                <span class="text-h5">Přidat Skupinu</span>
             </v-card-title>
             <v-card-text>
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field v-model="group.jmeno" label="Jmeno*" required></v-text-field>
+                            <v-text-field v-model="group.jmeno" label="Jméno*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field v-model="group.komentar" label="Komentar" hint="example of helper text only on focus"></v-text-field>
+                            <v-text-field v-model="group.komentar" label="Komentář" required></v-text-field>
                         </v-col>
                     </v-row>
                 </v-container>
-                <small>*indicates required field</small>
+                <small>*Povinní</small>
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="dialog = false">
-                    Close
+                    Zavřít
                 </v-btn>
                 <v-btn color="blue darken-1" text @click="save">
-                    Save
+                    Uložit
                 </v-btn>
             </v-card-actions>
         </v-card>

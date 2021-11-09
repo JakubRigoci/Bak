@@ -9,7 +9,7 @@
   <EventAddPopup type="snail" :id="snailId"></EventAddPopup>
 </div>
 <div v-if="events.length === 0">
-    <span> Zatim nejsou zadne udalosti</span>
+    <span> Zatím nejsou žádné události</span>
     <EventAddPopup type="snail" :id="snailId"></EventAddPopup>
 </div>
 </div>

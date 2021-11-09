@@ -12,7 +12,7 @@
                             <v-fade-transition leave-absolute>
                                 <v-row v-if="!open" no-gutters style="width: 100%">
                                     <v-col cols="4">
-                                        Komentar: {{snail.komentar || "Not Set"}}
+                                        Komentář: {{snail.komentar || "Not Set"}}
                                     </v-col>
                                     <v-col cols="4">
                                         Barva ulity: {{ snail.barvaUlita || 'Not set' }}

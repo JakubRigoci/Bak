@@ -9,56 +9,68 @@
                 </v-avatar>
             </v-card>
         </template>
-        <v-card>
-            <v-card-title>
-                <span class="text-h5">Pridat Taxonomii</span>
-            </v-card-title>
-            <v-card-text>
-                <v-container>
-                    <v-row>
-                        <v-col cols="12">
-                            <v-text-field color="secondary" v-model="taxonomy.jmeno" label="Jmeno*" required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field color="secondary" v-model="taxonomy.popis" label="Popis" hint="example of helper text only on focus"></v-text-field>
-                        </v-col>
-                    </v-row>
-                </v-container>
-                <small>*indicates required field</small>
-            </v-card-text>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">
-                    Close
-                </v-btn>
-                <v-btn color="blue darken-1" text @click="save">
-                    Save
-                </v-btn>
-            </v-card-actions>
-        </v-card>
+        <v-form ref="form" v-model="valid">
+            <v-card>
+                <v-card-title>
+                    <span class="text-h5">Přidat Taxonomii</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container>
+                        <v-row>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" :rules="nameRules" v-model="taxonomy.jmeno" label="Jméno*" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" :rules="textRules" v-model="taxonomy.popis" label="Popis" required></v-text-field>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                    <small>*Povinní</small>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="secondary" text @click="dialog = false">
+                        Zavřít
+                    </v-btn>
+                    <v-btn color="secondary" text @click="save">
+                        Uložit
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-form>
     </v-dialog>
 </div>
 </template>
 
 <script>
+import {
+    nameRules,
+    textRules
+} from "@/components/Shared/Validation.js"
+
 export default {
     props: {
         id: Number,
     },
     data: () => ({
         dialog: false,
+        valid: false,
         taxonomy: {
             taxonomyId: 0,
             jmeno: "",
             popis: "",
             level: 0
-        }
+        },
+        nameRules: nameRules,
+        textRules: textRules,
 
     }),
     methods: {
         save() {
-            this.dialog = false
-            this.$store.dispatch("addTaxonomy",this.taxonomy)
+            if (this.$refs.form.validate()) {
+                this.dialog = false
+                this.$store.dispatch("addTaxonomy", this.taxonomy)
+            }
         }
     }
 };

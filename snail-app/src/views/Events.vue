@@ -1,6 +1,6 @@
 <template lang="">
 <v-container fluid>
-    <h1 class="subheading grey--text">Typy udalosti</h1>
+    <h1 class="subheading grey--text">Typy událostí</h1>
     <v-col cols="12">
         <v-select color="secondary" item-color="secondary" v-model="eventType" :items="targets" item-text="jmeno" label="Typ*" required></v-select>
     </v-col>

@@ -9,46 +9,50 @@
                 </v-avatar>
             </v-card>
         </template>
-        <v-card>
-            <v-card-title>
-                <span class="text-h5">Pridat Udalost</span>
-            </v-card-title>
-            <v-card-text>
-                <v-container>
-                    <v-row>
-                        <v-col cols="12">
-                            <v-text-field v-model="event.komentar" label="Komentar" hint="example of helper text only on focus"></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-menu transition="scale-transition" offset-y min-width="auto">
-                                <template v-slot:activator="{on}">
-                                    <v-text-field color="secondary" v-model="event.datum" v-on="on" label="Datum"></v-text-field>
-                                </template>
-                                <v-date-picker color="secondary" v-model="event.datum"></v-date-picker>
-                            </v-menu>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-select v-model="event.udalostTypId" :items="eventTypes" item-text="popis" item-value="udalostTypId" label="typ udalosti*" required></v-select>
-                        </v-col>
-                    </v-row>
-                </v-container>
-                <small>*indicates required field</small>
-            </v-card-text>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">
-                    Close
-                </v-btn>
-                <v-btn color="blue darken-1" text @click="save">
-                    Save
-                </v-btn>
-            </v-card-actions>
-        </v-card>
+        <v-form ref="form" v-model="valid">
+            <v-card>
+                <v-card-title>
+                    <span class="text-h5">Přidat událost</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container>
+                        <v-row>
+                            <v-col cols="12">
+                                <v-text-field v-model="event.komentar" :rules="commentRules" label="Komentář"></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-menu transition="scale-transition" offset-y min-width="auto">
+                                    <template v-slot:activator="{on}">
+                                        <v-text-field color="secondary" v-model="event.datum" v-on="on" label="Datum"></v-text-field>
+                                    </template>
+                                    <v-date-picker color="secondary" v-model="event.datum"></v-date-picker>
+                                </v-menu>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-select v-model="event.udalostTypId" :rules="selectRules" :items="eventTypes" item-text="popis" item-value="udalostTypId" label="Typ události*" required></v-select>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                    <small>*Povinní</small>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="secondary" text @click="dialog = false">
+                        Zavřít
+                    </v-btn>
+                    <v-btn color="secondary" text @click="save">
+                        Uložit
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-form>
     </v-dialog>
 </div>
 </template>
 
 <script>
+import { selectRules , commentRules } from "@/components/Shared/Validation.js"
+
 export default {
     props: {
         type: String,
@@ -62,7 +66,9 @@ export default {
                 komentar: "",
                 datum: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
                 udalostTypId: 0,
-            }
+            },
+            commentRules: commentRules,
+            selectRules: selectRules,
         }
     },
     computed: {
@@ -72,22 +78,24 @@ export default {
     },
     methods: {
         save() {
-            this.dialog = false
-            switch(this.type) {
-                case("box"):
-                    this.event.boxId = this.id
-                    break
-                case("snuska"):
-                    this.event.snuskaId = this.id
-                    break
-                case("snail"):
-                    this.event.snekId = this.id
-                    break
-                case("group"):
-                    this.event.skupinaId = this.id
-                    break
+            if (this.$refs.form.validate()) {
+                this.dialog = false
+                switch (this.type) {
+                    case ("box"):
+                        this.event.boxId = this.id
+                        break
+                    case ("snuska"):
+                        this.event.snuskaId = this.id
+                        break
+                    case ("snail"):
+                        this.event.snekId = this.id
+                        break
+                    case ("group"):
+                        this.event.skupinaId = this.id
+                        break
+                }
+                this.$store.dispatch("addEvent", this.event)
             }
-            this.$store.dispatch("addEvent", this.event)
         }
     }
 };

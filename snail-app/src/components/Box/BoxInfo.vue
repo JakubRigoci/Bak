@@ -6,20 +6,20 @@
         <div class="params">
             <v-row>
                 <v-col>
-                    <b>Jmeno:</b> {{box.jmeno}}</v-col>
-                <v-col> <b>Komentar:</b> {{box.komentar}}</v-col>
+                    <b>Jméno:</b> {{box.jmeno}}</v-col>
+                <v-col> <b>Komentář:</b> {{box.komentar}}</v-col>
             </v-row>
             <v-row>
                 <v-col> <b>Prodejce:</b> {{box.prodejce}} </v-col>
-                <v-col><b>Datum porizeni</b> {{box.datumPorizeni}}</v-col>
+                <v-col><b>Datum pořízení</b> {{box.datumPorizeni}}</v-col>
             </v-row>
             <v-row>
-                <v-col> <b>Vyska:</b> {{box.vyska}}</v-col>
-                <v-col><b>Sirka:</b> {{box.sirka}}</v-col>
+                <v-col> <b>Výška:</b> {{box.vyska}}</v-col>
+                <v-col><b>Šírka:</b> {{box.sirka}}</v-col>
                 
             </v-row>
             <v-row>
-                <v-col><b>Hlbka:</b> {{box.hlbka}}</v-col>
+                <v-col><b>Hloubka:</b> {{box.hlbka}}</v-col>
             </v-row>
 
         </div>

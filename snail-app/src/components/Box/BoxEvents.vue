@@ -10,7 +10,7 @@
 
 </div>
 <div v-if="events.length === 0">
-    <span> Zatim nejsou zadne udalosti</span>
+    <span>Zatím nejsou žádné udalosti</span>
     <EventAddPopup type="box" :id="boxId"></EventAddPopup>
 </div>
 </div>

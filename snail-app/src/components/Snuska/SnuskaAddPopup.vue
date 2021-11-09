@@ -9,93 +9,110 @@
                 </v-avatar>
             </v-card>
         </template>
-        <v-card>
-            <v-card-title>
-                <span class="text-h5">Pridat Snusku</span>
-            </v-card-title>
-            <v-card-text>
-                <v-container>
-                    <v-row>
-                        <v-col cols="12">
-                            <v-text-field color="secondary" v-model="snuska.komentar" label="Komentar*" required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-menu transition="scale-transition" offset-y min-width="auto">
-                                <template v-slot:activator="{on}">
-                                    <v-text-field color="secondary" v-model="snuska.datumSneseni" v-on="on" label="Datum sneseni"></v-text-field>
-                                </template>
-                                <v-date-picker color="secondary" v-model="snuska.datumSneseni"></v-date-picker>
-                            </v-menu>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field color="secondary" v-model="snuska.velikost" label="velikost" hint="example of helper text only on focus"></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-menu :close-on-content-click="false" transition="scale-transition" offset-y min-width="auto">
-                                <template v-slot:activator="{on}">
-                                    <v-text-field color="secondary" v-model="hatchingPeriodText" v-on="on" label="Datum sneseni"></v-text-field>
-                                </template>
-                                <v-date-picker color="secondary" range v-model="hatchingPeriod"></v-date-picker>
-                            </v-menu>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field color="secondary" v-model="snuska.skupinaId" label="Skupina*" required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field color="secondary" v-model="snuska.matkaId" label="Matka*" required></v-text-field>
-                        </v-col>
-                    </v-row>
-                </v-container>
-                <small>*indicates required field</small>
-            </v-card-text>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">
-                    Close
-                </v-btn>
-                <v-btn color="blue darken-1" text @click="save">
-                    Save
-                </v-btn>
-            </v-card-actions>
-        </v-card>
+        <v-form ref="form" v-model="valid">
+            <v-card>
+                <v-card-title>
+                    <span class="text-h5">Přidat snúšku</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container>
+                        <v-row>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" :rules="commentRules" v-model="snuska.komentar" label="Komentář*" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-menu transition="scale-transition" offset-y min-width="auto">
+                                    <template v-slot:activator="{on}">
+                                        <v-text-field readonly color="secondary" v-model="snuska.datumSneseni" v-on="on" label="Datum snesení*" required></v-text-field>
+                                    </template>
+                                    <v-date-picker color="secondary" v-model="snuska.datumSneseni"></v-date-picker>
+                                </v-menu>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" :rules="numberRules" type="number" v-model="snuska.velikost" label="Velikost*" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-menu :close-on-content-click="false" transition="scale-transition" offset-y min-width="auto">
+                                    <template v-slot:activator="{on}">
+                                        <v-text-field readonly color="secondary" v-model="hatchingPeriodText" v-on="on" label="Perioda vylíhnutí*"></v-text-field>
+                                    </template>
+                                    <v-date-picker color="secondary" range v-model="hatchingPeriod"></v-date-picker>
+                                </v-menu>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-select v-model="snuska.skupinaId" :rules="selectRules" :items="groups" item-text="komentar" item-value="skupinaId" label="Skupina*" required></v-select>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" v-model="snuska.matkaId" label="Matka"></v-text-field>
+                            </v-col>           
+                        </v-row>
+                    </v-container>
+                    <small>*Povinní</small>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="secondary" text @click="dialog = false">
+                        Zavřít
+                    </v-btn>
+                    <v-btn color="secondary" text @click="save">
+                        Uložit
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-form>
     </v-dialog>
 </div>
 </template>
 
 <script>
-const currDate =  (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
+import * as rules from "@/components/Shared/Validation.js"
+
+const currDate = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
 export default {
     props: {
         id: Number,
+    },
+    created() {
+        this.$store.dispatch("getGroups")
     },
     data() {
         return {
             dialog: false,
             hatchingPeriod: [currDate, currDate],
+            valid: false,
             snuska: {
                 snuskaId: 0,
                 komentar: "",
                 datumSneseni: currDate,
                 ponechana: true,
-                velikost: 0,
-                periodaVylihnutiStart:  currDate,
+                velikost: "",
+                periodaVylihnutiStart: currDate,
                 periodaVylihnutiKonec: currDate,
-                skupinaId: 0,
+                skupinaId: "",
                 matkaId: ""
-            }
+            },
+            nameRules: rules.nameRules,
+            commentRules: rules.commentRules,
+            numberRules: rules.numberRules,
+            selectRules: rules.selectRules,
         }
     },
     computed: {
         hatchingPeriodText() {
             return this.hatchingPeriod.join(" - ")
+        },
+        groups() {
+            return this.$store.state.groups
         }
     },
     methods: {
         save() {
-            this.dialog = false
-            this.snuska.periodaVylihnutiStart = this.hatchingPeriod[0]
-            this.snuska.periodaVylihnutiKonec = this.hatchingPeriod[1]
-            this.$store.dispatch("addSnuska", this.snuska)
+            if (this.$refs.form.validate()) {
+                this.dialog = false
+                this.snuska.periodaVylihnutiStart = this.hatchingPeriod[0]
+                this.snuska.periodaVylihnutiKonec = this.hatchingPeriod[1]
+                this.$store.dispatch("addSnuska", this.snuska)
+            }
         }
     }
 };

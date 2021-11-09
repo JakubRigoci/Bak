@@ -4,10 +4,10 @@
     <v-divider></v-divider>
     <v-container class="my-5">
         <div class="params">
-            <p> <b>Komentar:</b> {{snuska.komentar}}</p>
+            <p> <b>Komentář:</b> {{snuska.komentar}}</p>
             <p> <b>Velikost:</b> {{snuska.velikost}}</p>
-            <p> <b>Datum Sneseni:</b> {{snuska.datumSneseni}}</p>
-            <p v-if="snuska.periodaVylihnutiKonec"> <b>Perioda Vylihnuti:</b> {{snuska.periodaVylihnutiStart}} - {{snuska.periodaVylihnutiKonec}}</p>
+            <p> <b>Datum snesené:</b> {{snuska.datumSneseni}}</p>
+            <p v-if="snuska.periodaVylihnutiKonec"> <b>Perioda vylíhnutí:</b> {{snuska.periodaVylihnutiStart}} - {{snuska.periodaVylihnutiKonec}}</p>
             <p> <b>Skupina:</b> {{group.komentar}}</p>
             <p v-if="snail"> <b>Matka:</b> {{snail.komentar}}</p>
         </div>
@@ -16,7 +16,7 @@
             <SnuskaRemovePopup :id="Number.parseInt(this.$route.params.id)" :reroute="true"></SnuskaRemovePopup>
         </div>
     </v-container>
-    <h1 class="pt-8 subheading grey--text">Udalosti</h1>
+    <h1 class="pt-8 subheading grey--text">Události</h1>
     <v-btn class="secondary" @click="showEvents = !showEvents">
         <v-icon>{{ showEvents ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
     </v-btn>

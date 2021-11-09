@@ -91,19 +91,19 @@ export const ADD_EVENT_TYPE = (state, event) => {
 
 export const ADD_EVENT = (state, event) => {
   if (event.boxId) {
-    state.eventsForBox.push(event)
+    state.eventsForBox.unshift(event)
     return
   }
   if (event.skupinaId) {
-    state.eventsForGroup.push(event)
+    state.eventsForGroup.unshift(event)
     return
   }
   if (event.snuskaId) {
-    state.eventsForSnuska.push(event)
+    state.eventsForSnuska.unshift(event)
     return
   }
   if (event.snekId) {
-    state.eventsForSnail.push(event)
+    state.eventsForSnail.unshift(event)
     return
   }
 }

@@ -13,7 +13,7 @@
                         <BoxAddPopup></BoxAddPopup>
                     </div>
                 </template>
-                <span>Pridat box</span>
+                <span>Přidat box</span>
             </v-tooltip>
         </v-col>
 
@@ -30,22 +30,6 @@ export default {
         BoxAddPopup
     },
     computed: {
-        height() {
-            switch (this.$vuetify.breakpoint.name) {
-                case "xs":
-                    return 22;
-                case "sm":
-                    return 40;
-                case "md":
-                    return 50;
-                case "lg":
-                    return 60;
-                case "xl":
-                    return 80;
-                default:
-                    return 40;
-            }
-        },
         boxes() {
             return this.$store.state.boxes;
         },

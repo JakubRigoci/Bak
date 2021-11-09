@@ -7,13 +7,13 @@
                 Velikost: {{snuska.velikost}}
             </v-list-item-title>
             <v-list-item-subtitle>
-                Datum sneseni: {{snuska.datumSneseni}}
+                Datum snesení: {{snuska.datumSneseni}}
             </v-list-item-subtitle>
             <v-list-item-subtitle v-if="snuska.periodaVylihnutiKonec">
-                Perioda vylihnuti: {{snuska.periodaVylihnutiStart}} ~ {{snuska.periodaVylihnutiKonec}} 
+                Perioda vylíhnutí: {{snuska.periodaVylihnutiStart}} ~ {{snuska.periodaVylihnutiKonec}} 
             </v-list-item-subtitle>
             <v-list-item-subtitle v-if="!snuska.periodaVylihnutiKonec">
-                Perioda vylihnuti: {{snuska.periodaVylihnutiStart}}
+                Vylíhnutí: {{snuska.periodaVylihnutiStart}}
             </v-list-item-subtitle>
         </v-list-item-content>
 

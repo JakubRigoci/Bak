@@ -6,19 +6,19 @@
         </template>
         <v-card>
             <v-card-title>
-                <span class="text-h5">Odobrat typ udalosti</span>
+                <span class="text-h5">Odebrat typ události</span>
             </v-card-title>
             <v-card-text>
                 <span>
-                    Naozaj si prajete odobrat tento typ udalosti?
+                    Naozaj si přejete odebrat tento typ události?
                 </span>
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">
-                    Zavriet
+                <v-btn color="secondary" text @click="dialog = false">
+                    Zavřít
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="save">
+                <v-btn color="secondary" text @click="save">
                     Vymazat
                 </v-btn>
             </v-card-actions>

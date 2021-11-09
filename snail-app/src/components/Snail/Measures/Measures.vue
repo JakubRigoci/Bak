@@ -17,7 +17,7 @@ export default {
             show: false,
             showTable: false,
             headers: [{
-                    text: "Komentar",
+                    text: "Komentář",
                     value: "komentar",
                 },
                 {
@@ -25,42 +25,13 @@ export default {
                     value: "datum",
                 },
                 {
-                    text: "Vaha",
+                    text: "Váha",
                     value: "vaha",
                 },
                 {
                     text: "Ulita",
                     value: "ulita",
                 }
-            ],
-            aa: [{
-                    mereniId: 0,
-                    komentar: "mereno rano",
-                    datum: "2021-01-01",
-                    vaha: "10.2",
-                    ulita: "7.5",
-                },
-                {
-                    mereniId: 1,
-                    komentar: "mereno na obed",
-                    datum: "2021-01-01",
-                    vaha: "10.2",
-                    ulita: "70.5",
-                },
-                {
-                    mereniId: 2,
-                    komentar: "mereno vecer",
-                    datum: "2021-01-01",
-                    vaha: "1.2",
-                    ulita: "7.5",
-                },
-                {
-                    mereniId: 3,
-                    komentar: "mereno v noc",
-                    datum: "2021-01-01",
-                    vaha: "10",
-                    ulita: "8",
-                },
             ],
         };
     },

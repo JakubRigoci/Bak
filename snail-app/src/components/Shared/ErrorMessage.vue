@@ -14,7 +14,6 @@ export default {
                 return this.errorMessage !== ''
             },
             set(value) {
-                // just placeholder as we dont have Vuex here
                 this.counter = value;
             }
         },

@@ -1,7 +1,7 @@
 <template>
 <v-card class=" primary" outlined>
     <v-card-actions>
-        <v-btn color="secondary" @click="showTable = !showTable" text> Mereni </v-btn>
+        <v-btn color="secondary" @click="showTable = !showTable" text> Měření </v-btn>
 
         <v-spacer></v-spacer>
         <v-btn icon @click="showTable = !showTable">
@@ -35,7 +35,7 @@
     <SnailRemovePopup :groupId="groupId" :snailId="snailId"></SnailRemovePopup>
 
     <v-card-actions>
-        <v-btn color="secondary" @click="showEvents = !showEvents" text> Udalosti </v-btn>
+        <v-btn color="secondary" @click="showEvents = !showEvents" text> Události </v-btn>
 
         <v-spacer></v-spacer>
 

@@ -11,9 +11,9 @@
         class="secondary text-center"
       >
         <v-card-text>
-            <span> Pocet snekov: {{snails}}</span>
-            <span> Pocet skupin: {{groups}}</span>
-            <span> Pocet boxov: {{boxes}}</span>
+            <span> Počet šnekov: {{snails}}</span>
+            <span> Počet skupin: {{groups}}</span>
+            <span> Počet boxov: {{boxes}}</span>
         </v-card-text>
       </v-card>
     </v-footer>
@@ -22,14 +22,6 @@
 
 <script>
   export default {
-    data: () => ({
-      icons: [
-        'mdi-home',
-        'mdi-email',
-        'mdi-calendar',
-        'mdi-delete',
-      ]
-    }),
     created() {
         this.$store.dispatch("getSnails")
         this.$store.dispatch("getBoxes")

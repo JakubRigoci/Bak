@@ -2,23 +2,23 @@
 <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn v-bind="attrs" v-on="on" width="100px" outlined text depressed class="ma-2  width:100px info"> Vymaz </v-btn>
+            <v-btn v-bind="attrs" v-on="on" width="100px" outlined text depressed class="ma-2  width:100px info"> Vymazat </v-btn>
         </template>
         <v-card>
             <v-card-title>
-                <span class="text-h5">Odobrat Skupinu</span>
+                <span class="text-h5">Odebrat Skupinu</span>
             </v-card-title>
             <v-card-text>
                 <span>
-                    Naozaj si prajete odobrat skupinu s nazvom {{name}}?
+                    Naozaj si přejete odebrat skupinu?
                 </span>
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">
-                    Zavriet
+                <v-btn color="secondary" text @click="dialog = false">
+                    Zavřít
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="save">
+                <v-btn color="secondary" text @click="save">
                     Vymazat
                 </v-btn>
             </v-card-actions>
@@ -30,8 +30,7 @@
 <script>
 export default {
     props: {
-        id: Number,
-        name: String
+        id: Number
     },
     data: () => ({
         dialog: false,

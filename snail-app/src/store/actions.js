@@ -5,7 +5,10 @@ export const getSnails = ({commit}) => {
     axios.get("snek").then(response =>{
       commit("GET_SNAILS", response.data.map(d => d.snek))
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
   })
 }
 
@@ -14,7 +17,10 @@ export const getSnailsForGroup = ({commit}, groupId) => {
     axios.get(`snek/skupina/${groupId}`).then(response =>{
       commit("GET_SNAILS_FOR_GROUP",{ id: groupId, data: response.data.map(d => d.snek)})
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
   })
 }
 
@@ -24,7 +30,10 @@ export const getGroupsForBox = ({commit}, boxId) => {
       console.log(response.data)
       commit("GET_GROUPS_FOR_BOX", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
   })
 
 }
@@ -34,7 +43,10 @@ export const getBoxes = ({commit}) => {
     axios.get("box").then(response =>{
       commit("GET_BOXES", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
   })
 }
 
@@ -43,17 +55,8 @@ export const getGroups = ({commit}) => {
     axios.get("skupina").then(response =>{
       commit("GET_GROUPS", response.data)
       resolve(response)
-    }).catch(error => reject(error))
-  })
-}
-
-export const test = ({commit}) => {
-  return new Promise((resolve, reject) => {
-    axios.get("skupinasdasdasdasd").then(response =>{
-      commit("GET_GROUPS", response.data)
-      resolve(response)
     }).catch(e => {
-      error({commit}, e.message)
+      error({commit}, e.response.data.message)
       reject(e)
     })
   })
@@ -64,7 +67,10 @@ export const getSnuskas = ({commit}) => {
     axios.get("snuska").then(response =>{
       commit("GET_SNUSKAS", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -73,7 +79,10 @@ export const getTaxonomies = ({commit}) => {
     axios.get("taxonomy").then(response => {
       commit("GET_TAXONOMIES", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -82,7 +91,10 @@ export const getMeasuresForSnail = ({commit}, snailId) => {
     axios.get(`mereni/${snailId}`).then(response => {
       commit("GET_MEASURES_FOR_SNAIL", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -91,7 +103,10 @@ export const getEventTypes = ({commit}) => {
     axios.get("udalost-typ").then(response => {
       commit("GET_EVENT_TYPES", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -100,7 +115,10 @@ export const getBoxEvents = ({commit}, boxId) => {
     axios.get(`box/${boxId}/udalost`).then(response => {
       commit("GET_BOX_EVENTS", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -109,7 +127,10 @@ export const getSnuskaEvents = ({commit}, snuskaId) => {
     axios.get(`snuska/${snuskaId}/udalost`).then(response => {
       commit("GET_SNUSKA_EVENTS", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -118,7 +139,10 @@ export const getSnailEvents = ({commit}, snailId) => {
     axios.get(`snek/${snailId}/udalost`).then(response => {
       commit("GET_SNAIL_EVENTS", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -129,7 +153,10 @@ export const addSnail = ({commit}, payload) => {
       console.log(response.data)
       commit("ADD_SNAIL", {groupId: payload.id, snail: response.data })
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -146,7 +173,10 @@ export const addBox = ({commit}, box) => {
       }
       addGroup({commit},{group: group, boxId: response.data.boxId})
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -156,7 +186,10 @@ export const addGroup = ({commit}, payload) => {
     axios.post(`skupina/${payload.boxId}`, payload.group).then(response => {
       commit("ADD_GROUP", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -165,7 +198,10 @@ export const addTaxonomy = ({commit}, taxonomy) => {
     axios.post("/taxonomy/admin", taxonomy).then(response => {
       commit("ADD_TAXONOMY", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -174,7 +210,10 @@ export const addSnuska = ({commit}, snuska) => {
     axios.post(`snuska/${snuska.velikost}`, snuska).then(response => {
       commit("ADD_SNUSKA", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -183,7 +222,10 @@ export const addEventType = ({commit}, event) => {
     axios.post(`udalost-typ/admin`, event).then(response => {
       commit("ADD_EVENT_TYPE", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -192,7 +234,10 @@ export const addEvent = ({commit}, event) => {
     axios.post("udalost", event).then(response => {
       commit("ADD_EVENT", response.data)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -201,7 +246,10 @@ export const removeSnail = ({commit}, payload) => {
     axios.delete(`snek/${payload.snailId}`).then(response => {
       commit("REMOVE_SNAIL", payload)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -210,7 +258,10 @@ export const removeGroup = ({commit}, groupId) => {
     axios.delete(`skupina/${groupId}`).then(response =>{
       commit("REMOVE_GROUP", groupId)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -220,8 +271,9 @@ export const removeBox = ({commit}, boxId) => {
       commit("REMOVE_BOX", boxId)
       resolve(response)
     }).catch(e => {
-      error({commit}, e.response.data.message)
-      reject(e)})
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -230,7 +282,10 @@ export const removeSnuska = ({commit}, snuskaId) => {
     axios.delete(`snuska/${snuskaId}`).then(response => {
       commit("REMOVE_SNUSKA", snuskaId)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -239,7 +294,10 @@ export const removeTaxonomy = ({commit}, taxonomyId) => {
     axios.delete(`/taxonomy/admin/${taxonomyId}`).then(response => {
       commit("REMOVE_TAXONOMY", taxonomyId)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -248,7 +306,10 @@ export const removeEventType = ({commit}, eventTypeId) => {
     axios.delete(`udalost-typ/admin/${eventTypeId}`).then(response => {
       commit("REMOVE_EVENT_TYPE", eventTypeId)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
@@ -257,7 +318,10 @@ export const removeEvent = ({commit}, event) => {
     axios.delete(`udalost/${event.id}`).then(response => {
       commit("REMOVE_EVENT", event)
       resolve(response)
-    }).catch(error => reject(error))
+    }).catch(e => {
+        error({commit}, e.response.data.message)
+        reject(e)
+      })
   })
 }
 
