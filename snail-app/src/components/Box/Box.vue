@@ -25,6 +25,7 @@
 
 <script>
 import BoxRemovePopup from "@/components/Box/BoxRemovePopup.vue"
+
 export default {
     props: {
         id: Number,
@@ -49,7 +50,7 @@ export default {
         }
     },
     components: {
-        BoxRemovePopup
+        BoxRemovePopup,
     }
 };
 </script>

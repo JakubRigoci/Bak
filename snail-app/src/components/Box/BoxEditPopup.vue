@@ -1,18 +1,13 @@
 <template lang="">
 <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
-        <template v-slot:activator="{ on, attrs }">
-            <v-card v-bind="attrs" v-on="on" allign="center" class="mx-auto primary justify-center d-flex" max-width="344" outlined>
-
-                <v-avatar class="d-flex " color="secondary" size='120'>
-                    <v-icon x-large> mdi-plus-thick </v-icon>
-                </v-avatar>
-            </v-card>
+             <template v-slot:activator="{ on, attrs }">
+            <v-btn v-bind="attrs" v-on="on" width="100px" outlined text depressed class="ma-2  width:100px info"> Upravit </v-btn>
         </template>
         <v-form ref="form" v-model="valid">
             <v-card>
                 <v-card-title>
-                    <span class="text-h5">Pridat box</span>
+                    <span class="text-h5">Upravit box</span>
                 </v-card-title>
                 <v-card-text>
                     <v-container>
@@ -67,6 +62,9 @@
 import * as rules from "@/components/Shared/Validation.js"
 
 export default {
+    props: {
+        box: Object,
+    },
     data: () => ({
         dialog: false,
         menu: false,
@@ -74,16 +72,16 @@ export default {
         nameRules: rules.nameRules,
         commentRules: rules.commentRules,
         numberRules: rules.numberRules,
-        box: {
-            id: 0,
-            jmeno: "",
-            komentar: "",
-            vyska: "",
-            sirka: "",
-            hlbka: "",
-            datumPorizeni: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-            prodejce: "",
-        }
+        // box: {
+        //     id: this.boxId,
+        //     jmeno: "",
+        //     komentar: "",
+        //     vyska: "",
+        //     sirka: "",
+        //     hlbka: "",
+        //     datumPorizeni: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+        //     prodejce: "",
+        // }
 
     }),
     methods: {

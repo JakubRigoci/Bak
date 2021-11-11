@@ -44,7 +44,6 @@ export default {
             } else {
                 this.$store.dispatch("error", "Box má závislosti!")
             }
-            //this.$store.dispatch("getBoxes")
 
             if (this.reroute) {
                 this.$router.push("/home")

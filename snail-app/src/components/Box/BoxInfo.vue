@@ -11,7 +11,7 @@
             </v-row>
             <v-row>
                 <v-col> <b>Prodejce:</b> {{box.prodejce}} </v-col>
-                <v-col><b>Datum pořízení</b> {{box.datumPorizeni}}</v-col>
+                <v-col><b>Datum pořízení:</b> {{box.datumPorizeni}}</v-col>
             </v-row>
             <v-row>
                 <v-col> <b>Výška:</b> {{box.vyska}}</v-col>
@@ -25,8 +25,8 @@
         </div>
         <div class="buttons">
             <v-row>
-            <v-btn width="100px" outlined text depressed class="mr-8 ma-2 width:100px info"> Uprav </v-btn>
             <BoxRemovePopup :id="boxId" :name="box.jmeno" :reroute="true"></BoxRemovePopup>
+            <BoxEditPopup :box="box"></BoxEditPopup>
             </v-row>
         </div>
     </v-container>
@@ -35,9 +35,12 @@
 
 <script>
 import BoxRemovePopup from "@/components/Box/BoxRemovePopup.vue"
+import BoxEditPopup from "@/components/Box/BoxEditPopup.vue"
+
 export default {
     components: {
-        BoxRemovePopup
+        BoxRemovePopup,
+        BoxEditPopup
     },
     props: {
         boxId: Number

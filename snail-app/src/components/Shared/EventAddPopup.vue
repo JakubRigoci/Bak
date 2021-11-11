@@ -61,6 +61,7 @@ export default {
     data() {
         return {
             dialog: false,
+            valid: false,
             event: {
                 udalostId: 0,
                 komentar: "",
