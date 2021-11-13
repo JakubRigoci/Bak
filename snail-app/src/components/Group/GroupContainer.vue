@@ -32,7 +32,14 @@
             </v-expansion-panel>
         </v-expansion-panels>
         <div>
-            <GroupAddPopup :boxId="Number.parseInt(this.$route.params.id)"></GroupAddPopup>
+             <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                    <div v-bind="attrs" v-on="on">
+                        <GroupAddPopup :boxId="boxId"></GroupAddPopup>
+                    </div>
+                </template>
+                <span>Přidat skupinu</span>
+            </v-tooltip>
         </div>
 
     </v-row>
@@ -47,6 +54,11 @@ import GroupRemovePopup from "@/components/Group/GroupRemovePopup.vue"
 export default {
     props: {
         ids: []
+    },
+    data () {
+        return {
+            boxId: Number.parseInt(this.$route.params.id)
+        }
     },
     computed: {
         groups() {

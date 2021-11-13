@@ -8,7 +8,7 @@
             </v-list-item-title>
         </v-list-item-content>
 
-        <v-icon x-large class="pr-8"> mdi-archive </v-icon>
+        <v-icon x-large class="pr-8"> mdi-calendar </v-icon>
     </v-list-item>
     <v-card-actions class="d-flex justify-space-around mb-6">
         <v-btn width="100px" outlined text depressed class="ma-2  width:100px info"> Uprav </v-btn>

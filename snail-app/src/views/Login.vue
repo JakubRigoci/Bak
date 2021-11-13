@@ -6,10 +6,7 @@
                 <v-card elevation="4" light>
                     <v-card-title>
                         <v-layout align-center justify-space-between>
-                            <h3 class="headline">SNAIL APP</h3>
-                            <v-flex>
-                                <v-img class="ml-3" contain height="48px" position="center right" src="@/assets/logo.png"></v-img>
-                            </v-flex>
+                            <h3 class="headline">Přihlásit</h3>
                         </v-layout>
                     </v-card-title>
                     <v-divider></v-divider>
@@ -22,6 +19,9 @@
                     <v-divider></v-divider>
                     <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
                         <v-spacer></v-spacer>
+                        <v-btn color="secondary" :large="$vuetify.breakpoint.smAndUp" router to="/register">
+                            Registrovat
+                        </v-btn>
                         <v-btn color="secondary" @click="login" :large="$vuetify.breakpoint.smAndUp">
                             Přihlásit
                         </v-btn>
@@ -34,13 +34,12 @@
 </template>
 
 <script>
-const axios = require("axios");
 
 export default {
     name: "Login",
     data() {
         return {
-            name: "Jméno",
+            name: "",
             password: "",
         };
     },
@@ -48,23 +47,12 @@ export default {
         login: function () {
             let name = this.name;
             let password = this.password;
-            this.$store
-            .dispatch("login", {
+            this.$store.dispatch("login", {
                     name,
                     password
                 })
                 .then(() => this.$router.push("/home"))
                 .catch((err) => console.log(err));
-        },
-        onClick() {
-            axios
-                .post("/auth/signin", {
-                    username: this.name,
-                    password: this.password,
-                })
-                .then((res) => {
-                    console.log(res);
-                });
         },
     },
 };

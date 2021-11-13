@@ -4,6 +4,7 @@
         <template v-slot:activator="{ on, attrs }">
             <v-btn v-bind="attrs" v-on="on" outlined block width="150px" text depressed class="mt-4 info"> Přidat šneka</v-btn>
         </template>
+        <v-form ref="form" v-model="valid">
         <v-card>
             <v-card-title>
                 <span class="text-h5">Přidat šneka</span>
@@ -12,19 +13,19 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field color="secondary" v-model="snail.jmeno" label="Jméno*" required></v-text-field>
+                            <v-text-field color="secondary" :rules="nameRules" v-model="snail.jmeno" label="Jméno*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field color="secondary" v-model="snail.komentar" label="Komentář*" required></v-text-field>
+                            <v-text-field color="secondary" :rules="textRules" v-model="snail.komentar" label="Komentář*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field color="secondary" v-model="snail.barvaUlita" label="Barva ulity*" required></v-text-field>
+                            <v-text-field color="secondary" :rules="textRules" v-model="snail.barvaUlita" label="Barva ulity*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field color="secondary" v-model="snail.barvaTelo" label="Barva tela*" required></v-text-field>
+                            <v-text-field color="secondary" :rules="textRules" v-model="snail.barvaTelo" label="Barva tela*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field color="secondary" v-model="snail.vzorecUlita" label="Vzor ulity*" required></v-text-field>
+                            <v-text-field color="secondary" :rules="textRules" v-model="snail.vzorecUlita" label="Vzor ulity*" required></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-menu transition="scale-transition" offset-y min-width="auto">
@@ -35,13 +36,15 @@
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="snail.snuskaId" :items="snuskas" item-text="komentar" item-value="snuskaId" label="Snúška*" required></v-select>
+                            <v-checkbox color="secondary" v-model="snuskaSelected" label="Určit snúšku"></v-checkbox>
+                            <v-select v-if="snuskaSelected" item-color="secondary" :rules="selectRules" color="secondary" v-model="snail.snuskaId" :items="snuskas" item-text="komentar" item-value="snuskaId" label="Snúška*" required></v-select>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="snail.taxonomyId" :items="taxonomies" item-text="jmeno" item-value="taxonomyId" label="Taxonomie*" required></v-select>
+                            <v-checkbox color="secondary" v-model="taxonomySelected" label="Určit taxonomii"></v-checkbox>
+                            <v-select v-if="taxonomySelected" item-color="secondary" :rules="selectRules" color="secondary" v-model="snail.taxonomyId" :items="taxonomies" item-text="jmeno" item-value="taxonomyId" label="Taxonomie*" required></v-select>
                         </v-col>
                         <v-col cols="12">
-                            <v-text-field color="secondary" v-model="snail.puvodSneka" label="Púvod šneka*" required></v-text-field>
+                            <v-text-field color="secondary" v-model="snail.puvodSneka" label="Púvod šneka"></v-text-field>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -57,11 +60,14 @@
                 </v-btn>
             </v-card-actions>
         </v-card>
+        </v-form>
     </v-dialog>
 </div>
 </template>
 
 <script>
+import { selectRules, textRules, nameRules} from "@/components/Shared/Validation.js"
+
 export default {
     props: {
         groupId: Number,
@@ -72,6 +78,9 @@ export default {
     },
     data: () => ({
         dialog: false,
+        valid: false,
+        snuskaSelected: false,
+        taxonomySelected: false,
         snail: {
             snekId: 0,
             jmeno: "",
@@ -85,10 +94,13 @@ export default {
             puvodSneka: "",
             zverejnit: true,
             aktivni: true,
-            taxonomyId: 0,
-            snuskaId: 0,
+            taxonomyId: null,
+            snuskaId: null,
             galerieId: 0
-        }
+        },
+        nameRules: nameRules,
+        selectRules: selectRules,
+        textRules: textRules
 
     }),
     computed: {
@@ -101,11 +113,12 @@ export default {
     },
     methods: {
         save() {
+            if (this.$refs.form.validate()) {
             this.dialog = false
             this.$store.dispatch("addSnail", {
                 id: this.groupId,
                 snail: this.snail
-            })
+            })}
         }
     }
 };

@@ -146,6 +146,19 @@ export const getSnailEvents = ({commit}, snailId) => {
   })
 }
 
+export const getUsersAdmin = ({commit}) => {
+  return new Promise((resolve, reject) => {
+    axios.get("users/admin").then(response => {
+      console.log(response)
+      commit("GET_USERS_ADMIN", response.data.content)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
 export const addSnail = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     axios.post(`snek/${payload.id}`, payload.snail).then(response =>{
@@ -168,7 +181,7 @@ export const addBox = ({commit}, box) => {
       console.log(response.data)
       const group = {
         skupinaId: 0,
-        jmeno: "Zakladni skupina",
+        jmeno: `Zakladni skupina pro box: ${box.jmeno}`,
         komentar: "Skupina pro vsechny sneky",
       }
       addGroup({commit},{group: group, boxId: response.data.boxId})
@@ -325,6 +338,30 @@ export const removeEvent = ({commit}, event) => {
   })
 }
 
+export const editUserRoles = ({commit}, payload) => {
+  return new Promise((resolve, reject) => {
+    axios.put(`users/admin/${payload.userId}/roles`, payload.roles).then(response => {
+      commit("EDIT_USER", response.data)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
+export const activateUser = ({commit}, payload) => {
+  return new Promise((resolve, reject) => {
+    axios.patch(`users/admin/${payload.userId}/active-until/${payload.activeUntil}`).then(response => {
+      commit("EDIT_USER", response.data)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
 export const setActiveBox = ({commit}, boxId) => {
   return new Promise((resolve) => {
     commit("SET_ACTIVE_BOX", boxId)
@@ -343,6 +380,16 @@ export const error = ({commit}, message) => {
   }
 }
 
+export const register = ({commit}, user) => {
+  return new Promise((resolve, reject) => {
+    axios.post("auth/signup", user).then(response => {
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
 
 export const login = ({commit}, user) => {
     return new Promise((resolve, reject) => {
@@ -367,6 +414,7 @@ export const login = ({commit}, user) => {
       })
       .catch(err => {
         commit("AUTH_ERROR")
+        error({commit}, err.response.data.message)
         localStorage.removeItem("token")
         console.error(err)
         reject(err)

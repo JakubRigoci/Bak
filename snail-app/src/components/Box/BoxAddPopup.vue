@@ -12,7 +12,7 @@
         <v-form ref="form" v-model="valid">
             <v-card>
                 <v-card-title>
-                    <span class="text-h5">Pridat box</span>
+                    <span class="text-h5">Přidat box</span>
                 </v-card-title>
                 <v-card-text>
                     <v-container>
@@ -30,7 +30,7 @@
                                 <v-text-field color="secondary" :rules="numberRules" v-model="box.sirka" type="number" label="Šírka*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="numberRules" v-model="box.depth" type="number" label="Hloubka*" required></v-text-field>
+                                <v-text-field color="secondary" :rules="numberRules" v-model="box.hlbka" type="number" label="Hloubka*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" offset-y min-width="auto">

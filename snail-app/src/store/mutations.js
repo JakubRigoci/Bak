@@ -62,6 +62,10 @@ export const GET_SNAIL_EVENTS = (state, eventsForSnail) => {
 })
 }
 
+export const GET_USERS_ADMIN = (state, users) => {
+  state.users = users
+}
+
 export const ADD_SNAIL = (state, payload) => {
   state.snails.push(payload.snail)
   state.snailsForGroup[payload.groupId].push(payload.snail)
@@ -152,6 +156,11 @@ export const REMOVE_EVENT = (state, event) => {
       state.eventsForSnail = state.eventsForSnail.filter(e => event.id !== e.udalostId)
       return
   }
+}
+
+export const EDIT_USER = (state, user) => {
+  const index = state.users.findIndex(u => u.userId === user.userId)
+  Vue.set(state.users, index, user)
 }
 export const SET_ACTIVE_BOX = (state, boxId) => {
   state.activeBox = boxId

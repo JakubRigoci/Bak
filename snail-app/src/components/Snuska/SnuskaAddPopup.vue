@@ -40,10 +40,11 @@
                                 </v-menu>
                             </v-col>
                             <v-col cols="12">
-                                <v-select v-model="snuska.skupinaId" :rules="selectRules" :items="groups" item-text="komentar" item-value="skupinaId" label="Skupina*" required></v-select>
+                                <v-select @change="getSnailsForGroup" item-color="secondary" color="secondary" v-model="snuska.skupinaId" :rules="selectRules" :items="groups" item-text="jmeno" item-value="skupinaId" label="Skupina*" required></v-select>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" v-model="snuska.matkaId" label="Matka"></v-text-field>
+                                <v-checkbox color="secondary" v-model="motherSelected" label="Určit matku"></v-checkbox>
+                                <v-select v-if="motherSelected" item-color="secondary" color="secondary" v-model="snuska.matkaId" :items="snailsForGroup" item-text="jmeno" item-value="snekId" label="Matka" clearable></v-select>
                             </v-col>           
                         </v-row>
                     </v-container>
@@ -80,6 +81,7 @@ export default {
             dialog: false,
             hatchingPeriod: [currDate, currDate],
             valid: false,
+            motherSelected: false,
             snuska: {
                 snuskaId: 0,
                 komentar: "",
@@ -103,6 +105,9 @@ export default {
         },
         groups() {
             return this.$store.state.groups
+        },
+        snailsForGroup() {
+            return this.$store.getters.snailsByGroup(this.snuska.skupinaId)
         }
     },
     methods: {
@@ -113,6 +118,9 @@ export default {
                 this.snuska.periodaVylihnutiKonec = this.hatchingPeriod[1]
                 this.$store.dispatch("addSnuska", this.snuska)
             }
+        },
+        getSnailsForGroup() {
+            this.$store.dispatch("getSnailsForGroup", this.snuska.skupinaId)
         }
     }
 };

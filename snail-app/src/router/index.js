@@ -3,11 +3,13 @@ import VueRouter from "vue-router"
 import store from "../store/index.js"
 import Home from "../views/Home.vue"
 import Login from "../views/Login.vue"
+import Register from "../views/Register.vue"
 import BoxView from "../views/BoxView.vue"
 import Snuskas from "../views/Snuskas.vue"
 import SnuskaView from "../views/SnuskaView.vue"
 import Taxonomies from "../views/Taxonomies.vue"
 import Events from "../views/Events.vue"
+import Users from "../views/Users.vue"
 import App from "../App.vue"
 
 Vue.use(VueRouter)
@@ -55,6 +57,12 @@ const routes = [
     beforeEnter: ifNotAuthenticated,
   },
   {
+    path: "/register",
+    name: "Register",
+    component: Register,
+    beforeEnter: ifNotAuthenticated,
+  },
+  {
     path: "/box/:id",
     name: "boxView",
     component: BoxView,
@@ -82,6 +90,12 @@ const routes = [
     path: "/events",
     name: "Events",
     component: Events,
+    beforeEnter: ifAdmin,
+  },
+  {
+    path: "/users",
+    name: "Users",
+    component: Users,
     beforeEnter: ifAdmin,
   },
   // {

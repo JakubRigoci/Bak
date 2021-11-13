@@ -3,6 +3,7 @@ export default {
     token: localStorage.getItem("token") || "",
     activeBox: Number,
     user: {},
+    users: [],
     errorMessage: "",
     snails: [],
     snailsForGroup: [],

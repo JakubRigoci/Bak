@@ -12,7 +12,15 @@
             <v-divider></v-divider>
             <GroupContainer v-if="!showSnails" :ids="groups.map(g => g.skupinaId)"></GroupContainer>
             <SnailContainer v-if="showSnails" :groupId="groups[0].skupinaId"></SnailContainer>
-            <GroupAddPopup v-if="showSnails" :boxId="Number.parseInt(this.$route.params.id)"></GroupAddPopup>
+             <v-tooltip v-if="showSnails" bottom>
+                <template v-slot:activator="{ on, attrs }">
+                    <div v-bind="attrs" v-on="on">
+                        <GroupAddPopup :boxId="boxId"></GroupAddPopup>
+                    </div>
+                </template>
+                <span>Přidat skupinu</span>
+            </v-tooltip>
+            
         </div>
     </v-expand-transition>
     <h1 class="pt-8 subheading grey--text">Události</h1>
@@ -22,7 +30,7 @@
     <v-expand-transition>
         <div v-show="showEvents">
             <v-divider></v-divider>
-            <BoxEvents :boxId="Number.parseInt(this.$route.params.id)"></BoxEvents>
+            <BoxEvents :boxId="boxId"></BoxEvents>
         </div>
     </v-expand-transition>
 </v-container>
@@ -40,6 +48,7 @@ export default {
         return {
             showGroups: false,
             showEvents: false,
+            boxId: Number.parseInt(this.$route.params.id)
         }
     },
     components: {

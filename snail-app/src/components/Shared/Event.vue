@@ -21,6 +21,9 @@ export default {
     components: {
         EventRemovePopup
     },
+    created() {
+        this.$store.dispatch("getEventTypes")
+    },
     computed: {
         event() {
             switch (this.type) {
