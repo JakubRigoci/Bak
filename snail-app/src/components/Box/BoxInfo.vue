@@ -16,17 +16,17 @@
             <v-row>
                 <v-col> <b>Výška:</b> {{box.vyska}}</v-col>
                 <v-col><b>Šírka:</b> {{box.sirka}}</v-col>
-                
+
             </v-row>
             <v-row>
-                <v-col><b>Hloubka:</b> {{box.hlbka}}</v-col>
+                <v-col><b>Hloubka:</b> {{box.hloubka}}</v-col>
             </v-row>
 
         </div>
         <div class="buttons">
             <v-row>
-            <BoxRemovePopup :id="boxId" :name="box.jmeno" :reroute="true"></BoxRemovePopup>
-            <BoxEditPopup :box="box"></BoxEditPopup>
+                <BoxRemovePopup :id="boxId" :name="box.jmeno" :reroute="true"></BoxRemovePopup>
+                <BoxEditPopup :box="Object.assign({},box)"></BoxEditPopup>
             </v-row>
         </div>
     </v-container>

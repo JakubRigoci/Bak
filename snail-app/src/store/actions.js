@@ -338,6 +338,32 @@ export const removeEvent = ({commit}, event) => {
   })
 }
 
+export const editBox = ({commit}, box) => {
+  return new Promise((resolve, reject) => {
+    axios.put(`box/${box.boxId}`, box).then(response => {
+      commit("EDIT_BOX", response.data)
+      resolve(response)
+    }).catch(e => {
+      console.log(e)
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
+export const editGroup = ({commit}, group) => {
+  return new Promise((resolve, reject) => {
+    axios.put(`skupina/${group.skupinaId}`, group).then(response => {
+      commit("EDIT_GROUP", response.data)
+      resolve(response)
+    }).catch(e => {
+      console.log(e)
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
 export const editUserRoles = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     axios.put(`users/admin/${payload.userId}/roles`, payload.roles).then(response => {

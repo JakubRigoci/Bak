@@ -1,10 +1,11 @@
 <template lang="">
 <v-container fluid class="pt-12">
     <v-row justify="center" class="pa-0">
-        <v-expansion-panels popout>
-            <v-expansion-panel v-for="group in groups" :key="group.skupinaId">
-                <v-expansion-panel-header class="secondary">
-                    <v-row class="mx-auto">
+        <v-expansion-panels  popout>
+            <v-expansion-panel  v-for="group in groups" :key="group.skupinaId">
+                <v-expansion-panel-header  class="secondary">
+                    <div style="width: 100%" class="secondary d-flex justify-space-between">
+                                            <v-row class="">
                         <v-col cols="12">
                             {{group.jmeno}}
                         </v-col>
@@ -16,15 +17,21 @@
                         </v-col>
                     </v-row>
                     <v-spacer></v-spacer>
-                    <v-row class="mx-auto">
-                        <v-col cols="12">
+                    <v-menu offset-y>
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn icon v-bind="attrs" v-on="on">
+                                <v-icon>
+                                    mdi-dots-vertical
+                                </v-icon>
+                            </v-btn>
+                        </template>
+                        <v-card class="primary">
                             <GroupRemovePopup :id="group.skupinaId"></GroupRemovePopup>
-                            <v-btn outlined width="100px" depressed class="ma-2 info"> Uprav</v-btn>
-                        </v-col>
-                    </v-row>
-                    <v-col cols="12">
-                        <v-btn outlined width="150px" @click="showSnuskas(group.skupinaId)" depressed class="ma-2 info">Zobrazit snúšky</v-btn>
-                    </v-col>
+                            <GroupEditPopup :group="Object.assign({}, group)"></GroupEditPopup>
+                            <v-btn text width="100%" @click="showSnuskas(group.skupinaId)">Zobrazit snúšky</v-btn>
+                        </v-card>
+                    </v-menu>
+                    </div>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content id="innerExPan" class="secondary">
                     <Group :id="group.skupinaId"></Group>
@@ -32,7 +39,7 @@
             </v-expansion-panel>
         </v-expansion-panels>
         <div>
-             <v-tooltip bottom>
+            <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
                     <div v-bind="attrs" v-on="on">
                         <GroupAddPopup :boxId="boxId"></GroupAddPopup>
@@ -50,12 +57,13 @@
 import Group from "@/components/Group/Group.vue"
 import GroupAddPopup from "@/components/Group/GroupAddPopup.vue"
 import GroupRemovePopup from "@/components/Group/GroupRemovePopup.vue"
+import GroupEditPopup from "@/components/Group/GroupEditPopup.vue"
 
 export default {
     props: {
         ids: []
     },
-    data () {
+    data() {
         return {
             boxId: Number.parseInt(this.$route.params.id)
         }
@@ -68,7 +76,8 @@ export default {
     components: {
         Group,
         GroupAddPopup,
-        GroupRemovePopup
+        GroupRemovePopup,
+        GroupEditPopup
     },
     methods: {
         showSnuskas(skupinaId) {

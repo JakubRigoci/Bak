@@ -30,7 +30,7 @@
                                 <v-text-field color="secondary" :rules="numberRules" v-model="box.sirka" type="number" label="Šírka*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="numberRules" v-model="box.hlbka" type="number" label="Hloubka*" required></v-text-field>
+                                <v-text-field color="secondary" :rules="numberRules" v-model="box.hloubka" type="number" label="Hloubka*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" offset-y min-width="auto">
@@ -80,7 +80,7 @@ export default {
             komentar: "",
             vyska: "",
             sirka: "",
-            hlbka: "",
+            hloubka: "",
             datumPorizeni: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
             prodejce: "",
         }

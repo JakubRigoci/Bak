@@ -158,10 +158,24 @@ export const REMOVE_EVENT = (state, event) => {
   }
 }
 
+export const EDIT_BOX = (state, box) => {
+  const index = state.boxes.findIndex(b => b.boxId === box.boxId)
+  Vue.set(state.boxes, index, box)
+}
+
 export const EDIT_USER = (state, user) => {
   const index = state.users.findIndex(u => u.userId === user.userId)
   Vue.set(state.users, index, user)
 }
+
+export const EDIT_GROUP = (state, group) => {
+  let index = state.groups.findIndex(g => g.skupinaId === group.skupinaId)
+  Vue.set(state.groups, index, group)
+
+  index = state.groupsForBox.findIndex(g => g.skupinaId === group.skupinaId)
+  Vue.set(state.groupsForBox, index, group)
+}
+
 export const SET_ACTIVE_BOX = (state, boxId) => {
   state.activeBox = boxId
 }

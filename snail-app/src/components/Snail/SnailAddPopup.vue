@@ -37,7 +37,7 @@
                         </v-col>
                         <v-col cols="12">
                             <v-checkbox color="secondary" v-model="snuskaSelected" label="Určit snúšku"></v-checkbox>
-                            <v-select v-if="snuskaSelected" item-color="secondary" :rules="selectRules" color="secondary" v-model="snail.snuskaId" :items="snuskas" item-text="komentar" item-value="snuskaId" label="Snúška*" required></v-select>
+                            <v-select @change="modifyBirth" v-if="snuskaSelected" item-color="secondary" :rules="selectRules" color="secondary" v-model="snail.snuskaId" :items="snuskas" item-text="komentar" item-value="snuskaId" label="Snúška*" required></v-select>
                         </v-col>
                         <v-col cols="12">
                             <v-checkbox color="secondary" v-model="taxonomySelected" label="Určit taxonomii"></v-checkbox>
@@ -119,6 +119,10 @@ export default {
                 id: this.groupId,
                 snail: this.snail
             })}
+        },
+        modifyBirth() {
+            const snuska = this.$store.state.snuskas.find(s => s.snuskaId === this.snail.snuskaId)
+            this.snail.narozen = snuska.periodaVylihnutiStart
         }
     }
 };

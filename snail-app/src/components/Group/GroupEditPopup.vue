@@ -2,12 +2,7 @@
 <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-card allign="center" class="mt-6 mx-auto primary justify-center d-flex" max-width="344" outlined>
-
-                <v-avatar v-bind="attrs" v-on="on" class="d-flex " color="secondary" size='120'>
-                    <v-icon x-large> mdi-plus-thick </v-icon>
-                </v-avatar>
-            </v-card>
+               <v-btn text width="100%" v-on="on" v-bind="attrs" > Uprav</v-btn>
         </template>
         <v-form ref="form" v-model="valid">
             <v-card>
@@ -25,14 +20,14 @@
                             </v-col>
                         </v-row>
                     </v-container>
-                    <small>*Povinní</small>
+                    <small>*Povinný</small>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="dialog = false">
+                    <v-btn color="secondary" text @click="dialog = false">
                         Zavřít
                     </v-btn>
-                    <v-btn color="blue darken-1" text @click="save">
+                    <v-btn color="secondary" text @click="save">
                         Uložit
                     </v-btn>
                 </v-card-actions>
@@ -50,16 +45,11 @@ import {
 
 export default {
     props: {
-        boxId: Number,
+        group: Object,
     },
     data: () => ({
         dialog: false,
         valid: false,
-        group: {
-            skupinaId: 0,
-            jmeno: "",
-            komentar: "",
-        },
         nameRules: nameRules,
         commentRules: commentRules
 
@@ -68,10 +58,7 @@ export default {
         save() {
             if (this.$refs.form.validate()) {
                 this.dialog = false
-                this.$store.dispatch("addGroup", {
-                    group: this.group,
-                    boxId: this.boxId
-                })
+                this.$store.dispatch("editGroup", this.group)
             }
         }
     }

@@ -25,7 +25,7 @@
                                 <v-text-field color="secondary" :rules="numberRules" v-model="box.sirka" type="number" label="Šírka*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="numberRules" v-model="box.depth" type="number" label="Hloubka*" required></v-text-field>
+                                <v-text-field color="secondary" :rules="numberRules" v-model="box.hloubka" type="number" label="Hloubka*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" offset-y min-width="auto">
@@ -88,8 +88,8 @@ export default {
         save() {
             if (this.$refs.form.validate()) {
                 this.dialog = false
-                this.$store.dispatch("addBox", this.box)
-                this.$store.dispatch("getBoxes")
+                this.$store.dispatch("editBox", this.box)
+                //this.$store.dispatch("getBoxes")
             }
         }
     }

@@ -13,6 +13,7 @@
         </div>
         <div class="buttons">
             <v-btn width="100px" outlined text depressed class="ma-2  width:100px info"> Uprav </v-btn>
+            <SnuskaEditPopup :snuska="Object.assign({}, snuska)"></SnuskaEditPopup>
             <SnuskaRemovePopup :id="Number.parseInt(this.$route.params.id)" :reroute="true"></SnuskaRemovePopup>
         </div>
     </v-container>
@@ -32,6 +33,7 @@
 <script>
 import SnuskaRemovePopup from "@/components/Snuska/SnuskaRemovePopup"
 import SnuskaEvents from "@/components/Snuska/SnuskaEvents.vue"
+import SnuskaEditPopup from "@/components/Snuska/SnuskaEditPopup.vue"
 
 export default {
     created() {
@@ -46,8 +48,8 @@ export default {
     },
     components: {
         SnuskaRemovePopup,
-        SnuskaEvents
-
+        SnuskaEvents,
+        SnuskaEditPopup
     },
     computed: {
         snuska() {
