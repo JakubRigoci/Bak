@@ -2,7 +2,7 @@
 <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn v-bind="attrs" v-on="on" width="100px" outlined text depressed class="ma-2  width:100px info"> Vymazat </v-btn>
+            <v-btn v-bind="attrs" v-on="on" color="secondary"> Vymazat </v-btn>
         </template>
         <v-card>
             <v-card-title>
@@ -40,9 +40,9 @@ export default {
         async save() {
             this.dialog = false
             if (await this.checkDependenciesOrRemoveGroup()) {
-                this.$store.dispatch("removeBox", this.id)
+                await this.$store.dispatch("removeBox", this.id)
             } else {
-                this.$store.dispatch("error", "Box má závislosti!")
+                await this.$store.dispatch("error", "Box má závislosti!")
             }
 
             if (this.reroute) {
@@ -54,17 +54,18 @@ export default {
             await this.$store.dispatch("getGroupsForBox", this.id)
             const groupsInBox = this.$store.state.groupsForBox
 
-            if (groupsInBox.length !== 1) {
-                return false
-            }
-            const group = groupsInBox[0]
-
-            if (group.velikost !== 0) {
-                return false
+            for (let group of groupsInBox) {
+                if (group.velikost > 0) {
+                    return false
+                }
             }
 
-            await this.$store.dispatch("removeGroup", group.skupinaId)
+            for (let group of groupsInBox) {
+                await this.$store.dispatch("removeGroup", group.skupinaId)
+            }
+
             return true
+
         }
     }
 };

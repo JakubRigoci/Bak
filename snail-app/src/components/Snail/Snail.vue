@@ -16,23 +16,66 @@
         </div>
     </v-expand-transition>
 
-    <v-card-title> {{snail.jmeno}}</v-card-title>
+    <v-card-title> Jméno: {{snail.jmeno}}</v-card-title>
 
-    <v-card-subtitle class="mx-auto" max-width='100'> {{snail.komentar}} </v-card-subtitle>
+    <v-card-subtitle class="mx-auto" max-width='100'>Komentář: {{snail.komentar}} </v-card-subtitle>
 
     <div class="container">
-        <div class="name"></div>
-        <div class="komentar"></div>
-        <div class="barva-ulita"></div>
-        <div class="barva-rtelo"></div>
+        <v-row>
+            <v-col>
+                <b>Barva ulity:</b> {{snail.barvaUlita}}
+            </v-col>
+            <v-col>
+                <b>Barva tela:</b> {{snail.barvaTelo}}
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col>
+                <b>Vzor ulity:</b> {{snail.vzorecUlita}}
+            </v-col>
+            <v-col>
+                <b>Narozen: </b> {{snail.narozen}}
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col v-if="snail.zemrel !== null">
+                <b>Zemřel: </b> {{snail.zemrel}}
+            </v-col>
+            <v-col v-if="snail.puvodSneka">
+                <b>Původ: </b> {{snail.puvodSneka}}
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col v-if="snail.snuskaId">
+                <b>Snůška: </b> {{snuska.komentar}}
+            </v-col>
+            <v-col v-if="snail.taxonomyId">
+                <b>Taxonomie: </b> {{taxonomy.jmeno}}
+            </v-col>
+        </v-row>
+
         <div class="aaa"></div>
     </div>
     <div class="snail-info">
-        <v-card-subtitle class="allign-right"> <b>Barva ulity:</b> {{snail.barvaUlita}} </v-card-subtitle>
-        <v-card-subtitle flex> <b>Barva tela:</b> {{snail.barvaTelo}} </v-card-subtitle>
+        <v-card-subtitle class="allign-right"> </v-card-subtitle>
+        <v-card-subtitle flex> </v-card-subtitle>
     </div>
 
-    <SnailRemovePopup :groupId="groupId" :snailId="snailId"></SnailRemovePopup>
+    <div class="ml-4 buttons">
+        <v-row no-gutters>
+            <v-col cols="6">
+        <SnailRemovePopup :groupId="groupId" :snailId="snailId"></SnailRemovePopup>
+  
+
+            </v-col>
+            <v-col cols="6">
+                      <SnailEditPopup :groupId="groupId" :snail="Object.assign({}, snail)"></SnailEditPopup>
+            </v-col>
+            <v-col cols="12">
+        <SnailGroupChangePopup class="mt-2" :groupId="groupId" :snailId="snailId"></SnailGroupChangePopup>
+            </v-col>
+        </v-row>
+    </div>
 
     <v-card-actions>
         <v-btn color="secondary" @click="showEvents = !showEvents" text> Události </v-btn>
@@ -64,7 +107,7 @@
     <v-expand-transition>
         <div v-show="showGallery">
             <v-divider></v-divider>
-            <Gallery></Gallery>
+            <Gallery :snailId="snailId" :galleryId="snail.galerieId"></Gallery>
         </div>
     </v-expand-transition>
 </v-card>
@@ -75,6 +118,8 @@ import Gallery from "@/components/Gallery/Gallery.vue"
 import SnailRemovePopup from "@/components/Snail/SnailRemovePopup.vue"
 import Measures from "@/components/Snail/Measures/Measures.vue"
 import SnailEvents from "@/components/Snail/SnailEvents.vue"
+import SnailEditPopup from "@/components/Snail/SnailEditPopup.vue"
+import SnailGroupChangePopup from "@/components/Snail/SnailGroupChangePopup.vue"
 
 export default {
     props: {
@@ -92,11 +137,29 @@ export default {
         Gallery,
         SnailRemovePopup,
         Measures,
-        SnailEvents
+        SnailEvents,
+        SnailEditPopup,
+        SnailGroupChangePopup
+    },
+    created() {
+        this.$store.dispatch("getSnuskas")
+        this.$store.dispatch("getTaxonomies")
     },
     computed: {
         snail() {
             return this.$store.getters.snailById(this.snailId)
+        },
+        snuska() {
+            if (this.snail.snuskaId) {
+                return this.$store.state.snuskas.find(s => s.snuskaId === this.snail.snuskaId)
+            }
+            return {}
+        },
+        taxonomy() {
+            if (this.snail.taxonomyId) {
+                return this.$store.state.taxonomies.find(t => t.taxonomyId === this.snail.taxonomyId)
+            }
+            return {}
         }
     }
 };

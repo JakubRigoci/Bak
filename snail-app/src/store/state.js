@@ -14,9 +14,11 @@ export default {
     groups: [],
     groupsForBox:[],
     events: [],
+    eventTypes: [],
     eventsForBox: [],
     eventsForSnail: [],
     eventsForGroup: [],
     eventsForSnuska: [],
+    files: [],
 
 }

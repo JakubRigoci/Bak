@@ -11,7 +11,7 @@
         <div v-show="showGroups">
             <v-divider></v-divider>
             <GroupContainer v-if="!showSnails" :ids="groups.map(g => g.skupinaId)"></GroupContainer>
-            <SnailContainer v-if="showSnails" :groupId="groups[0].skupinaId"></SnailContainer>
+            <SnailContainer v-if="showSnails && groups[0]" :groupId="groups[0].skupinaId"></SnailContainer>
              <v-tooltip v-if="showSnails" bottom>
                 <template v-slot:activator="{ on, attrs }">
                     <div v-bind="attrs" v-on="on">

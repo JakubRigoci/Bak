@@ -2,16 +2,14 @@
 <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn v-bind="attrs" v-on="on" color="secondary"> Vymazat </v-btn>
+            <v-btn v-bind="attrs" v-on="on" color="secondary">Změnit skupinu</v-btn>
         </template>
         <v-card>
             <v-card-title>
-                <span class="text-h5">Odebrat typ události</span>
+                <span class="text-h5">Změnit skupinu šneka</span>
             </v-card-title>
             <v-card-text>
-                <span>
-                    Naozaj si přejete odebrat tento typ události?
-                </span>
+                <v-select item-color="secondary" color="secondary" v-model="selectedGroup" :items="groups" item-text="jmeno" item-value="skupinaId" label="Skupiny*" required></v-select>
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
@@ -19,7 +17,7 @@
                     Zavřít
                 </v-btn>
                 <v-btn color="secondary" text @click="save">
-                    Vymazat
+                    Potvrdit
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -30,17 +28,32 @@
 <script>
 export default {
     props: {
-        eventTypeId: Number
+        snailId: Number,
+        groupId: Number,
     },
     data() {
         return {
             dialog: false,
+            selectedGroup: this.groupId,
+        }
+    },
+    created() {
+        this.$store.dispatch("getGroups")
+    },
+    computed: {
+        groups() {
+            return this.$store.state.groups
         }
     },
     methods: {
         save() {
             this.dialog = false
-            this.$store.dispatch("removeEventType", this.eventTypeId)
+            this.$store.dispatch("changeGroup", {
+                snailId: this.snailId,
+                groupId: this.selectedGroup,
+                oldGroupId: this.groupId
+            })
+            this.$router.go()
         }
     }
 };

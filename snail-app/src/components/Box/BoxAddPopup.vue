@@ -91,7 +91,6 @@ export default {
             if (this.$refs.form.validate()) {
                 this.dialog = false
                 this.$store.dispatch("addBox", this.box)
-                this.$store.dispatch("getBoxes")
             }
         }
     }

@@ -34,7 +34,6 @@ export default {
                 case "snail":
                     return this.$store.state.eventsForSnail.find(e => e.udalostId === this.id);
             }
-
             return {}
         },
         eventType() {

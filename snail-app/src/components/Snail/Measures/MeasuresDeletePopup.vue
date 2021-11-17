@@ -1,16 +1,17 @@
 <template lang="">
-<div>
     <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn v-bind="attrs" v-on="on" color="secondary"> Vymazat </v-btn>
+            <v-icon v-bind="attrs" v-on="on" small class="mr-2" >
+                mdi-delete
+            </v-icon>
         </template>
         <v-card>
             <v-card-title>
-                <span class="text-h5">Odebrat šneka</span>
+                <span class="text-h5">Odebrat měření</span>
             </v-card-title>
             <v-card-text>
                 <span>
-                    Naozaj si přejete odebrat šneka?
+                    Naozaj si přejete odebrat měření?
                 </span>
             </v-card-text>
             <v-card-actions>
@@ -24,15 +25,12 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
-</div>
 </template>
 
 <script>
 export default {
     props: {
-        snailId: Number,
-        groupId: Number,
-        name: String
+        measureId: Number
     },
     data: () => ({
         dialog: false,
@@ -40,7 +38,7 @@ export default {
     methods: {
         save() {
             this.dialog = false
-            this.$store.dispatch("removeSnail", {snailId: this.snailId, groupId: this.groupId})
+            this.$store.dispatch("removeMeasure", this.measureId)
         }
     }
 };

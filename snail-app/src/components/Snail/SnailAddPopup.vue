@@ -2,7 +2,7 @@
 <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn v-bind="attrs" v-on="on" outlined block width="150px" text depressed class="mt-4 info"> Přidat šneka</v-btn>
+            <v-btn v-bind="attrs" v-on="on" text class="mt-4"> Přidat šneka</v-btn>
         </template>
         <v-form ref="form" v-model="valid">
         <v-card>

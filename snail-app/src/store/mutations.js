@@ -66,14 +66,18 @@ export const GET_USERS_ADMIN = (state, users) => {
   state.users = users
 }
 
+export const GET_FILES = (state, images) => {
+  state.files = images
+}
+
 export const ADD_SNAIL = (state, payload) => {
   state.snails.push(payload.snail)
   state.snailsForGroup[payload.groupId].push(payload.snail)
+  state.groupsForBox.find(g => g.skupinaId === payload.groupId).velikost += 1
 }
 
 export const ADD_BOX = (state, box) => {
   state.boxes.push(box);
-  state.groupsForBox.push(box);
 }
 
 export const ADD_GROUP = (state, group) => {
@@ -112,9 +116,20 @@ export const ADD_EVENT = (state, event) => {
   }
 }
 
+export const ADD_MEASURE = (state, measure) => {
+  debugger
+  state.measuresForSnail.push(measure)
+}
+
+export const ADD_FILE = (state, file) => {
+  state.files.push(file.data)
+}
+
 export const REMOVE_SNAIL = (state, payload) => {
   state.snails = state.snails.filter(s => s.snekId !== payload.snailId)
   Vue.set(state.snailsForGroup, payload.groupId, state.snailsForGroup[payload.groupId].filter(s => s.snekId !== payload.snailId))
+
+  state.groupsForBox.find(g => g.skupinaId === payload.groupId).velikost -= 1
 }
 
 export const REMOVE_GROUP = (state, groupId) => {
@@ -158,6 +173,10 @@ export const REMOVE_EVENT = (state, event) => {
   }
 }
 
+export const REMOVE_MEASURE = (state, measureId) => {
+  state.measuresForSnail = state.measuresForSnail.filter(m => m.mereniSnekId !== measureId)
+}
+
 export const EDIT_BOX = (state, box) => {
   const index = state.boxes.findIndex(b => b.boxId === box.boxId)
   Vue.set(state.boxes, index, box)
@@ -174,6 +193,43 @@ export const EDIT_GROUP = (state, group) => {
 
   index = state.groupsForBox.findIndex(g => g.skupinaId === group.skupinaId)
   Vue.set(state.groupsForBox, index, group)
+}
+
+export const EDIT_SNUSKA = (state, snuska) => {
+  const index = state.snuskas.findIndex(s => s.snuskaId === snuska.snuskaId)
+  Vue.set(state.snuskas, index, snuska)
+}
+
+export const EDIT_EVENT_TYPE = (state, eventType) => {
+  const index = state.eventTypes.findIndex(e => e.udalostTypId === eventType.udalostTypId)
+  Vue.set(state.eventTypes, index, eventType)
+}
+
+export const EDIT_TAXONOMY = (state, taxonomy) => {
+  const index = state.taxonomies.findIndex(t => t.taxonomyId === taxonomy.taxonomyId)
+  Vue.set(state.taxonomies, index, taxonomy)
+}
+
+export const EDIT_SNAIL = (state, payload) => {
+  let index = state.snails.findIndex(s => s.snekId === payload.snail.snekId)
+  Vue.set(state.snails, index, payload.snail)
+
+  index = state.snailsForGroup[payload.groupId].findIndex(s => s.snekId === payload.snail.snekId)
+  Vue.set(state.snailsForGroup[payload.groupId], index, payload.snail)
+}
+
+export const EDIT_MEASURE = (state, measure) => {
+  let index = state.measuresForSnail.findIndex(m => m.mereniSnekId === measure.mereniSnekId)
+  Vue.set(state.measuresForSnail, index, measure)
+}
+export const CHANGE_GROUP = (state, payload) => {
+  debugger
+  let index = state.snails.findIndex(s => s.snekId === payload.data.snekId)
+  Vue.set(state.snails, index, payload.data)
+
+  state.snailsForGroup[payload.groupIds.oldGroupId] = state.snailsForGroup[payload.groupIds.oldGroupId].filter(s => s.snekId !== payload.data.snekId)
+
+  state.snailsForGroup[payload.groupIds.groupId].push(payload.data)
 }
 
 export const SET_ACTIVE_BOX = (state, boxId) => {

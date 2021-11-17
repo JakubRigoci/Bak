@@ -4,17 +4,37 @@
     <v-divider></v-divider>
     <v-container class="my-5">
         <div class="params">
-            <p> <b>Komentář:</b> {{snuska.komentar}}</p>
-            <p> <b>Velikost:</b> {{snuska.velikost}}</p>
-            <p> <b>Datum snesené:</b> {{snuska.datumSneseni}}</p>
-            <p v-if="snuska.periodaVylihnutiKonec"> <b>Perioda vylíhnutí:</b> {{snuska.periodaVylihnutiStart}} - {{snuska.periodaVylihnutiKonec}}</p>
-            <p> <b>Skupina:</b> {{group.komentar}}</p>
-            <p v-if="snail"> <b>Matka:</b> {{snail.komentar}}</p>
+            <v-row>
+                <v-col>
+                    <p> <b>Komentář:</b> {{snuska.komentar}}</p>
+                </v-col>
+                <v-col>
+                    <p> <b>Velikost:</b> {{snuska.velikost}}</p>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
+                    <p> <b>Datum snesení:</b> {{snuska.datumSneseni}}</p>
+                </v-col>
+                <v-col>
+                    <p> <b>Skupina:</b> {{group.komentar}}</p>
+                </v-col>
+
+            </v-row>
+            <v-row>
+                <v-col>
+                    <p v-if="snuska.periodaVylihnutiKonec"> <b>Perioda vylíhnutí:</b> {{snuska.periodaVylihnutiStart}} - {{snuska.periodaVylihnutiKonec}}</p>
+                </v-col>
+                <v-col>
+                    <p v-if="snail"> <b>Matka:</b> {{snail.komentar}}</p>
+                </v-col>
+            </v-row>
         </div>
         <div class="buttons">
-            <v-btn width="100px" outlined text depressed class="ma-2  width:100px info"> Uprav </v-btn>
-            <SnuskaEditPopup :snuska="Object.assign({}, snuska)"></SnuskaEditPopup>
-            <SnuskaRemovePopup :id="Number.parseInt(this.$route.params.id)" :reroute="true"></SnuskaRemovePopup>
+            <v-row>
+                <SnuskaEditPopup :snuska="Object.assign({}, snuska)"></SnuskaEditPopup>
+                <SnuskaRemovePopup class="ml-2" :id="Number.parseInt(this.$route.params.id)" :reroute="true"></SnuskaRemovePopup>
+            </v-row>
         </div>
     </v-container>
     <h1 class="pt-8 subheading grey--text">Události</h1>

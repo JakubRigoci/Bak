@@ -2,7 +2,7 @@
 <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
              <template v-slot:activator="{ on, attrs }">
-            <v-btn v-bind="attrs" v-on="on" width="100px" outlined text depressed class="ma-2  width:100px info"> Upravit </v-btn>
+            <v-btn v-bind="attrs" v-on="on" color="secondary"> Upravit </v-btn>
         </template>
         <v-form ref="form" v-model="valid">
             <v-card>

@@ -11,16 +11,19 @@
         <v-icon x-large class="pr-8"> mdi-bacteria </v-icon>
     </v-list-item>
     <v-card-actions class="d-flex justify-space-around mb-6">
-        <v-btn width="100px" outlined text depressed class="ma-2  width:100px info"> Uprav </v-btn>
+        <TaxonomyEditPopup :taxonomy="Object.assign({}, taxonomy)"></TaxonomyEditPopup>
         <TaxonomyRemovePopup :taxonomyId="taxonomyId"></TaxonomyRemovePopup>
     </v-card-actions>
 </v-card>
 </template>
 <script>
 import TaxonomyRemovePopup from "@/components/Taxonomy/TaxonomyRemovePopup.vue"
+import TaxonomyEditPopup from "@/components/Taxonomy/TaxonomyEditPopup.vue"
+
 export default {
     components: {
-        TaxonomyRemovePopup
+        TaxonomyRemovePopup,
+        TaxonomyEditPopup
     },
    props: {
        taxonomyId: Number

@@ -2,7 +2,7 @@
 <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn v-bind="attrs" v-on="on" width="100px" outlined text depressed class="ma-2  width:100px info"> Vymazat </v-btn>
+            <v-btn v-bind="attrs" v-on="on" color="secondary"> Vymazat </v-btn>
         </template>
         <v-card>
             <v-card-title>

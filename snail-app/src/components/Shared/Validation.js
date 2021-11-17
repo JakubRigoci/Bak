@@ -38,3 +38,7 @@ export const passwordRules = [
 export const phoneRules = [
     v => v <= 9999999999 || 'Telefonní číslo musí být méně než 10 cifer'
 ]
+
+export const fileRules = [
+    value => !value || value.size < 2000000 || 'Obrázek musí mít méně než 2MB',
+]

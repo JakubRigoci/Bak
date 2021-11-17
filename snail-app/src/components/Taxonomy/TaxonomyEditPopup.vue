@@ -2,26 +2,21 @@
 <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-card allign="center" class="mt-6 mx-auto primary justify-center d-flex" max-width="344" outlined>
-
-                <v-avatar v-bind="attrs" v-on="on" class="d-flex " color="secondary" size='120'>
-                    <v-icon x-large> mdi-plus-thick </v-icon>
-                </v-avatar>
-            </v-card>
+                <v-btn v-bind="attrs" v-on="on" color="secondary">Uprav</v-btn>
         </template>
         <v-form ref="form" v-model="valid">
             <v-card>
                 <v-card-title>
-                    <span class="text-h5">Přidat Skupinu</span>
+                    <span class="text-h5">Upravit Taxonomii</span>
                 </v-card-title>
                 <v-card-text>
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field v-model="group.jmeno" :rules="nameRules" label="Jméno*" required></v-text-field>
+                                <v-text-field color="secondary" :rules="nameRules" v-model="taxonomy.jmeno" label="Jméno*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field v-model="group.komentar" :rules="commentRules" label="Komentář" required></v-text-field>
+                                <v-text-field color="secondary" :rules="textRules" v-model="taxonomy.popis" label="Popis" required></v-text-field>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -45,33 +40,25 @@
 <script>
 import {
     nameRules,
-    commentRules
+    textRules
 } from "@/components/Shared/Validation.js"
 
 export default {
     props: {
-        boxId: Number,
+        taxonomy: Object
     },
     data: () => ({
         dialog: false,
         valid: false,
-        group: {
-            skupinaId: 0,
-            jmeno: "",
-            komentar: "",
-        },
         nameRules: nameRules,
-        commentRules: commentRules
+        textRules: textRules,
 
     }),
     methods: {
         save() {
             if (this.$refs.form.validate()) {
                 this.dialog = false
-                this.$store.dispatch("addGroup", {
-                    group: this.group,
-                    boxId: this.boxId
-                })
+                this.$store.dispatch("editTaxonomy", this.taxonomy)
             }
         }
     }

@@ -2,12 +2,12 @@
 <div>
     <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-           <v-btn v-bind="attrs" v-on="on">uprav</v-btn>
+           <v-btn color="secondary" v-bind="attrs" v-on="on">uprav</v-btn>
         </template>
         <v-form ref="form" v-model="valid">
             <v-card>
                 <v-card-title>
-                    <span class="text-h5">Přidat snúšku</span>
+                    <span class="text-h5">Upravit snúšku</span>
                 </v-card-title>
                 <v-card-text>
                     <v-container>
@@ -71,6 +71,7 @@ export default {
     },
     created() {
         this.$store.dispatch("getGroups")
+        this.$store.dispatch("getSnailsForGroup", this.snuska.skupinaId)
     },
     data() {
         return {
@@ -112,6 +113,7 @@ export default {
                 this.dialog = false
                 this.snuska.periodaVylihnutiStart = this.hatchingPeriod[0]
                 this.snuska.periodaVylihnutiKonec = this.hatchingPeriod[1]
+                this.snuska.velikost = Number.parseInt(this.snuska.velikost)
                 this.$store.dispatch("editSnuska", this.snuska)
             }
         },

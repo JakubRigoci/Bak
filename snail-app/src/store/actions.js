@@ -88,7 +88,7 @@ export const getTaxonomies = ({commit}) => {
 
 export const getMeasuresForSnail = ({commit}, snailId) => {
   return new Promise((resolve, reject) => {
-    axios.get(`mereni/${snailId}`).then(response => {
+    axios.get(`snek/${snailId}/mereni`).then(response => {
       commit("GET_MEASURES_FOR_SNAIL", response.data)
       resolve(response)
     }).catch(e => {
@@ -159,6 +159,18 @@ export const getUsersAdmin = ({commit}) => {
   })
 }
 
+export const getFiles = ({commit}, galleryId) => {
+  return new Promise((resolve, reject) => {
+    axios.get(`file/galerie/${galleryId}`).then(response => {
+      commit("GET_FILES", response.data)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
 export const addSnail = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     axios.post(`snek/${payload.id}`, payload.snail).then(response =>{
@@ -177,8 +189,6 @@ export const addBox = ({commit}, box) => {
   return new Promise((resolve, reject) => {
     axios.post("box", box).then(response => {
       commit("ADD_BOX", response.data)
-      console.log("ADDING BOX")
-      console.log(response.data)
       const group = {
         skupinaId: 0,
         jmeno: `Zakladni skupina pro box: ${box.jmeno}`,
@@ -251,6 +261,37 @@ export const addEvent = ({commit}, event) => {
         error({commit}, e.response.data.message)
         reject(e)
       })
+  })
+}
+
+export const addMeasure = ({commit}, payload) => {
+  return new Promise((resolve, reject) => {
+    axios.post(`mereni/${payload.snailId}`, payload.measure).then(response => {
+      commit("ADD_MEASURE", response.data)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
+export const addFile = ({commit}, file) => {
+  return new Promise((resolve, reject) => {
+    const formData = new FormData();
+    formData.append('file',file.data)
+    const config = {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+    }
+    axios.post(`snek/${file.snekId}/image`, formData, config).then(response => {
+      commit("ADD_FILE", file)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
   })
 }
 
@@ -338,6 +379,18 @@ export const removeEvent = ({commit}, event) => {
   })
 }
 
+export const removeMeasure = ({commit}, measureId) => {
+  return new Promise((resolve, reject) => {
+    axios.delete(`mereni/${measureId}`).then(response => {
+      commit("REMOVE_MEASURE", measureId)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
 export const editBox = ({commit}, box) => {
   return new Promise((resolve, reject) => {
     axios.put(`box/${box.boxId}`, box).then(response => {
@@ -364,6 +417,54 @@ export const editGroup = ({commit}, group) => {
   })
 }
 
+export const editSnuska = ({commit}, snuska) => {
+  return new Promise((resolve, reject) => {
+    axios.put(`snuska/${snuska.snuskaId}`, snuska).then(response => {
+      commit("EDIT_SNUSKA", response.data)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
+export const editEventType = ({commit}, eventType) => {
+  return new Promise((resolve, reject) => {
+    axios.put(`udalost-typ/admin/${eventType.udalostTypId}`, eventType).then(response => {
+      commit("EDIT_EVENT_TYPE", response.data)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
+export const editTaxonomy = ({commit}, taxonomy) => {
+  return new Promise((resolve, reject) => {
+    axios.put(`taxonomy/admin/${taxonomy.taxonomyId}`, taxonomy).then(response => {
+      commit("EDIT_TAXONOMY", response.data)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
+export const editSnail = ({commit}, payload) => {
+  return new Promise((resolve, reject) => {
+    axios.put(`snek/${payload.snail.snekId}`, payload.snail).then(response => {
+      commit("EDIT_SNAIL", payload)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
 export const editUserRoles = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     axios.put(`users/admin/${payload.userId}/roles`, payload.roles).then(response => {
@@ -376,10 +477,37 @@ export const editUserRoles = ({commit}, payload) => {
   })
 }
 
+export const editMeasure = ({commit}, measure) => {
+  return new Promise((resolve, reject) => {
+    axios.put(`mereni/${measure.mereniSnekId}`, measure).then(response => {
+      commit("EDIT_MEASURE", response.data)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
 export const activateUser = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     axios.patch(`users/admin/${payload.userId}/active-until/${payload.activeUntil}`).then(response => {
       commit("EDIT_USER", response.data)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
+export const changeGroup = ({commit}, payload) => {
+  return new Promise((resolve, reject) => {
+    axios.post(`snek/${payload.snailId}/skupina/${payload.groupId}`).then(response => {
+      commit("CHANGE_GROUP", {
+        data: response.data,
+        groupIds: payload
+      })
       resolve(response)
     }).catch(e => {
       error({commit}, e.response.data.message)

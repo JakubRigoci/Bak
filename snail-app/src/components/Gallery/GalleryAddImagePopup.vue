@@ -12,20 +12,17 @@
         <v-form ref="form" v-model="valid">
             <v-card>
                 <v-card-title>
-                    <span class="text-h5">Přidat Skupinu</span>
+                    <span class="text-h5">Přidat obrázek</span>
                 </v-card-title>
                 <v-card-text>
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field v-model="group.jmeno" :rules="nameRules" label="Jméno*" required></v-text-field>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-text-field v-model="group.komentar" :rules="commentRules" label="Komentář" required></v-text-field>
+                                <v-file-input  accept="image/png, image/jpeg, image/bmp"
+                                 :rules="fileRules" v-model="file.data" truncate-length="15"></v-file-input>
                             </v-col>
                         </v-row>
                     </v-container>
-                    <small>*Povinní</small>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
@@ -43,35 +40,30 @@
 </template>
 
 <script>
-import {
-    nameRules,
-    commentRules
-} from "@/components/Shared/Validation.js"
+import { fileRules } from "@/components/Shared/Validation.js"
 
 export default {
     props: {
-        boxId: Number,
+        snailId: Number
     },
-    data: () => ({
-        dialog: false,
-        valid: false,
-        group: {
-            skupinaId: 0,
-            jmeno: "",
-            komentar: "",
-        },
-        nameRules: nameRules,
-        commentRules: commentRules
+    data() {
+        return {
+            dialog: false,
+            valid: false,
+            file: {
+                snekId: this.snailId,
+                data: []
+            },
+            fileRules: fileRules
+        }
 
-    }),
+    },
     methods: {
         save() {
+            console.log(this.file)
             if (this.$refs.form.validate()) {
                 this.dialog = false
-                this.$store.dispatch("addGroup", {
-                    group: this.group,
-                    boxId: this.boxId
-                })
+                this.$store.dispatch("addFile", this.file)
             }
         }
     }
