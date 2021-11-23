@@ -1,6 +1,6 @@
 <template lang="">
 <div>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
             <v-card allign="center" class="mt-6 mx-auto primary justify-center d-flex" max-width="344" outlined>
 
@@ -18,18 +18,17 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-file-input  accept="image/png, image/jpeg, image/bmp"
-                                 :rules="fileRules" v-model="file.data" truncate-length="15"></v-file-input>
+                                <v-file-input accept="image/png, image/jpeg, image/bmp" :rules="fileRules" v-model="file.data" truncate-length="15"></v-file-input>
                             </v-col>
                         </v-row>
                     </v-container>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="secondary" text @click="dialog = false">
+                    <v-btn color="info" text @click="dialog = false">
                         Zavřít
                     </v-btn>
-                    <v-btn color="secondary" text @click="save">
+                    <v-btn color="info" text @click="save">
                         Uložit
                     </v-btn>
                 </v-card-actions>
@@ -40,11 +39,14 @@
 </template>
 
 <script>
-import { fileRules } from "@/components/Shared/Validation.js"
+import {
+    fileRules
+} from "@/components/Shared/Validation.js"
 
 export default {
     props: {
-        snailId: Number
+        snailId: Number,
+        galleryId: Number,
     },
     data() {
         return {
@@ -63,7 +65,16 @@ export default {
             console.log(this.file)
             if (this.$refs.form.validate()) {
                 this.dialog = false
-                this.$store.dispatch("addFile", this.file)
+                this.$store.dispatch("addFile", {
+                    file: this.file,
+                    galleryId: this.galleryId
+                }).then(() => {
+                    this.$refs.form.resetValidation()
+                    this.file = {
+                        snekId: this.snailId,
+                        data: []
+                    }
+                })
             }
         }
     }

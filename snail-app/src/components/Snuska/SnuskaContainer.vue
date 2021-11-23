@@ -1,8 +1,8 @@
 <template lang="">
 <v-container fluid>
     <v-row class="d-flex justify-end ma-8 pa-2">
-        <SnuskaFilter v-on:filter="(value) => this.filter(value)"></SnuskaFilter>
-        <v-spacer></v-spacer>
+        <SnuskaFilter :class="$vuetify.breakpoint.smAndDown ? 'mb-2' : 'mr-2'" v-on:filter="(value) => this.filter(value)"></SnuskaFilter>
+
         <SnuskaSorter v-on:sort="(value) => this.sort(value)"></SnuskaSorter>
     </v-row>
     <v-row allign="center">
@@ -54,9 +54,9 @@ export default {
         snuskas() {
             let unsorted = []
             if (this.groupId && Number.isInteger(this.groupId)) {
-                unsorted = this.$store.state.snuskas.filter(s => s.komentar.includes(this.commentaryFilter) && s.skupinaId === this.groupId)
+                unsorted = this.$store.state.snuskas.filter(s => s.komentar.toLowerCase().includes(this.commentaryFilter.toLowerCase()) && s.skupinaId === this.groupId)
             } else {
-                unsorted = this.$store.state.snuskas.filter(s => s.komentar.includes(this.commentaryFilter));
+                unsorted = this.$store.state.snuskas.filter(s => s.komentar.toLowerCase().includes(this.commentaryFilter.toLowerCase()));
             }
 
             switch (this.sortType) {

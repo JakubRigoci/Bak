@@ -1,6 +1,6 @@
 <template lang="">
 <div>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
             <v-btn v-bind="attrs" color="secondary" v-on="on" class="mt-4"> Přidat měření</v-btn>
         </template>

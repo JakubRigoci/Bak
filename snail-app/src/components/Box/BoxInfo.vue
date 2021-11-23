@@ -1,6 +1,6 @@
 <template lang="">
 <div>
-    <h1 class="subheading grey--text">Box</h1>
+    <h1 class="subheading grey--text">Detaily Boxu</h1>
     <v-divider></v-divider>
     <v-container v-if="(typeof box !== 'undefined')">
         <div class="params">
@@ -17,7 +17,7 @@
                     <b>Prodejce:</b> {{box.prodejce}}
                 </v-col>
                 <v-col>
-                    <b>Datum pořízení:</b> {{box.datumPorizeni}}
+                    <b>Datum pořízení:</b> {{format(box.datumPorizeni)}}
                 </v-col>
             </v-row>
             <v-row>
@@ -39,7 +39,7 @@
         <div class="buttons">
             <v-row>
                 <BoxRemovePopup :id="boxId" :name="box.jmeno" :reroute="true"></BoxRemovePopup>
-                <BoxEditPopup class="ml-2" :box="Object.assign({},box)"></BoxEditPopup>
+                <BoxEditPopup class="ml-2" :boxProp="Object.assign({},box)"></BoxEditPopup>
             </v-row>
         </div>
     </v-container>
@@ -49,6 +49,7 @@
 <script>
 import BoxRemovePopup from "@/components/Box/BoxRemovePopup.vue"
 import BoxEditPopup from "@/components/Box/BoxEditPopup.vue"
+import {format} from "@/components/Shared/DateFormater.js"
 
 export default {
     components: {
@@ -62,6 +63,9 @@ export default {
         box() {
             return this.$store.getters.boxById(this.boxId)
         }
+    },
+    methods: {
+        format: format,
     }
 
 }

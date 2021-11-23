@@ -1,6 +1,6 @@
 <template lang="">
 <div>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
             <v-btn color="secondary" v-bind="attrs" v-on="on" class="ma-2"> Uprav </v-btn>
         </template>
@@ -16,10 +16,10 @@
             <UserDeactivation v-if="selectedType === 'DEAKTIVOVAT'"></UserDeactivation>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="secondary" text @click="dialog = false">
+                <v-btn color="info" text @click="dialog = false">
                     Zavřít
                 </v-btn>
-                <v-btn color="secondary" text @click="save">
+                <v-btn color="info" text @click="save">
                     Potvrdit
                 </v-btn>
             </v-card-actions>

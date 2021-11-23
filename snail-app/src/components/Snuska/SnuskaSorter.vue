@@ -8,7 +8,7 @@
         </template>
         <v-list>
             <v-list-item v-for="(item, index) in items" :key="index">
-                <v-list-item-title @click="emitValue(item.value)">{{ item.title }}</v-list-item-title>
+                <v-btn text width="100%" @click="emitValue(item.value)">{{ item.title }}</v-btn>
             </v-list-item>
         </v-list>
     </v-menu>

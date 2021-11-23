@@ -4,7 +4,7 @@
 <EventAddPopup type="box" :id="boxId"></EventAddPopup>
 <v-timeline dense>
     <v-timeline-item color="secondary" fill-dot v-for="event in events" :key="event.udalostId">
-        <Event type="box" :id="event.udalostId"></Event>
+        <Event type="box" :eventId="event.udalostId" :id="boxId"></Event>
     </v-timeline-item>
   </v-timeline>
 

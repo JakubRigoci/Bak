@@ -1,12 +1,10 @@
 <template lang="">
 <div>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
             <v-card allign="center" class="mt-6 mx-auto primary justify-center d-flex" max-width="344" outlined>
 
-                <v-avatar v-bind="attrs" v-on="on" class="d-flex " color="secondary" size='120'>
-                    <v-icon x-large> mdi-plus-thick </v-icon>
-                </v-avatar>
+                <v-btn v-bind="attrs" v-on="on" color="secondary" class="mt-4"> Přidat skupinu</v-btn>
             </v-card>
         </template>
         <v-form ref="form" v-model="valid">
@@ -29,10 +27,10 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="secondary" text @click="dialog = false">
+                    <v-btn color="info" text @click="dialog = false">
                         Zavřít
                     </v-btn>
-                    <v-btn color="secondary" text @click="save">
+                    <v-btn color="info" text @click="save">
                         Uložit
                     </v-btn>
                 </v-card-actions>
@@ -71,6 +69,13 @@ export default {
                 this.$store.dispatch("addGroup", {
                     group: this.group,
                     boxId: this.boxId
+                }).then(() => {
+                    this.$refs.form.resetValidation()
+                    this.group = {
+                        skupinaId: 0,
+                        jmeno: "",
+                        komentar: "",
+                    }
                 })
             }
         }

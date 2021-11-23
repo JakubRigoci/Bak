@@ -2,7 +2,7 @@
 <div>
 <v-timeline dense>
     <v-timeline-item color="secondary" fill-dot v-for="event in events" :key="event.udalostId">
-        <Event type="snuska" :id="event.udalostId"></Event>
+        <Event type="snuska" :id="snuskaId" :eventId="event.udalostId"></Event>
     </v-timeline-item>
   </v-timeline>
   <EventAddPopup type="snuska" :id="snuskaId"></EventAddPopup>

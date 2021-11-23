@@ -1,18 +1,12 @@
 <template lang="">
-<div>
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-card allign="center" class="mx-auto primary justify-center d-flex" max-width="344" outlined>
-
-                <v-avatar v-bind="attrs" v-on="on" class="d-flex " color="secondary" size='120'>
-                    <v-icon x-large> mdi-plus-thick </v-icon>
-                </v-avatar>
-            </v-card>
+           <v-btn v-bind="attrs" v-on="on" text color="info"> Upravit </v-btn>
         </template>
         <v-form ref="form" v-model="valid">
             <v-card>
                 <v-card-title>
-                    <span class="text-h5">Přidat událost</span>
+                    <span class="text-h5">Upravit událost</span>
                 </v-card-title>
                 <v-card-text>
                     <v-container>
@@ -47,46 +41,36 @@
             </v-card>
         </v-form>
     </v-dialog>
-</div>
 </template>
 
 <script>
-import {
-    selectRules,
-    commentRules
-} from "@/components/Shared/Validation.js"
+import { selectRules , commentRules } from "@/components/Shared/Validation.js"
 import {
     format
 } from "@/components/Shared/DateFormater"
-import {
-    translate
-} from "@/components/Shared/Translator.js"
 
 export default {
     props: {
+        eventId: Number,
         type: String,
-        id: Number,
+        eventProp: Object,
+        id: Number
     },
     data() {
         return {
             dialog: false,
             valid: false,
-            event: {
-                udalostId: 0,
-                komentar: "",
-                datum: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-                udalostTypId: 0,
-            },
+            event: this.eventProp,
             commentRules: commentRules,
             selectRules: selectRules,
         }
     },
     computed: {
         eventTypes() {
-            return this.$store.state.eventTypes.filter(e => e.typ === translate(this.type))
+            return this.$store.state.events
         },
         formatedDate() {
-            return this.event.datum ? this.format(this.event.datum) : ''
+            return  this.event.datum ? this.format(this.event.datum) : ''
         }
     },
     methods: {
@@ -107,15 +91,7 @@ export default {
                         this.event.skupinaId = this.id
                         break
                 }
-                this.$store.dispatch("addEvent", this.event).then(() => {
-                    this.$refs.form.resetValidation()
-                    this.event = {
-                        udalostId: 0,
-                        komentar: "",
-                        datum: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-                        udalostTypId: 0,
-                    }
-                })
+                this.$store.dispatch("editEvent", {event: this.event, id: this.id, type: this.type})
             }
         },
         format: format

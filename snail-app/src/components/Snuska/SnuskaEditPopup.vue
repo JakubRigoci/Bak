@@ -1,8 +1,8 @@
 <template lang="">
 <div>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-           <v-btn color="secondary" v-bind="attrs" v-on="on">uprav</v-btn>
+            <v-btn color="secondary" v-bind="attrs" v-on="on">uprav</v-btn>
         </template>
         <v-form ref="form" v-model="valid">
             <v-card>
@@ -18,18 +18,15 @@
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" offset-y min-width="auto">
                                     <template v-slot:activator="{on}">
-                                        <v-text-field readonly color="secondary" v-model="snuska.datumSneseni" v-on="on" label="Datum snesení*" required></v-text-field>
+                                        <v-text-field readonly color="secondary" :value="formatedDate" v-on="on" label="Datum snesení*" required></v-text-field>
                                     </template>
                                     <v-date-picker color="secondary" v-model="snuska.datumSneseni"></v-date-picker>
                                 </v-menu>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="numberRules" type="number" v-model="snuska.velikost" label="Velikost*" required></v-text-field>
-                            </v-col>
-                            <v-col cols="12">
                                 <v-menu :close-on-content-click="false" transition="scale-transition" offset-y min-width="auto">
                                     <template v-slot:activator="{on}">
-                                        <v-text-field readonly color="secondary" v-model="hatchingPeriodText" v-on="on" label="Perioda vylíhnutí*"></v-text-field>
+                                        <v-text-field readonly color="secondary" :value="formatedHatchingPeriodDate" v-on="on" label="Perioda vylíhnutí*"></v-text-field>
                                     </template>
                                     <v-date-picker color="secondary" range v-model="hatchingPeriod"></v-date-picker>
                                 </v-menu>
@@ -40,17 +37,17 @@
                             <v-col cols="12">
                                 <v-checkbox color="secondary" v-model="motherSelected" label="Určit matku"></v-checkbox>
                                 <v-select v-if="motherSelected" item-color="secondary" color="secondary" v-model="snuska.matkaId" :items="snailsForGroup" item-text="jmeno" item-value="snekId" label="Matka" clearable></v-select>
-                            </v-col>           
+                            </v-col>
                         </v-row>
                     </v-container>
                     <small>*Povinní</small>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="secondary" text @click="dialog = false">
+                    <v-btn color="info" text @click="dialog = false">
                         Zavřít
                     </v-btn>
-                    <v-btn color="secondary" text @click="save">
+                    <v-btn color="info" text @click="save">
                         Uložit
                     </v-btn>
                 </v-card-actions>
@@ -62,12 +59,15 @@
 
 <script>
 import * as rules from "@/components/Shared/Validation.js"
+import {
+    format
+} from "@/components/Shared/DateFormater"
 
 const currDate = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
 export default {
     props: {
         id: Number,
-        snuska: Object,
+        snuskaProp: Object,
     },
     created() {
         this.$store.dispatch("getGroups")
@@ -79,17 +79,7 @@ export default {
             hatchingPeriod: [currDate, currDate],
             valid: false,
             motherSelected: false,
-            // snuska: {
-            //     snuskaId: 0,
-            //     komentar: "",
-            //     datumSneseni: currDate,
-            //     ponechana: true,
-            //     velikost: "",
-            //     periodaVylihnutiStart: currDate,
-            //     periodaVylihnutiKonec: currDate,
-            //     skupinaId: "",
-            //     matkaId: ""
-            // },
+            snuska: this.snuskaProp,
             nameRules: rules.nameRules,
             commentRules: rules.commentRules,
             numberRules: rules.numberRules,
@@ -105,7 +95,13 @@ export default {
         },
         snailsForGroup() {
             return this.$store.getters.snailsByGroup(this.snuska.skupinaId)
-        }
+        },
+        formatedDate() {
+            return this.snuska.datumSneseni ? this.format(this.snuska.datumSneseni) : ''
+        },
+        formatedHatchingPeriodDate() {
+            return this.hatchingPeriod.map(d => format(d))
+        },
     },
     methods: {
         save() {
@@ -119,7 +115,8 @@ export default {
         },
         getSnailsForGroup() {
             this.$store.dispatch("getSnailsForGroup", this.snuska.skupinaId)
-        }
+        },
+        format: format
     }
 };
 </script>

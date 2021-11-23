@@ -3,7 +3,7 @@
 <div v-if="events.length > 0">
 <v-timeline dense>
     <v-timeline-item color="secondary" fill-dot v-for="event in events" :key="event.udalostId">
-        <Event type="snail" :id="event.udalostId"></Event>
+        <Event type="snail" :eventId="event.udalostId" :id="snailId"></Event>
     </v-timeline-item>
   </v-timeline>
   <EventAddPopup type="snail" :id="snailId"></EventAddPopup>

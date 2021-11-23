@@ -14,7 +14,7 @@
             </v-row>
             <v-row>
                 <v-col>
-                    <p> <b>Datum snesení:</b> {{snuska.datumSneseni}}</p>
+                    <p> <b>Datum snesení:</b> {{format(snuska.datumSneseni)}}</p>
                 </v-col>
                 <v-col>
                     <p> <b>Skupina:</b> {{group.komentar}}</p>
@@ -23,7 +23,7 @@
             </v-row>
             <v-row>
                 <v-col>
-                    <p v-if="snuska.periodaVylihnutiKonec"> <b>Perioda vylíhnutí:</b> {{snuska.periodaVylihnutiStart}} - {{snuska.periodaVylihnutiKonec}}</p>
+                    <p v-if="snuska.periodaVylihnutiKonec"> <b>Perioda vylíhnutí:</b> {{format(snuska.periodaVylihnutiStart)}} - {{format(snuska.periodaVylihnutiKonec)}}</p>
                 </v-col>
                 <v-col>
                     <p v-if="snail"> <b>Matka:</b> {{snail.komentar}}</p>
@@ -32,7 +32,7 @@
         </div>
         <div class="buttons">
             <v-row>
-                <SnuskaEditPopup :snuska="Object.assign({}, snuska)"></SnuskaEditPopup>
+                <SnuskaEditPopup :snuskaProp="Object.assign({}, snuska)"></SnuskaEditPopup>
                 <SnuskaRemovePopup class="ml-2" :id="Number.parseInt(this.$route.params.id)" :reroute="true"></SnuskaRemovePopup>
             </v-row>
         </div>
@@ -54,6 +54,9 @@
 import SnuskaRemovePopup from "@/components/Snuska/SnuskaRemovePopup"
 import SnuskaEvents from "@/components/Snuska/SnuskaEvents.vue"
 import SnuskaEditPopup from "@/components/Snuska/SnuskaEditPopup.vue"
+import {
+    format
+} from "@/components/Shared/DateFormater"
 
 export default {
     created() {
@@ -87,6 +90,9 @@ export default {
                 return s.snekId === this.snuska.matkaId
             }) || "";
         }
+    },
+    methods: {
+        format: format
     }
 }
 </script>

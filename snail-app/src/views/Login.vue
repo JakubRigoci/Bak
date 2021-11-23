@@ -20,7 +20,7 @@
                     <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
                         <v-spacer></v-spacer>
                         <v-btn color="secondary" :large="$vuetify.breakpoint.smAndUp" router to="/register">
-                            Registrovat
+                            Přejít na registraci
                         </v-btn>
                         <v-btn color="secondary" @click="login" :large="$vuetify.breakpoint.smAndUp">
                             Přihlásit

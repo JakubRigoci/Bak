@@ -6,6 +6,11 @@
             <v-list-item-title class="mb-1">
                 {{taxonomy.popis}}
             </v-list-item-title>
+            <v-list-item-subtitle>
+                            <p v-if="taxonomy.fkTaxonomyTaxonomy">
+                Naddruh: {{parentTaxonomy.jmeno}}
+            </p>
+            </v-list-item-subtitle>
         </v-list-item-content>
 
         <v-icon x-large class="pr-8"> mdi-bacteria </v-icon>
@@ -31,6 +36,12 @@ export default {
    computed: {
        taxonomy() {
            return this.$store.state.taxonomies.find(t => t.taxonomyId === this.taxonomyId) || {}
+       },
+       parentTaxonomy() {
+           if (this.taxonomy.fkTaxonomyTaxonomy) {
+                return this.$store.state.taxonomies.find(t => t.taxonomyId === this.taxonomy.fkTaxonomyTaxonomy) || {}
+           }
+           return {}
        }
    } 
 }

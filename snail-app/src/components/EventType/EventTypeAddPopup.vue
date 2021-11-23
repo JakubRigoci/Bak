@@ -1,6 +1,6 @@
 <template lang="">
 <div>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
             <v-card allign="center" class="mx-auto primary justify-center d-flex" max-width="344" outlined>
 
@@ -29,10 +29,10 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="secondary" text @click="dialog = false">
+                    <v-btn color="info" text @click="dialog = false">
                         Zavřít
                     </v-btn>
-                    <v-btn color="secondary" text @click="save">
+                    <v-btn color="info" text @click="save">
                         Uložit
                     </v-btn>
                 </v-card-actions>
@@ -43,7 +43,10 @@
 </template>
 
 <script>
-import { selectRules , textRules } from "@/components/Shared/Validation.js"
+import {
+    selectRules,
+    textRules
+} from "@/components/Shared/Validation.js"
 
 export default {
     data: () => ({
@@ -63,7 +66,14 @@ export default {
         save() {
             if (this.$refs.form.validate()) {
                 this.dialog = false
-                this.$store.dispatch("addEventType", this.eventType)
+                this.$store.dispatch("addEventType", this.eventType).then(() => {
+                    this.$refs.form.resetValidation()
+                    this.eventType = {
+                        udalostTypId: 0,
+                        popis: "",
+                        typ: "BOX"
+                    }
+                })
             }
         }
     }

@@ -1,5 +1,5 @@
 <template lang="">
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
             <v-icon v-bind="attrs" v-on="on" small class="mr-2">
                 mdi-pencil

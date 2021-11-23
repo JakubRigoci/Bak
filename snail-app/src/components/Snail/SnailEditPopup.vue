@@ -1,6 +1,6 @@
 <template lang="">
 <div>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
             <v-btn v-bind="attrs" v-on="on" color="secondary">upravit</v-btn>
         </template>
@@ -30,7 +30,7 @@
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" offset-y min-width="auto">
                                     <template v-slot:activator="{on}">
-                                        <v-text-field v-model="snail.narozen" v-on="on" label="Narozen"></v-text-field>
+                                        <v-text-field :value="formatedBornDate" v-on="on" label="Narozen"></v-text-field>
                                     </template>
                                     <v-date-picker color="secondary" v-model="snail.narozen"></v-date-picker>
                                 </v-menu>
@@ -52,10 +52,10 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="secondary" text @click="dialog = false">
+                    <v-btn color="info" text @click="dialog = false">
                         Zavřít
                     </v-btn>
-                    <v-btn color="secondary" text @click="save">
+                    <v-btn color="info" text @click="save">
                         Uložit
                     </v-btn>
                 </v-card-actions>
@@ -71,11 +71,14 @@ import {
     textRules,
     nameRules
 } from "@/components/Shared/Validation.js"
+import {
+    format
+} from "@/components/Shared/DateFormater"
 
 export default {
     props: {
         groupId: Number,
-        snail: Object
+        snailProp: Object
     },
     created() {
         this.$store.dispatch("getSnuskas")
@@ -83,13 +86,14 @@ export default {
     },
     data() {
         return {
+            snail: this.snailProp,
             dialog: false,
-            valid: false,
-            snuskaSelected: (this.snail.snuskaId !== null),
-            taxonomySelected: (this.snail.taxonomyId !== null),
+            valid: false,        
+            snuskaSelected: (this.snailProp.snuskaId !== null),
+            taxonomySelected: (this.snailProp.taxonomyId !== null),
             nameRules: nameRules,
             selectRules: selectRules,
-            textRules: textRules
+            textRules: textRules,
         }
 
     },
@@ -99,6 +103,12 @@ export default {
         },
         taxonomies() {
             return this.$store.state.taxonomies
+        },
+        formatedBornDate() {
+            return  this.snail.narozen ? this.format(this.snail.narozen) : ''
+        },
+        formatedDiedDate() {
+            return  this.snail.zemrel ? this.format(this.snail.zemrel) : ''
         }
     },
     methods: {
@@ -117,7 +127,8 @@ export default {
         modifyBirth() {
             const snuska = this.$store.state.snuskas.find(s => s.snuskaId === this.snail.snuskaId)
             this.snail.narozen = snuska.periodaVylihnutiStart
-        }
+        },
+        format: format
     }
 };
 </script>

@@ -6,7 +6,7 @@
                 <Box :id="box.boxId"></Box>
             </div>
         </v-col>
-        <v-col>
+        <v-col :cols='12' :md='6' :lg="4">
             <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
                     <div v-bind="attrs" v-on="on">
@@ -16,7 +16,6 @@
                 <span>Přidat box</span>
             </v-tooltip>
         </v-col>
-
     </v-row>
 </v-container>
 </template>

@@ -66,8 +66,8 @@ export const GET_USERS_ADMIN = (state, users) => {
   state.users = users
 }
 
-export const GET_FILES = (state, images) => {
-  state.files = images
+export const GET_FILES = (state, files) => {
+  state.files = files
 }
 
 export const ADD_SNAIL = (state, payload) => {
@@ -177,6 +177,10 @@ export const REMOVE_MEASURE = (state, measureId) => {
   state.measuresForSnail = state.measuresForSnail.filter(m => m.mereniSnekId !== measureId)
 }
 
+export const REMOVE_FILE = (state, fileId) => {
+  state.files = state.files.filter(f => f.fileId !== fileId)
+}
+
 export const EDIT_BOX = (state, box) => {
   const index = state.boxes.findIndex(b => b.boxId === box.boxId)
   Vue.set(state.boxes, index, box)
@@ -203,6 +207,28 @@ export const EDIT_SNUSKA = (state, snuska) => {
 export const EDIT_EVENT_TYPE = (state, eventType) => {
   const index = state.eventTypes.findIndex(e => e.udalostTypId === eventType.udalostTypId)
   Vue.set(state.eventTypes, index, eventType)
+}
+
+export const EDIT_EVENT = (state, payload) => {
+  let index
+  switch(payload.type){
+    case "box":
+      index = state.eventsForBox.findIndex(e => e.udalostId === payload.event.udalostId)
+      Vue.set(state.eventsForBox, index, payload.event)
+      return
+    case "group":
+      index = state.eventsForGroup.findIndex(e => e.udalostId === payload.event.udalostId)
+      Vue.set(state.eventsForGroup, index, payload.event)
+      return
+    case "snuska":
+      index = state.eventsForSnuska.findIndex(e => e.udalostId === payload.event.udalostId)
+      Vue.set(state.eventsForSnuska, index, payload.event)
+      return
+    case "snail":
+      index = state.eventsForSnail.findIndex(e => e.udalostId === payload.event.udalostId)
+      Vue.set(state.eventsForSnail, index, payload.event)
+      return
+  }
 }
 
 export const EDIT_TAXONOMY = (state, taxonomy) => {

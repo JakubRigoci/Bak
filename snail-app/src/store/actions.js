@@ -171,6 +171,13 @@ export const getFiles = ({commit}, galleryId) => {
   })
 }
 
+export const donwloadFile = ({commit}, url) => {
+  axios.get(`${url}`).then(response => {
+    console.log(response)
+    commit("DOWNLOAD_FILE", response.data)
+  })
+}
+
 export const addSnail = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     axios.post(`snek/${payload.id}`, payload.snail).then(response =>{
@@ -276,17 +283,17 @@ export const addMeasure = ({commit}, payload) => {
   })
 }
 
-export const addFile = ({commit}, file) => {
+export const addFile = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     const formData = new FormData();
-    formData.append('file',file.data)
+    formData.append('file',payload.file.data)
     const config = {
         headers: {
             'content-type': 'multipart/form-data'
         }
     }
-    axios.post(`snek/${file.snekId}/image`, formData, config).then(response => {
-      commit("ADD_FILE", file)
+    axios.post(`snek/${payload.file.snekId}/image`, formData, config).then(response => {
+      getFiles({commit}, payload.galleryId)
       resolve(response)
     }).catch(e => {
       error({commit}, e.response.data.message)
@@ -391,6 +398,18 @@ export const removeMeasure = ({commit}, measureId) => {
   })
 }
 
+export const removeFile = ({commit}, fileId) => {
+  return new Promise((resolve, reject) => {
+    axios.delete(`file/${fileId}`).then(response => {
+      commit("REMOVE_FILE", fileId)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
 export const editBox = ({commit}, box) => {
   return new Promise((resolve, reject) => {
     axios.put(`box/${box.boxId}`, box).then(response => {
@@ -420,7 +439,9 @@ export const editGroup = ({commit}, group) => {
 export const editSnuska = ({commit}, snuska) => {
   return new Promise((resolve, reject) => {
     axios.put(`snuska/${snuska.snuskaId}`, snuska).then(response => {
-      commit("EDIT_SNUSKA", response.data)
+      const editedSnuska = response.data
+      editedSnuska.velikost = snuska.velikost
+      commit("EDIT_SNUSKA", editedSnuska)
       resolve(response)
     }).catch(e => {
       error({commit}, e.response.data.message)
@@ -433,6 +454,18 @@ export const editEventType = ({commit}, eventType) => {
   return new Promise((resolve, reject) => {
     axios.put(`udalost-typ/admin/${eventType.udalostTypId}`, eventType).then(response => {
       commit("EDIT_EVENT_TYPE", response.data)
+      resolve(response)
+    }).catch(e => {
+      error({commit}, e.response.data.message)
+      reject(e)
+    })
+  })
+}
+
+export const editEvent = ({commit}, payload) => {
+  return new Promise((resolve, reject) => {
+    axios.put(`udalost/${payload.event.udalostId}`, payload.event).then(response => {
+      commit("EDIT_EVENT", {event: response.data, type: payload.type})
       resolve(response)
     }).catch(e => {
       error({commit}, e.response.data.message)

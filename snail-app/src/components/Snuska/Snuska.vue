@@ -7,10 +7,10 @@
                 Velikost: {{snuska.velikost}}
             </v-list-item-title>
             <v-list-item-subtitle>
-                Datum snesení: {{snuska.datumSneseni}}
+                Datum snesení: {{format(snuska.datumSneseni)}}
             </v-list-item-subtitle>
             <v-list-item-subtitle v-if="snuska.periodaVylihnutiKonec">
-                Perioda vylíhnutí: {{snuska.periodaVylihnutiStart}} ~ {{snuska.periodaVylihnutiKonec}} 
+                Perioda vylíhnutí: {{format(snuska.periodaVylihnutiStart)}} ~ {{format(snuska.periodaVylihnutiKonec)}} 
             </v-list-item-subtitle>
             <v-list-item-subtitle v-if="!snuska.periodaVylihnutiKonec">
                 Vylíhnutí: {{snuska.periodaVylihnutiStart}}
@@ -28,6 +28,9 @@
 
 <script>
 import SnuskaRemovePopup from "@/components/Snuska/SnuskaRemovePopup.vue"
+import {
+    format
+} from "@/components/Shared/DateFormater"
 
 export default {
     props: {
@@ -39,7 +42,8 @@ export default {
     methods: {
          details() {
             this.$router.push(`/snuska/${this.snuskaId}`)
-        }
+        },
+        format: format
     },
     computed: {
         snuska() {

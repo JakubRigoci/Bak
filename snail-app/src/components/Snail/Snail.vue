@@ -34,12 +34,12 @@
                 <b>Vzor ulity:</b> {{snail.vzorecUlita}}
             </v-col>
             <v-col>
-                <b>Narozen: </b> {{snail.narozen}}
+                <b>Narozen: </b> {{format(snail.narozen)}}
             </v-col>
         </v-row>
         <v-row>
             <v-col v-if="snail.zemrel !== null">
-                <b>Zemřel: </b> {{snail.zemrel}}
+                <b>Zemřel: </b> {{format(snail.zemrel)}}
             </v-col>
             <v-col v-if="snail.puvodSneka">
                 <b>Původ: </b> {{snail.puvodSneka}}
@@ -64,15 +64,14 @@
     <div class="ml-4 buttons">
         <v-row no-gutters>
             <v-col cols="6">
-        <SnailRemovePopup :groupId="groupId" :snailId="snailId"></SnailRemovePopup>
-  
+                <SnailRemovePopup :groupId="groupId" :snailId="snailId"></SnailRemovePopup>
 
             </v-col>
             <v-col cols="6">
-                      <SnailEditPopup :groupId="groupId" :snail="Object.assign({}, snail)"></SnailEditPopup>
+                <SnailEditPopup :groupId="groupId" :snailProp="Object.assign({}, snail)"></SnailEditPopup>
             </v-col>
             <v-col cols="12">
-        <SnailGroupChangePopup class="mt-2" :groupId="groupId" :snailId="snailId"></SnailGroupChangePopup>
+                <SnailGroupChangePopup class="mt-2" :groupId="groupId" :snailId="snailId"></SnailGroupChangePopup>
             </v-col>
         </v-row>
     </div>
@@ -120,6 +119,9 @@ import Measures from "@/components/Snail/Measures/Measures.vue"
 import SnailEvents from "@/components/Snail/SnailEvents.vue"
 import SnailEditPopup from "@/components/Snail/SnailEditPopup.vue"
 import SnailGroupChangePopup from "@/components/Snail/SnailGroupChangePopup.vue"
+import {
+    format
+} from "@/components/Shared/DateFormater"
 
 export default {
     props: {
@@ -161,6 +163,9 @@ export default {
             }
             return {}
         }
+    },
+    methods: {
+        format: format
     }
 };
 </script>
