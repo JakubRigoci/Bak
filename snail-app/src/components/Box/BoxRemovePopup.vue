@@ -10,7 +10,7 @@
             </v-card-title>
             <v-card-text>
                 <span>
-                    Naozaj si přejete odebrat box?
+                    Skutečně si přejete odebrat box?
                 </span>
             </v-card-text>
             <v-card-actions>

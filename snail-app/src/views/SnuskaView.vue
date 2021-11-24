@@ -23,10 +23,13 @@
             </v-row>
             <v-row>
                 <v-col>
-                    <p v-if="snuska.periodaVylihnutiKonec"> <b>Perioda vylíhnutí:</b> {{format(snuska.periodaVylihnutiStart)}} - {{format(snuska.periodaVylihnutiKonec)}}</p>
+                    <p v-if="snuska.periodaVylihnutiKonec"> <b>Perioda vylíhnutí:</b>
+                        {{format(snuska.periodaVylihnutiStart)}} - {{format(snuska.periodaVylihnutiKonec)}}</p>
+                    <p v-if="!snuska.periodaVylihnutiKonec">
+                        <b>Vylíhnutí:</b> {{format(snuska.periodaVylihnutiStart)}}</p>
                 </v-col>
                 <v-col>
-                    <p v-if="snail"> <b>Matka:</b> {{snail.komentar}}</p>
+                    <p v-if="snail"> <b>Matka:</b> {{snail.jmeno}}</p>
                 </v-col>
             </v-row>
         </div>

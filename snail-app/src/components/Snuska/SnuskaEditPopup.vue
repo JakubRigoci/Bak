@@ -16,11 +16,11 @@
                                 <v-text-field color="secondary" :rules="commentRules" v-model="snuska.komentar" label="Komentář*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-menu transition="scale-transition" offset-y min-width="auto">
+                                <v-menu transition="scale-transition"  v-model="menu" :close-on-content-click="false" offset-y min-width="auto">
                                     <template v-slot:activator="{on}">
                                         <v-text-field readonly color="secondary" :value="formatedDate" v-on="on" label="Datum snesení*" required></v-text-field>
                                     </template>
-                                    <v-date-picker color="secondary" v-model="snuska.datumSneseni"></v-date-picker>
+                                    <v-date-picker color="secondary" @input="menu = false" v-model="snuska.datumSneseni"></v-date-picker>
                                 </v-menu>
                             </v-col>
                             <v-col cols="12">
@@ -36,7 +36,7 @@
                             </v-col>
                             <v-col cols="12">
                                 <v-checkbox color="secondary" v-model="motherSelected" label="Určit matku"></v-checkbox>
-                                <v-select v-if="motherSelected" item-color="secondary" color="secondary" v-model="snuska.matkaId" :items="snailsForGroup" item-text="jmeno" item-value="snekId" label="Matka" clearable></v-select>
+                                <v-select v-if="motherSelected" :rules="selectRules" item-color="secondary" color="secondary" v-model="snuska.matkaId" :items="snailsForGroup" item-text="jmeno" item-value="snekId" label="Matka" clearable></v-select>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -78,7 +78,8 @@ export default {
             dialog: false,
             hatchingPeriod: [currDate, currDate],
             valid: false,
-            motherSelected: false,
+            menu: false,
+            motherSelected: this.snuskaProp.matkaId !== null,
             snuska: this.snuskaProp,
             nameRules: rules.nameRules,
             commentRules: rules.commentRules,
@@ -87,9 +88,6 @@ export default {
         }
     },
     computed: {
-        hatchingPeriodText() {
-            return this.hatchingPeriod.join(" - ")
-        },
         groups() {
             return this.$store.state.groups
         },
@@ -100,13 +98,28 @@ export default {
             return this.snuska.datumSneseni ? this.format(this.snuska.datumSneseni) : ''
         },
         formatedHatchingPeriodDate() {
-            return this.hatchingPeriod.map(d => format(d))
+            return [...this.hatchingPeriod].sort((a, b) => {
+                const left = new Date(a)
+                const right = new Date(b)
+                return left - right
+            }).map(d => format(d)).join(" ~ ")
         },
+    },
+    watch: {
+        motherSelected: function (val) {
+            if (!val)
+                this.snuska.matkaId = null
+        }
     },
     methods: {
         save() {
             if (this.$refs.form.validate()) {
                 this.dialog = false
+                this.hatchingPeriod.sort((a, b) => {
+                    const left = new Date(a)
+                    const right = new Date(b)
+                    return left - right
+                })
                 this.snuska.periodaVylihnutiStart = this.hatchingPeriod[0]
                 this.snuska.periodaVylihnutiKonec = this.hatchingPeriod[1]
                 this.snuska.velikost = Number.parseInt(this.snuska.velikost)

@@ -10,7 +10,7 @@
             </v-card-title>
             <v-card-text>
                 <span>
-                    Naozaj si přejete odebrat šneka?
+                    Skutečně si přejete odebrat šneka?
                 </span>
             </v-card-text>
             <v-card-actions>

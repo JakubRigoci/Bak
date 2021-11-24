@@ -5,20 +5,20 @@
             <v-expansion-panel v-for="snail in snails" :key="snail.snekId">
                 <v-expansion-panel-header class="info" v-slot="{ open }">
                     <v-row no-gutters>
-                        <v-col cols="4">
+                        <v-col cols='12'>
                             {{snail.jmeno}}
                         </v-col>
-                        <v-col cols="8" class="text--secondary">
+                        <v-col cols="12" class="text--secondary">
                             <v-fade-transition leave-absolute>
                                 <v-row v-if="!open" no-gutters style="width: 100%">
-                                    <v-col cols="4">
-                                        Komentář: {{snail.komentar || "Not Set"}}
+                                    <v-col cols='12' md='6' lg="4">
+                                        <b>Komentář:</b> {{snail.komentar || "Not Set"}}
                                     </v-col>
-                                    <v-col cols="4">
-                                        Barva ulity: {{ snail.barvaUlita || 'Not set' }}
+                                    <v-col cols='12' md='6' lg="4">
+                                        <b>Barva ulity:</b> {{ snail.barvaUlita || 'Not set' }}
                                     </v-col>
-                                    <v-col cols="4">
-                                        Barva tela: {{ snail.barvaTelo || 'Not set' }}
+                                    <v-col cols='12' md='6' lg="4">
+                                        <b>Barva tela:</b> {{ snail.barvaTelo || 'Not set' }}
                                     </v-col>
                                 </v-row>
                             </v-fade-transition>

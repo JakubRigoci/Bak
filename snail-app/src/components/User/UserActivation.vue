@@ -2,7 +2,7 @@
 <v-container fluid>
     <p>Vyberte čas do kdy aktivace platí:</p>
     <v-col cols="12">
-        <v-menu transition="scale-transition" offset-y min-width="auto">
+        <v-menu transition="scale-transition"  v-model="menu" :close-on-content-click="false" offset-y min-width="auto">
             <template v-slot:activator="{on}">
                 <v-text-field readonly :value="formatedDate" v-on="on"></v-text-field>
             </template>
@@ -24,6 +24,7 @@ export default {
     data() {
         return {
             activeUntil: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+            menu: false,
         }
     },
     computed: {
@@ -36,6 +37,7 @@ export default {
     },
     methods: {
         emitValue() {
+            this.menu = false
             this.$emit("change", this.activeUntil)
         },
         format: format

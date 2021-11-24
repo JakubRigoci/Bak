@@ -10,7 +10,7 @@
             </v-card-title>
             <v-card-text>
                 <span>
-                    Naozaj si přejete odebrat tuto taxonomii?
+                    Skutečně si přejete odebrat tuto taxonomii?
                 </span>
             </v-card-text>
             <v-card-actions>

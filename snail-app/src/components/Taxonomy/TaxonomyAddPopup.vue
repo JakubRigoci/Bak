@@ -21,7 +21,7 @@
                                 <v-text-field color="secondary" :rules="nameRules" v-model="taxonomy.jmeno" label="Jméno*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="textRules" v-model="taxonomy.popis" label="Popis" required></v-text-field>
+                                <v-text-field color="secondary" :rules="textRules" v-model="taxonomy.popis" label="Popis*" required></v-text-field>
                             </v-col>
                             <v-col>
                                 <v-checkbox color="secondary" v-model="levelSelected" label="Určit naddruh"></v-checkbox>

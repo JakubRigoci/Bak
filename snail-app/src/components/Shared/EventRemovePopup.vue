@@ -9,7 +9,7 @@
             </v-card-title>
             <v-card-text>
                 <span>
-                    Naozaj si přejete odebrat tuto událost?
+                    Skutečně si přejete odebrat tuto událost?
                 </span>
             </v-card-text>
             <v-card-actions>

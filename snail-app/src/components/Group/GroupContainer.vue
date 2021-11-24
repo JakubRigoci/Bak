@@ -1,36 +1,36 @@
 <template lang="">
 <v-container fluid class="pt-12">
     <v-row justify="center" class="pa-0">
-        <v-expansion-panels  popout>
-            <v-expansion-panel  v-for="group in groups" :key="group.skupinaId">
-                <v-expansion-panel-header  class="secondary">
+        <v-expansion-panels popout>
+            <v-expansion-panel v-for="group in groups" :key="group.skupinaId">
+                <v-expansion-panel-header class="secondary">
                     <div style="width: 100%" class="secondary d-flex justify-space-between">
-                                            <v-row class="">
-                        <v-col cols="12">
-                            {{group.jmeno}}
-                        </v-col>
-                        <v-col cols="4" class="mx-auto text--secondary">
-                            {{group.komentar}}
-                        </v-col>
-                        <v-col cols="4" class="mx-auto text--secondary">
-                            Velikost: {{group.velikost}}
-                        </v-col>
-                    </v-row>
-                    <v-spacer></v-spacer>
-                    <v-menu offset-y>
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-btn icon v-bind="attrs" v-on="on">
-                                <v-icon>
-                                    mdi-dots-vertical
-                                </v-icon>
-                            </v-btn>
-                        </template>
-                        <v-card class="primary">
-                            <GroupRemovePopup :id="group.skupinaId"></GroupRemovePopup>
-                            <GroupEditPopup :group="Object.assign({}, group)"></GroupEditPopup>
-                            <v-btn text width="100%" @click="showSnuskas(group.skupinaId)">Zobrazit snúšky</v-btn>
-                        </v-card>
-                    </v-menu>
+                        <v-row>
+                            <v-col cols="12">
+                                {{group.jmeno}}
+                            </v-col>
+                            <v-col cols='12' md='6' lg="4" class="text--secondary">
+                                {{group.komentar}}
+                            </v-col>
+                            <v-col cols='12' md='6' lg="4" class="text--secondary">
+                                Velikost: {{group.velikost}}
+                            </v-col>
+                        </v-row>
+                        <v-spacer></v-spacer>
+                        <v-menu offset-y>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn icon v-bind="attrs" v-on="on">
+                                    <v-icon>
+                                        mdi-dots-vertical
+                                    </v-icon>
+                                </v-btn>
+                            </template>
+                            <v-card class="primary">
+                                <GroupRemovePopup :id="group.skupinaId"></GroupRemovePopup>
+                                <GroupEditPopup :group="Object.assign({}, group)"></GroupEditPopup>
+                                <v-btn text width="100%" @click="showSnuskas(group.skupinaId)">Zobrazit snúšky</v-btn>
+                            </v-card>
+                        </v-menu>
                     </div>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content id="innerExPan" class="secondary">

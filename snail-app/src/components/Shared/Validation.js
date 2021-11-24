@@ -7,7 +7,7 @@ export const nameRules = [
 
 export const commentRules = [
     v => !!v || 'Kometář je povinný',
-    v => v.length <= 60 || 'Komentář musí být méně než 60 znaků',
+    v => v.length <= 25 || 'Komentář musí být méně než 25 znaků',
 ]
 
 export const numberRules = [
@@ -22,7 +22,7 @@ export const selectRules = [
 
 export const textRules = [
     v => !!v || 'Pole je povinný',
-    v => v.length <= 25 || 'Pole musí mít méně než 25 znaků',
+    v => v.length <= 15 || 'Pole musí mít méně než 15 znaků',
 ]
 
 export const usernameRules = [

@@ -18,7 +18,7 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-file-input accept="image/png, image/jpeg, image/bmp" :rules="fileRules" v-model="file.data" truncate-length="15"></v-file-input>
+                                <v-file-input accept="image/png, image/jpeg, image/bmp" prepend-icon="mdi-camera" :rules="fileRules" v-model="file.data" truncate-length="15"></v-file-input>
                             </v-col>
                         </v-row>
                     </v-container>

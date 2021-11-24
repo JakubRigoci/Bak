@@ -13,7 +13,7 @@
                 Perioda vylíhnutí: {{format(snuska.periodaVylihnutiStart)}} ~ {{format(snuska.periodaVylihnutiKonec)}} 
             </v-list-item-subtitle>
             <v-list-item-subtitle v-if="!snuska.periodaVylihnutiKonec">
-                Vylíhnutí: {{snuska.periodaVylihnutiStart}}
+                Vylíhnutí: {{format(snuska.periodaVylihnutiStart)}}
             </v-list-item-subtitle>
         </v-list-item-content>
 
