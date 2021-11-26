@@ -15,9 +15,6 @@
                             <v-col cols="12">
                                 <v-text-field color="secondary" :rules="nameRules" v-model="taxonomy.jmeno" label="Jméno*" required></v-text-field>
                             </v-col>
-                            <v-col cols="12">
-                                <v-text-field color="secondary" :rules="textRules" v-model="taxonomy.popis" label="Popis*" required></v-text-field>
-                            </v-col>
                             <v-col>
                                 <v-checkbox color="secondary" v-model="levelSelected" label="Určit naddruh"></v-checkbox>
                                 <v-select v-if="levelSelected" item-color="secondary" color="secondary" v-model="taxonomy.fkTaxonomyTaxonomy" :items="taxonomies" item-text="jmeno" item-value="taxonomyId" label="Taxonomie" clearable></v-select>
@@ -44,7 +41,6 @@
 <script>
 import {
     nameRules,
-    textRules
 } from "@/components/Shared/Validation.js"
 
 export default {
@@ -57,7 +53,6 @@ export default {
         valid: false,
         levelSelected: this.taxonomy.fkTaxonomyTaxonomy !== null,
         nameRules: nameRules,
-        textRules: textRules,
 
         }
     },

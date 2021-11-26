@@ -1,5 +1,17 @@
 import Vue from "vue";
 
+function generateTreeView(taxonomies, taxonomyId) {
+  
+  let treeView = taxonomies.filter(t => t.fkTaxonomyTaxonomy === taxonomyId).map(t => {
+    return {
+      name: t.jmeno,
+      id: t.taxonomyId,
+      children: generateTreeView(taxonomies, t.taxonomyId)
+    }
+  })
+  return treeView
+}
+
 export const GET_SNAILS = (state, snails) => {
     state.snails = snails;
 }
@@ -28,6 +40,7 @@ export const GET_SNUSKAS = (state, snuskas) => {
 
 export const GET_TAXONOMIES = (state, taxonomies) => {
   state.taxonomies = taxonomies;
+  state.taxonomiesTreeView = generateTreeView(taxonomies, null)
 }
 
 export const GET_MEASURES_FOR_SNAIL = (state, measures) => {

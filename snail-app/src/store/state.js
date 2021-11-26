@@ -10,6 +10,7 @@ export default {
     snuskas: [],
     measuresForSnail: [],
     taxonomies: [],
+    taxonomiesTreeView: [],
     boxes: [],
     groups: [],
     groupsForBox:[],

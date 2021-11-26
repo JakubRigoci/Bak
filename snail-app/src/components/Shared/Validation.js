@@ -2,12 +2,12 @@
 
 export const nameRules = [
     v => !!v || 'Jméno je povinné',
-    v => v.length <= 15 || 'Jméno musí být méně než 15 znaků',
+    v => v.length <= 45 || 'Jméno musí být méně než 45 znaků',
 ]
 
 export const commentRules = [
     v => !!v || 'Kometář je povinný',
-    v => v.length <= 25 || 'Komentář musí být méně než 25 znaků',
+    v => v.length <= 60 || 'Komentář musí být méně než 60 znaků',
 ]
 
 export const numberRules = [
@@ -22,7 +22,7 @@ export const selectRules = [
 
 export const textRules = [
     v => !!v || 'Pole je povinný',
-    v => v.length <= 15 || 'Pole musí mít méně než 15 znaků',
+    v => v.length <= 45 || 'Pole musí mít méně než 45 znaků',
 ]
 
 export const usernameRules = [
@@ -53,4 +53,8 @@ export const fileRules = [
 
 export const intRules = [
     v => Number.isInteger(Number(v)) || 'Hodnota musí být celé číslo'
+]
+
+export const lengthRules = [
+    v => v.length < 30 || 'Dĺžka musí být méně než 30'
 ]

@@ -19,13 +19,13 @@
                                 <v-text-field color="secondary" :rules="commentRules" v-model="snail.komentar" label="Komentář*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="textRules" v-model="snail.barvaUlita" label="Barva ulity*" required></v-text-field>
+                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.barvaUlita" label="Barva ulity" ></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="textRules" v-model="snail.barvaTelo" label="Barva tela*" required></v-text-field>
+                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.barvaTelo" label="Barva tela" ></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="textRules" v-model="snail.vzorecUlita" label="Vzor ulity*" required></v-text-field>
+                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.vzorecUlita" label="Vzor ulity" ></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" v-model="menu" :close-on-content-click="false" offset-y min-width="auto">
@@ -41,7 +41,7 @@
                             </v-col>
                             <v-col cols="12">
                                 <v-checkbox color="secondary" v-model="taxonomySelected" label="Určit taxonomii"></v-checkbox>
-                                <v-select v-if="taxonomySelected" item-color="secondary" :rules="selectRules" color="secondary" v-model="snail.taxonomyId" :items="taxonomies" item-text="jmeno" item-value="taxonomyId" label="Taxonomie*" required></v-select>
+                                <TaxonomyTreeView v-on:change="(v) => {snail.taxonomyId = v[0]}" v-if="taxonomySelected"></TaxonomyTreeView>
                             </v-col>
                             <v-col cols="12">
                                 <v-text-field color="secondary" v-model="snail.puvodSneka" label="Púvod šneka"></v-text-field>
@@ -70,11 +70,13 @@ import {
     selectRules,
     textRules,
     nameRules,
-    commentRules
+    commentRules,
+    lengthRules
 } from "@/components/Shared/Validation.js"
 import {
     format
 } from "@/components/Shared/DateFormater"
+import TaxonomyTreeView from "@/components/Taxonomy/TaxonomyTreeView.vue"
 
 export default {
     props: {
@@ -83,6 +85,9 @@ export default {
     created() {
         this.$store.dispatch("getSnuskas")
         this.$store.dispatch("getTaxonomies")
+    },
+    components: {
+        TaxonomyTreeView
     },
     data: () => ({
         dialog: false,
@@ -111,6 +116,7 @@ export default {
         selectRules: selectRules,
         textRules: textRules,
         commentRules: commentRules,
+        lengthRules: lengthRules,
 
     }),
     computed: {
@@ -122,6 +128,16 @@ export default {
         },
         formatedDate() {
             return this.snail.narozen ? this.format(this.snail.narozen) : ''
+        }
+    },
+    watch: {
+        taxonomySelected: function (val) {
+            if (!val)
+                this.snail.taxonomyId = null
+        },
+        snuskaSelected: function (val) {
+            if (!val)
+                this.snail.snuskaId = null
         }
     },
     methods: {

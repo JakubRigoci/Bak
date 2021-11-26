@@ -1,20 +1,6 @@
 <template>
 <v-card class=" primary" outlined>
-    <v-card-actions>
-        <v-btn color="secondary" @click="showTable = !showTable" text> Měření </v-btn>
 
-        <v-spacer></v-spacer>
-        <v-btn icon @click="showTable = !showTable">
-            <v-icon>{{ showTable ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
-        </v-btn>
-    </v-card-actions>
-
-    <v-expand-transition>
-        <div v-show="showTable">
-            <v-divider></v-divider>
-            <Measures :snailId="snailId"></Measures>
-        </div>
-    </v-expand-transition>
 
     <v-card-title> Jméno: {{snail.jmeno}}</v-card-title>
 
@@ -22,15 +8,15 @@
 
     <div class="container">
         <v-row>
-            <v-col>
+            <v-col v-if="snail.barvaUlita">
                 <b>Barva ulity:</b> {{snail.barvaUlita}}
             </v-col>
-            <v-col>
+            <v-col v-if="snail.barvaTelo">
                 <b>Barva tela:</b> {{snail.barvaTelo}}
             </v-col>
         </v-row>
         <v-row>
-            <v-col>
+            <v-col v-if="snail.vzorecUlita">
                 <b>Vzor ulity:</b> {{snail.vzorecUlita}}
             </v-col>
             <v-col>
@@ -75,6 +61,22 @@
             </v-col>
         </v-row>
     </div>
+
+        <v-card-actions>
+        <v-btn color="secondary" @click="showTable = !showTable" text> Měření </v-btn>
+
+        <v-spacer></v-spacer>
+        <v-btn icon @click="showTable = !showTable">
+            <v-icon>{{ showTable ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
+        </v-btn>
+    </v-card-actions>
+
+    <v-expand-transition>
+        <div v-show="showTable">
+            <v-divider></v-divider>
+            <Measures :snailId="snailId"></Measures>
+        </div>
+    </v-expand-transition>
 
     <v-card-actions>
         <v-btn color="secondary" @click="showEvents = !showEvents" text> Události </v-btn>

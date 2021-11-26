@@ -4,26 +4,28 @@
         <v-expansion-panels tile popout>
             <v-expansion-panel v-for="snail in snails" :key="snail.snekId">
                 <v-expansion-panel-header class="info" v-slot="{ open }">
+                    <v-card color="info" elevation=0>
                     <v-row no-gutters>
                         <v-col cols='12'>
-                            {{snail.jmeno}}
+                            <p>{{snail.jmeno}}</p>
                         </v-col>
                         <v-col cols="12" class="text--secondary">
                             <v-fade-transition leave-absolute>
                                 <v-row v-if="!open" no-gutters style="width: 100%">
                                     <v-col cols='12' md='6' lg="4">
-                                        <b>Komentář:</b> {{snail.komentar || "Not Set"}}
+                                        <b>Komentář:</b> <p>{{snail.komentar}}</p>
                                     </v-col>
-                                    <v-col cols='12' md='6' lg="4">
-                                        <b>Barva ulity:</b> {{ snail.barvaUlita || 'Not set' }}
+                                    <v-col v-if="snail.barvaUlita" cols='12' md='6' lg="4">
+                                        <b>Barva ulity:</b> {{ snail.barvaUlita }}
                                     </v-col>
-                                    <v-col cols='12' md='6' lg="4">
-                                        <b>Barva tela:</b> {{ snail.barvaTelo || 'Not set' }}
+                                    <v-col v-if="snail.barvaTelo" cols='12' md='6' lg="4">
+                                        <b>Barva tela:</b> {{ snail.barvaTelo }}
                                     </v-col>
                                 </v-row>
                             </v-fade-transition>
                         </v-col>
                     </v-row>
+                    </v-card>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content id="innerExPan" class="info">
                     <Snail :groupId="groupId" :snailId="snail.snekId"></Snail>
@@ -61,5 +63,8 @@ export default {
 <style lang="scss">
 #innerExPan > * {
         padding: 2px
+}
+.v-tabs__item {
+    text-transform: none !important;
 }
 </style>

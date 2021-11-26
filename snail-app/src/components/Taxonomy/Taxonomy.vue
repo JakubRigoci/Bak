@@ -3,9 +3,6 @@
     <v-list-item three-line>
         <v-list-item-content class="pa-8">
             <div class="text-overline mb-4">{{taxonomy.jmeno}}</div>
-            <v-list-item-title class="mb-1">
-                {{taxonomy.popis}}
-            </v-list-item-title>
             <v-list-item-subtitle>
                             <p v-if="taxonomy.fkTaxonomyTaxonomy">
                 Naddruh: {{parentTaxonomy.jmeno}}

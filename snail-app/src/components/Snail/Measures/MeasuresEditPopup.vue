@@ -14,7 +14,7 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                            <v-text-field color="secondary" :rules="textRules" v-model="measure.komentar" label="Komentář*" required></v-text-field>
+                            <v-text-field color="secondary" :rules="lengthRules" v-model="measure.komentar" label="Komentář"></v-text-field>
                         </v-col>
                         <v-col cols="12">
                             <v-menu transition="scale-transition" offset-y min-width="auto">
@@ -36,10 +36,10 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">
+                <v-btn color="info" text @click="dialog = false">
                     Zavřít
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="save">
+                <v-btn color="info" text @click="save">
                     Uložit
                 </v-btn>
             </v-card-actions>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { numberRules, textRules } from "@/components/Shared/Validation.js"
+import { numberRules, lengthRules } from "@/components/Shared/Validation.js"
 
 export default {
     props: {
@@ -60,7 +60,7 @@ export default {
         dialog: false,
         valid: false,
         numberRules: numberRules,
-        textRules: textRules
+        lengthRules: lengthRules
 
     }),
     methods: {
