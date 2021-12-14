@@ -2,7 +2,7 @@
 <div>
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-               <v-btn text width="100%" v-on="on" v-bind="attrs" > Uprav</v-btn>
+            <v-btn text width="100%" v-on="on" v-bind="attrs"> Uprav</v-btn>
         </template>
         <v-form ref="form" v-model="valid">
             <v-card>

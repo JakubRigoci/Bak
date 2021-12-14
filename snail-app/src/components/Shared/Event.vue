@@ -8,7 +8,7 @@
     </v-card-text>
     <v-card-actions>
         <EventRemovePopup :eventId="event.udalostId" :type="type"></EventRemovePopup>
-        <EventEditPopup :id="id" :eventId="event.udalostId"  :eventProp="Object.assign({}, event)" :type="type"></EventEditPopup>       
+        <EventEditPopup :id="id" :eventId="event.udalostId" :eventProp="Object.assign({}, event)" :type="type"></EventEditPopup>
     </v-card-actions>
 </v-card>
 </template>

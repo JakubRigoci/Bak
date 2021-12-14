@@ -3,7 +3,7 @@
     <v-col v-for="(image, i) in images" :key="i" class="d-flex child-flex" cols="4">
         <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
-                <img v-on="on" v-bind="attrs" v-auth-image="image.url">
+                <img class="ma-2" v-on="on" v-bind="attrs" v-auth-image="image.url">
             </template>
             <v-card class="primary">
                 <DeleteImagePopup :imageId="image.fileId"></DeleteImagePopup>

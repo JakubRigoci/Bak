@@ -1,14 +1,13 @@
 <template lang="">
-<v-container fluid >
+<v-container fluid>
     <v-row allign="center">
         <v-col v-for="eventType in eventTypes" :key="eventType.udalostTypId" :cols='12' :md='6' :lg="4">
             <div>
                 <EventType :eventTypeId="eventType.udalostTypId"></EventType>
             </div>
         </v-col>
-       
+
         <v-col>
-             <v-divider></v-divider>
             <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
                     <div v-bind="attrs" v-on="on">

@@ -38,7 +38,10 @@
 </template>
 
 <script>
-import { selectRules , textRules } from "@/components/Shared/Validation.js"
+import {
+    selectRules,
+    textRules
+} from "@/components/Shared/Validation.js"
 
 export default {
     props: {

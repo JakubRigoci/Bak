@@ -40,7 +40,10 @@ export default {
     methods: {
         save() {
             this.dialog = false
-            this.$store.dispatch("removeSnail", {snailId: this.snailId, groupId: this.groupId})
+            this.$store.dispatch("removeSnail", {
+                snailId: this.snailId,
+                groupId: this.groupId
+            })
         }
     }
 };

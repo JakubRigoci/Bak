@@ -1,11 +1,12 @@
 <template lang="">
-            <v-snackbar color="error" top v-model="snackbarOpen" type="error">
-                {{errorMessage}}
-            </v-snackbar>
+<v-snackbar color="error" top v-model="snackbarOpen" type="error">
+    {{errorMessage}}
+</v-snackbar>
 </template>
+
 <script>
 export default {
-        computed: {
+    computed: {
         errorMessage() {
             return this.$store.state.errorMessage
         },
@@ -20,6 +21,7 @@ export default {
     }
 }
 </script>
+
 <style lang="">
-    
+
 </style>

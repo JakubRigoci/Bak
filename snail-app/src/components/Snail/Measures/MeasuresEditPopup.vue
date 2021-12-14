@@ -1,11 +1,11 @@
 <template lang="">
-    <v-dialog v-model="dialog" max-width="600px">
-        <template v-slot:activator="{ on, attrs }">
-            <v-icon v-bind="attrs" v-on="on" small class="mr-2">
-                mdi-pencil
-            </v-icon>
-        </template>
-        <v-form ref="form" v-model="valid">
+<v-dialog v-model="dialog" max-width="600px">
+    <template v-slot:activator="{ on, attrs }">
+        <v-icon v-bind="attrs" v-on="on" small class="mr-2">
+            mdi-pencil
+        </v-icon>
+    </template>
+    <v-form ref="form" v-model="valid">
         <v-card>
             <v-card-title>
                 <span class="text-h5">Upravit měření</span>
@@ -44,12 +44,15 @@
                 </v-btn>
             </v-card-actions>
         </v-card>
-        </v-form>
-    </v-dialog>
+    </v-form>
+</v-dialog>
 </template>
 
 <script>
-import { numberRules, lengthRules } from "@/components/Shared/Validation.js"
+import {
+    numberRules,
+    lengthRules
+} from "@/components/Shared/Validation.js"
 
 export default {
     props: {
@@ -66,8 +69,9 @@ export default {
     methods: {
         save() {
             if (this.$refs.form.validate()) {
-            this.dialog = false
-            this.$store.dispatch("editMeasure", this.measure)}
+                this.dialog = false
+                this.$store.dispatch("editMeasure", this.measure)
+            }
         },
     }
 };

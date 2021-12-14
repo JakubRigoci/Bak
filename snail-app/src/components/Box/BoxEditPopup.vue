@@ -81,7 +81,7 @@ export default {
     },
     computed: {
         formatedDate() {
-            return  this.box.datumPorizeni ? this.format(this.box.datumPorizeni) : ''
+            return this.box.datumPorizeni ? this.format(this.box.datumPorizeni) : ''
         }
     },
     methods: {

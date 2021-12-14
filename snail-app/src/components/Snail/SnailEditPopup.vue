@@ -19,13 +19,13 @@
                                 <v-text-field color="secondary" :rules="commentRules" v-model="snail.komentar" label="Komentář*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.barvaUlita" label="Barva ulity" ></v-text-field>
+                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.barvaUlita" label="Barva ulity"></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.barvaTelo" label="Barva tela" ></v-text-field>
+                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.barvaTelo" label="Barva tela"></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.vzorecUlita" label="Vzor ulity" ></v-text-field>
+                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.vzorecUlita" label="Vzor ulity"></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" v-model="menu" :close-on-content-click="false" offset-y min-width="auto">
@@ -92,7 +92,7 @@ export default {
             snail: this.snailProp,
             dialog: false,
             valid: false,
-            menu: false, 
+            menu: false,
             snuskaSelected: (this.snailProp.snuskaId !== null),
             taxonomySelected: (this.snailProp.taxonomyId !== null),
             nameRules: nameRules,
@@ -114,10 +114,10 @@ export default {
             return this.$store.state.taxonomies
         },
         formatedBornDate() {
-            return  this.snail.narozen ? this.format(this.snail.narozen) : ''
+            return this.snail.narozen ? this.format(this.snail.narozen) : ''
         },
         formatedDiedDate() {
-            return  this.snail.zemrel ? this.format(this.snail.zemrel) : ''
+            return this.snail.zemrel ? this.format(this.snail.zemrel) : ''
         }
     },
     watch: {
@@ -140,7 +140,10 @@ export default {
                     this.snail.taxonomyId = null
                 }
                 this.dialog = false
-                this.$store.dispatch("editSnail", {snail: this.snail, groupId: this.groupId})
+                this.$store.dispatch("editSnail", {
+                    snail: this.snail,
+                    groupId: this.groupId
+                })
             }
         },
         modifyBirth() {

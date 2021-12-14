@@ -10,7 +10,7 @@
                 Datum snesení: {{format(snuska.datumSneseni)}}
             </v-list-item-subtitle>
             <v-list-item-subtitle v-if="snuska.periodaVylihnutiKonec">
-                Perioda vylíhnutí: {{format(snuska.periodaVylihnutiStart)}} ~ {{format(snuska.periodaVylihnutiKonec)}} 
+                Perioda vylíhnutí: {{format(snuska.periodaVylihnutiStart)}} ~ {{format(snuska.periodaVylihnutiKonec)}}
             </v-list-item-subtitle>
             <v-list-item-subtitle v-if="!snuska.periodaVylihnutiKonec">
                 Vylíhnutí: {{format(snuska.periodaVylihnutiStart)}}
@@ -38,9 +38,9 @@ export default {
     },
     components: {
         SnuskaRemovePopup,
-            },
+    },
     methods: {
-         details() {
+        details() {
             this.$router.push(`/snuska/${this.snuskaId}`)
         },
         format: format

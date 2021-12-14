@@ -5,51 +5,54 @@
             <v-btn v-bind="attrs" color="secondary" v-on="on" class="mt-4"> Přidat měření</v-btn>
         </template>
         <v-form ref="form" v-model="valid">
-        <v-card>
-            <v-card-title>
-                <span class="text-h5">Přidat měření</span>
-            </v-card-title>
-            <v-card-text>
-                <v-container>
-                    <v-row>
-                        <v-col cols="12">
-                            <v-text-field color="secondary" :rules="lengthRules" v-model="measure.komentar" label="Komentář"></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-menu transition="scale-transition" offset-y min-width="auto">
-                                <template v-slot:activator="{on}">
-                                    <v-text-field v-model="measure.datum" v-on="on" label="Datum"></v-text-field>
-                                </template>
-                                <v-date-picker color="secondary" v-model="measure.datum"></v-date-picker>
-                            </v-menu>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field color="secondary" type="number" :rules="numberRules" v-model="measure.vaha" label="Váha*" required></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field color="secondary" type="number" :rules="numberRules" v-model="measure.ulita" label="Ulita*" required></v-text-field>
-                        </v-col>
-                    </v-row>
-                </v-container>
-                <small>*Povinní</small>
-            </v-card-text>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">
-                    Zavřít
-                </v-btn>
-                <v-btn color="blue darken-1" text @click="save">
-                    Uložit
-                </v-btn>
-            </v-card-actions>
-        </v-card>
+            <v-card>
+                <v-card-title>
+                    <span class="text-h5">Přidat měření</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container>
+                        <v-row>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" :rules="lengthRules" v-model="measure.komentar" label="Komentář"></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-menu transition="scale-transition" offset-y min-width="auto">
+                                    <template v-slot:activator="{on}">
+                                        <v-text-field v-model="measure.datum" v-on="on" label="Datum"></v-text-field>
+                                    </template>
+                                    <v-date-picker color="secondary" v-model="measure.datum"></v-date-picker>
+                                </v-menu>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" type="number" :rules="numberRules" v-model="measure.vaha" label="Váha*" required></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-text-field color="secondary" type="number" :rules="numberRules" v-model="measure.ulita" label="Ulita*" required></v-text-field>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                    <small>*Povinní</small>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="dialog = false">
+                        Zavřít
+                    </v-btn>
+                    <v-btn color="blue darken-1" text @click="save">
+                        Uložit
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
         </v-form>
     </v-dialog>
 </div>
 </template>
 
 <script>
-import { numberRules, lengthRules } from "@/components/Shared/Validation.js"
+import {
+    numberRules,
+    lengthRules
+} from "@/components/Shared/Validation.js"
 
 export default {
     props: {
@@ -72,11 +75,12 @@ export default {
     methods: {
         save() {
             if (this.$refs.form.validate()) {
-            this.dialog = false
-            this.$store.dispatch("addMeasure", {
-                snailId: this.snailId,
-                measure: this.measure
-            })}
+                this.dialog = false
+                this.$store.dispatch("addMeasure", {
+                    snailId: this.snailId,
+                    measure: this.measure
+                })
+            }
         },
     }
 };

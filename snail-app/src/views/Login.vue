@@ -12,8 +12,8 @@
                     <v-divider></v-divider>
                     <v-card-text>
                         <v-form>
-                            <v-text-field outline label="Přihlasovací jméno" type="text" v-model="name"></v-text-field>
-                            <v-text-field outline hide-details label="Heslo" type="password" v-model="password"></v-text-field>
+                            <v-text-field color="secondary" outline label="Přihlasovací jméno" type="text" v-model="name"></v-text-field>
+                            <v-text-field color="secondary" outline hide-details label="Heslo" type="password" v-model="password"></v-text-field>
                         </v-form>
                     </v-card-text>
                     <v-divider></v-divider>

@@ -7,6 +7,8 @@
                 <v-list-item-subtitle> <b>E-mail:</b> {{user.email}}</v-list-item-subtitle>
                 <v-list-item-subtitle> <b>Aktivní do:</b> {{format(user.activeUntil)}}</v-list-item-subtitle>
                 <v-list-item-subtitle> <b>Role:</b> <span v-for="role in user.roles" :key="role.rolesId"> {{role.name}}</span></v-list-item-subtitle>
+                <v-list-item-subtitle v-if="user.facebook"> <b>Facebook:</b> {{user.facebook}} </v-list-item-subtitle>
+                <v-list-item-subtitle v-if="user.phone"> <b>Tel. číslo:</b> {{user.phone}} </v-list-item-subtitle>
             </v-list-item-content>
         </v-col>
         <v-spacer></v-spacer>

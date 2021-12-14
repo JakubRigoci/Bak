@@ -16,7 +16,7 @@
                                 <v-text-field color="secondary" :rules="commentRules" v-model="snuska.komentar" label="Komentář*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-menu transition="scale-transition"  v-model="menu" :close-on-content-click="false" offset-y min-width="auto">
+                                <v-menu transition="scale-transition" v-model="menu" :close-on-content-click="false" offset-y min-width="auto">
                                     <template v-slot:activator="{on}">
                                         <v-text-field readonly color="secondary" :value="formatedDate" v-on="on" label="Datum snesení*" required></v-text-field>
                                     </template>

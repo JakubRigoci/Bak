@@ -16,6 +16,7 @@
     </v-card-actions>
 </v-card>
 </template>
+
 <script>
 import EventTypeRemovePopup from "@/components/EventType/EventTypeRemovePopup.vue"
 import EventTypeEditPopup from "@/components/EventType/EventTypeEditPopup.vue"
@@ -35,6 +36,7 @@ export default {
     }
 }
 </script>
+
 <style lang="">
-    
+
 </style>

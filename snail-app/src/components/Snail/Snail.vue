@@ -1,7 +1,6 @@
 <template>
 <v-card class=" primary" outlined>
 
-
     <v-card-title> Jméno: {{snail.jmeno}}</v-card-title>
 
     <v-card-subtitle class="mx-auto" max-width='100'>Komentář: {{snail.komentar}} </v-card-subtitle>
@@ -62,7 +61,7 @@
         </v-row>
     </div>
 
-        <v-card-actions>
+    <v-card-actions>
         <v-btn color="secondary" @click="showTable = !showTable" text> Měření </v-btn>
 
         <v-spacer></v-spacer>

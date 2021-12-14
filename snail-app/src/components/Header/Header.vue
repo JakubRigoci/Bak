@@ -8,8 +8,12 @@
             </span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <span v-if="isLoggedIn"><v-btn color="primary" text @click="logout">Logout</v-btn></span>
-        <span v-if="!isLoggedIn"><v-btn color="primary" text router to="/login">Login</v-btn></span>
+        <span v-if="isLoggedIn">
+            <v-btn color="primary" text @click="logout">Logout</v-btn>
+        </span>
+        <span v-if="!isLoggedIn">
+            <v-btn color="primary" text router to="/login">Login</v-btn>
+        </span>
         <span v-if="!isLoggedIn">|<v-btn color="primary" text router to="/register">Registrovat</v-btn></span>
     </v-app-bar>
     <v-navigation-drawer v-if="this.$store.getters.isLoggedIn" app v-model="drawer" class="secondary">

@@ -3,6 +3,7 @@
     <SnailContainer :groupId="id"></SnailContainer>
 </div>
 </template>
+
 <script>
 import SnailContainer from "@/components/Snail/SnailContainer.vue"
 export default {
@@ -13,13 +14,16 @@ export default {
         this.$store.dispatch("getSnails")
     },
     methods: {
-        log(){
+        log() {
             console.log(this.snails)
         }
     },
-    components: {SnailContainer}
+    components: {
+        SnailContainer
+    }
 }
 </script>
+
 <style lang="">
-    
+
 </style>

@@ -19,13 +19,13 @@
                                 <v-text-field color="secondary" :rules="commentRules" v-model="snail.komentar" label="Komentář*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.barvaUlita" label="Barva ulity" ></v-text-field>
+                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.barvaUlita" label="Barva ulity"></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.barvaTelo" label="Barva tela" ></v-text-field>
+                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.barvaTelo" label="Barva tela"></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.vzorecUlita" label="Vzor ulity" ></v-text-field>
+                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.vzorecUlita" label="Vzor ulity"></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" v-model="menu" :close-on-content-click="false" offset-y min-width="auto">
@@ -149,6 +149,8 @@ export default {
                     snail: this.snail
                 }).then(() => {
                     this.$refs.form.resetValidation()
+                    this.taxonomySelected = false
+                    this.snuskaSelected = false
                     this.snail = {
                         snekId: 0,
                         jmeno: "",

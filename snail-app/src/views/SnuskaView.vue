@@ -1,6 +1,6 @@
 <template lang="">
 <div>
-    <h1 class="subheading grey--text">Snuska</h1>
+    <h1 class="subheading grey--text">Detail Snúšky</h1>
     <v-divider></v-divider>
     <v-container class="my-5">
         <div class="params">

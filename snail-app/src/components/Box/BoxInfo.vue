@@ -49,7 +49,9 @@
 <script>
 import BoxRemovePopup from "@/components/Box/BoxRemovePopup.vue"
 import BoxEditPopup from "@/components/Box/BoxEditPopup.vue"
-import {format} from "@/components/Shared/DateFormater.js"
+import {
+    format
+} from "@/components/Shared/DateFormater.js"
 
 export default {
     components: {
