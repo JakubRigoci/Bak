@@ -9,12 +9,9 @@
                 <MeasuresAddPopup class="ml-4" :snailId="snailId"></MeasuresAddPopup>
             </v-toolbar>
         </template>
-        <template v-slot:item.createdOn="{ item }">
-         <span>{{ new Date(item.createdOn).toLocaleString() }}</span>
-        </template>
         <template v-slot:item.actions="{ item }">
             <MeasuresDeletePopup :measureId="item.mereniSnekId"></MeasuresDeletePopup>
-            <MeasuresEditPopup :measure="Object.assign({}, item)"></MeasuresEditPopup>
+            <MeasuresEditPopup :measureProp="Object.assign({}, item)"></MeasuresEditPopup>
         </template>
     </v-data-table>
 

@@ -18,7 +18,7 @@
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" offset-y min-width="auto">
                                     <template v-slot:activator="{on}">
-                                        <v-text-field v-model="measure.datum" v-on="on" label="Datum"></v-text-field>
+                                        <v-text-field :value="formatedDate" v-on="on" label="Datum"></v-text-field>
                                     </template>
                                     <v-date-picker color="secondary" v-model="measure.datum"></v-date-picker>
                                 </v-menu>
@@ -50,6 +50,9 @@
 
 <script>
 import {
+    format
+} from "@/components/Shared/DateFormater"
+import {
     numberRules,
     lengthRules
 } from "@/components/Shared/Validation.js"
@@ -72,6 +75,11 @@ export default {
         lengthRules: lengthRules
 
     }),
+    computed: {
+        formatedDate() {
+            return this.measure.datum ? this.format(this.measure.datum) : ''
+        }
+    },
     methods: {
         save() {
             if (this.$refs.form.validate()) {
@@ -82,6 +90,7 @@ export default {
                 })
             }
         },
+        format: format
     }
 };
 </script>

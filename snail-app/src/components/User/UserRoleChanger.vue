@@ -2,7 +2,6 @@
 <v-container fluid>
     <p>Vyberte role:</p>
     <v-checkbox
-      @change="emitValue"
       color="secondary"
       v-model="selected"
       label="ADMIN"
@@ -22,21 +21,19 @@ export default {
     props: {
         userId: Number
     },
-    data() {
-        return {
-            selected: ["USER"]
-        }
-    },
     computed: {
-        user() {
-            return this.$store.state.users.find(u => u.userId === this.userId)
+        roles() {
+            return this.$store.state.users.find(u => u.userId === this.userId).roles.map(r => r.name)
+        },
+        selected: {
+            get() {
+                return this.roles
+            },
+            set(val) {
+                this.$emit("change", val)
+            }
         }
     },
-    methods: {
-        emitValue() {
-            this.$emit("change", this.selected)
-        }
-    }
 }
 </script>
 <style lang="">

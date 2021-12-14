@@ -2,18 +2,22 @@
 <div>
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn color="secondary" v-bind="attrs" v-on="on" class="ma-2"> Uprav </v-btn>
+            <v-icon v-bind="attrs" v-on="on" small class="mr-2">
+            mdi-pencil
+        </v-icon>
         </template>
         <v-card>
             <v-card-title>
-                <span class="text-h5"> Upravit: </span>
+                <span class="text-h5"> Upravit užívatele {{user.name}} </span>
                 <v-col cols="12">
                 <v-select item-color="secondary" color="secondary" v-model="selectedType" :items="type" required></v-select>
                 </v-col>
             </v-card-title>
-            <UserRoleChanger v-on:change="(value) => this.roleChange(value)" :userId="userId" v-if="selectedType === 'ROLE'"></UserRoleChanger>
+            <v-card-subtitle>
+                            <UserRoleChanger v-on:change="(value) => this.roleChange(value)" :userId="userId" v-if="selectedType === 'ROLE'"></UserRoleChanger>
             <UserActivation v-on:change="(value) => this.activeUntilChange(value)" v-if="selectedType === 'AKTIVOVAT'"></UserActivation>
             <UserDeactivation v-if="selectedType === 'DEAKTIVOVAT'"></UserDeactivation>
+            </v-card-subtitle>
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="info" text @click="dialog = false">
@@ -49,6 +53,11 @@ export default {
         selectedRoles: [],
         activeUntil: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
     }),
+    computed: {
+        user() {
+             return this.$store.state.users.find(u => u.userId === this.userId)
+        }
+    },
     methods: {
         save() {
             switch (this.selectedType) {

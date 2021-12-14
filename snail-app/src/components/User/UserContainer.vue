@@ -1,21 +1,35 @@
 <template lang="">
 <v-container fluid class="primary">
-    <v-checkbox color="secondary" v-model="inactive" label="Neaktivní"></v-checkbox>
-    <v-list class="primary" v-if="inactive">
-        <v-list-item color="primary" v-for="user in inactiveUsers" :key="user.userId">
-                <User :userId="user.userId"></User>
-        </v-list-item>
-    </v-list>
-    <v-list class="primary" v-else>
-        <v-list-item color="primary" v-for="user in users" :key="user.userId">
-                <User :userId="user.userId"></User>
-        </v-list-item>
-    </v-list>
+    <v-card>
+    <v-card-title>
+            <v-checkbox color="secondary" v-model="inactive" label="Neaktivní"></v-checkbox>
+            <v-spacer></v-spacer>
+      <v-text-field
+        color="secondary"
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Hledat"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+        <v-data-table :headers="headers" :search="search" :items="inactive ? inactiveUsers : users" class="elevation-1">
+
+        <template v-slot:item.roles="{ item }">
+            <div>
+                {{ item.roles.map(u => u.name).join(' , ') }}
+            </div>
+        </template>
+        <template v-slot:item.actions="{ item }">
+            <UserEditPopup :userId="item.userId"></UserEditPopup>
+        </template>
+        </v-data-table>
+  </v-card>
 </v-container>
 </template>
 
 <script>
-import User from "@/components/User/User.vue"
+import UserEditPopup from "@/components/User/UserEditPopup.vue"
 
 export default {
     created() {
@@ -23,7 +37,37 @@ export default {
     },
     data() {
         return {
-            inactive: false
+            inactive: false,
+            search: '',
+            headers: [{
+                    text: "Username",
+                    value: "name",
+                },
+                {
+                    text: "E-mail",
+                    value: "email",
+                },
+                {
+                    text: "Aktivní do",
+                    value: "activeUntil",
+                },
+                {
+                    text: "Tel. číslo",
+                    value: "phone",
+                },
+                {
+                    text: "Facebook",
+                    value: "facebook",
+                },
+                {
+                    text: "Role",
+                    value: "roles"
+                },
+                {
+                    text: "Akce",
+                    value: "actions"
+                }
+            ],
         }
     },
     computed: {
@@ -35,10 +79,10 @@ export default {
             return this.$store.state.users.filter(u => {
                 return Date.parse(u.activeUntil) < today.getTime()
             })
-        }
+        },
     },
     components: {
-        User
+        UserEditPopup
     }
 }
 </script>
