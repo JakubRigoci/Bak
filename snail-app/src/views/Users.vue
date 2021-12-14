@@ -1,6 +1,6 @@
 <template lang="">
 <v-container fluid>
-    <h1 class="subheading grey--text">Uživatelé</h1>
+    <h1 class="subheading grey--text">Užívatelé</h1>
     <v-divider></v-divider>
     <UserContainer></UserContainer>
 </v-container>
