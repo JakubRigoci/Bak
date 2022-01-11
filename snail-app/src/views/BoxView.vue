@@ -1,8 +1,7 @@
 <template lang="">
 <v-container fluid>
     <BoxInfo :boxId="Number.parseInt(this.$route.params.id)"></BoxInfo>
-    <h1 v-if="!showSnails" class="subheading grey--text">Skupiny</h1>
-    <h1 v-if="showSnails" class="subheading grey--text">Šneci</h1>
+    <h1 class="subheading grey--text">Skupiny/Šneci</h1>
     <v-btn class="secondary" @click="showGroups = !showGroups">
         <v-icon>{{ showGroups ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
     </v-btn>
@@ -19,8 +18,7 @@
                     </div>
                 </template>
                 <span>Přidat skupinu</span>
-            </v-tooltip>
-            
+            </v-tooltip>    
         </div>
     </v-expand-transition>
     <h1 class="pt-8 subheading grey--text">Události</h1>
@@ -65,7 +63,6 @@ export default {
     },
     computed: {
         groups() {
-            //return this.$store.getters.getGroupsForBox[this.$route.params.id].filter(g => g.datumDo === null);
             return this.$store.state.groupsForBox;
         },
         showSnails() {
@@ -75,11 +72,6 @@ export default {
             return false
         }
     },
-    methods: {
-        log() {
-            console.log(this.groups)
-        }
-    }
 }
 </script>
 

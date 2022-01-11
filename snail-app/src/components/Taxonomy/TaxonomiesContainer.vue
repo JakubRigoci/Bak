@@ -40,11 +40,6 @@ export default {
             return this.$store.state.taxonomies;
         }
     },
-    methods: {
-        log() {
-            console.log(this.groups)
-        }
-    }
 }
 </script>
 

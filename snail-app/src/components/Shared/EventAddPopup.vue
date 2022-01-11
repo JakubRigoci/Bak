@@ -4,7 +4,7 @@
         <template v-slot:activator="{ on, attrs }">
             <v-card allign="center" class="mx-auto primary justify-center d-flex" max-width="344" outlined>
 
-                <v-btn v-bind="attrs" v-on="on" color="secondary" class="mt-4"> Přidat událost</v-btn>
+                <v-btn v-bind="attrs" v-on="on" color="info" class="mt-4"> Přidat událost</v-btn>
             </v-card>
         </template>
         <v-form ref="form" v-model="valid">
@@ -27,7 +27,7 @@
                                 </v-menu>
                             </v-col>
                             <v-col cols="12">
-                                <v-select v-model="event.udalostTypId" :rules="selectRules" :items="eventTypes" item-text="popis" item-value="udalostTypId" label="Typ události*" required></v-select>
+                                <v-select item-color="secondary" color="secondary" v-model="event.udalostTypId" :rules="selectRules" :items="eventTypes" item-text="popis" item-value="udalostTypId" label="Typ události*" required></v-select>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -79,6 +79,9 @@ export default {
             commentRules: commentRules,
             selectRules: selectRules,
         }
+    },
+    created() {
+        this.$store.dispatch("getEventTypes")
     },
     computed: {
         eventTypes() {

@@ -7,16 +7,16 @@
         <v-form ref="form" v-model="valid">
             <v-card>
                 <v-card-title>
-                    <span class="text-h5">Přidat Skupinu</span>
+                    <span class="text-h5">Upravit Skupinu</span>
                 </v-card-title>
                 <v-card-text>
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field v-model="group.jmeno" :rules="nameRules" label="Jméno*" required></v-text-field>
+                                <v-text-field color="secondary" v-model="group.jmeno" :rules="nameRules" label="Jméno*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field v-model="group.komentar" :rules="commentRules" label="Komentář" required></v-text-field>
+                                <v-text-field color="secondary" v-model="group.komentar" :rules="commentNotRequired" label="Komentář" required></v-text-field>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -40,7 +40,7 @@
 <script>
 import {
     nameRules,
-    commentRules
+    commentNotRequired
 } from "@/components/Shared/Validation.js"
 
 export default {
@@ -51,7 +51,7 @@ export default {
         dialog: false,
         valid: false,
         nameRules: nameRules,
-        commentRules: commentRules
+        commentNotRequired: commentNotRequired
 
     }),
     methods: {

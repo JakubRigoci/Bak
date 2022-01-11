@@ -90,7 +90,6 @@ export default {
     },
     methods: {
         sort(value) {
-            console.log(value)
             this.sortType = value
         },
         filter(value) {

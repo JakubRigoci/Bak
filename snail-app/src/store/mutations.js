@@ -167,11 +167,8 @@ export const REMOVE_EVENT_TYPE = (state, eventTypeId) => {
 }
 
 export const REMOVE_EVENT = (state, event) => {
-  console.log("BEFORE SWITCH")
   switch(event.type){
     case "box":
-      console.log("REMOVE BOX EVENT")
-      console.log(event)
       state.eventsForBox = state.eventsForBox.filter(e => event.id !== e.udalostId)
       return
     case "group":

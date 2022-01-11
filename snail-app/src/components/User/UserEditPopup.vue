@@ -75,11 +75,9 @@ export default {
             this.dialog = false
         },
         roleChange(value) {
-            console.log(value)
             this.selectedRoles = value
         },
         activeUntilChange(value) {
-            console.log(value)
             this.activeUntil = value
         }
     }

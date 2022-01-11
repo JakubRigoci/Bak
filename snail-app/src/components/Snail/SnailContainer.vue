@@ -20,7 +20,7 @@
                                             <b>Barva ulity:</b> {{ snail.barvaUlita }}
                                         </v-col>
                                         <v-col v-if="snail.barvaTelo" cols='12' md='6' lg="4">
-                                            <b>Barva tela:</b> {{ snail.barvaTelo }}
+                                            <b>Barva těla:</b> {{ snail.barvaTelo }}
                                         </v-col>
                                     </v-row>
                                 </v-fade-transition>

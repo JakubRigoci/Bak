@@ -7,9 +7,6 @@
                 <span> Počet skupin: {{groups}}</span>
                 <span> Počet boxov: {{boxes}}</span>
             </v-card-text>
-            <v-card-text v-else>
-                <span> Snail app</span>
-            </v-card-text>
         </v-card>
     </v-footer>
 </v-card>

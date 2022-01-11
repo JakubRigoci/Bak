@@ -27,7 +27,6 @@ export const getSnailsForGroup = ({commit}, groupId) => {
 export const getGroupsForBox = ({commit}, boxId) => {
   return new Promise((resolve, reject) => {
     axios.get(`box/${boxId}/skupina`).then(response =>{
-      console.log(response.data)
       commit("GET_GROUPS_FOR_BOX", response.data)
       resolve(response)
     }).catch(e => {
@@ -149,7 +148,6 @@ export const getSnailEvents = ({commit}, snailId) => {
 export const getUsersAdmin = ({commit}) => {
   return new Promise((resolve, reject) => {
     axios.get("users/admin").then(response => {
-      console.log(response)
       commit("GET_USERS_ADMIN", response.data.content)
       resolve(response)
     }).catch(e => {
@@ -173,7 +171,6 @@ export const getFiles = ({commit}, galleryId) => {
 
 export const donwloadFile = ({commit}, url) => {
   axios.get(`${url}`).then(response => {
-    console.log(response)
     commit("DOWNLOAD_FILE", response.data)
   })
 }
@@ -181,8 +178,6 @@ export const donwloadFile = ({commit}, url) => {
 export const addSnail = ({commit}, payload) => {
   return new Promise((resolve, reject) => {
     axios.post(`snek/${payload.id}`, payload.snail).then(response =>{
-      console.log("SNAIL")
-      console.log(response.data)
       commit("ADD_SNAIL", {groupId: payload.id, snail: response.data })
       resolve(response)
     }).catch(e => {
@@ -211,7 +206,6 @@ export const addBox = ({commit}, box) => {
 }
 
 export const addGroup = ({commit}, payload) => {
-  console.log("BOXID: " + payload.boxId)
   return new Promise((resolve, reject) => {
     axios.post(`skupina/${payload.boxId}`, payload.group).then(response => {
       commit("ADD_GROUP", response.data)
@@ -416,7 +410,6 @@ export const editBox = ({commit}, box) => {
       commit("EDIT_BOX", response.data)
       resolve(response)
     }).catch(e => {
-      console.log(e)
       error({commit}, e.response.data.message)
       reject(e)
     })
@@ -429,7 +422,6 @@ export const editGroup = ({commit}, group) => {
       commit("EDIT_GROUP", response.data)
       resolve(response)
     }).catch(e => {
-      console.log(e)
       error({commit}, e.response.data.message)
       reject(e)
     })
@@ -581,10 +573,8 @@ export const register = ({commit}, user) => {
 export const login = ({commit}, user) => {
     return new Promise((resolve, reject) => {
       commit("AUTH_REQUEST")
-      console.log(user)
       axios.post("auth/signin", { "username" : user.name, "password" : user.password})
       .then(resp => {
-        console.log(resp.data)
         const token = resp.data.accessToken
         const user = {
           userId : resp.data.id, 
@@ -596,7 +586,6 @@ export const login = ({commit}, user) => {
         localStorage.setItem("token", token)
         axios.defaults.headers.common = {"Authorization" : `Bearer ${token}`}
         commit("AUTH_SUCCESS", {token: token, user: user} )
-        console.log(user)
         resolve(resp)
       })
       .catch(err => {

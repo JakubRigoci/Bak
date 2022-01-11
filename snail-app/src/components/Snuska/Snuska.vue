@@ -20,7 +20,7 @@
         <v-icon x-large class="pr-8"> mdi-egg </v-icon>
     </v-list-item>
     <v-card-actions class="d-flex justify-space-around mb-6">
-        <v-btn @click="details" color="secondary"> Detaily </v-btn>
+        <v-btn @click="details" color="info"> Detaily </v-btn>
         <SnuskaRemovePopup :id="snuskaId" :reroute="false"></SnuskaRemovePopup>
     </v-card-actions>
 </v-card>

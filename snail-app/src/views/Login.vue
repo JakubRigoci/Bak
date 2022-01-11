@@ -13,16 +13,20 @@
                     <v-card-text>
                         <v-form>
                             <v-text-field color="secondary" outline label="Přihlasovací jméno" type="text" v-model="name"></v-text-field>
-                            <v-text-field color="secondary" outline hide-details label="Heslo" type="password" v-model="password"></v-text-field>
+                            <v-text-field color="secondary"
+                            :append-icon="showPswd ? 'mdi-eye-off' : 'mdi-eye'"
+                                        @click:append="showPswd = !showPswd"
+
+                             outline hide-details label="Heslo" :type="showPswd ? 'text' : 'password'" v-model="password"></v-text-field>
                         </v-form>
                     </v-card-text>
                     <v-divider></v-divider>
                     <v-card-actions :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }">
                         <v-spacer></v-spacer>
-                        <v-btn color="secondary" :large="$vuetify.breakpoint.smAndUp" router to="/register">
+                        <v-btn color="info" :large="$vuetify.breakpoint.smAndUp" router to="/register">
                             Přejít na registraci
                         </v-btn>
-                        <v-btn color="secondary" @click="login" :large="$vuetify.breakpoint.smAndUp">
+                        <v-btn color="info" @click="login" :large="$vuetify.breakpoint.smAndUp">
                             Přihlásit
                         </v-btn>
                     </v-card-actions>
@@ -41,6 +45,7 @@ export default {
         return {
             name: "",
             password: "",
+            showPswd: false,
         };
     },
     methods: {

@@ -4,7 +4,7 @@
         <template v-slot:activator="{ on, attrs }">
             <v-card allign="center" class="mt-6 mx-auto primary justify-center d-flex" max-width="344" outlined>
 
-                <v-btn v-bind="attrs" v-on="on" color="secondary" class="mt-4"> Přidat skupinu</v-btn>
+                <v-btn v-bind="attrs" v-on="on" color="info" class="mt-4"> Přidat skupinu</v-btn>
             </v-card>
         </template>
         <v-form ref="form" v-model="valid">
@@ -19,7 +19,7 @@
                                 <v-text-field v-model="group.jmeno" :rules="nameRules" label="Jméno*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field v-model="group.komentar" :rules="commentRules" label="Komentář" required></v-text-field>
+                                <v-text-field v-model="group.komentar" :rules="commentNotRequired" label="Komentář" required></v-text-field>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -43,7 +43,7 @@
 <script>
 import {
     nameRules,
-    commentRules
+    commentNotRequired
 } from "@/components/Shared/Validation.js"
 
 export default {
@@ -59,7 +59,7 @@ export default {
             komentar: "",
         },
         nameRules: nameRules,
-        commentRules: commentRules
+        commentNotRequired: commentNotRequired
 
     }),
     methods: {

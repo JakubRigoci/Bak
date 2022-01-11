@@ -2,8 +2,8 @@
 <div class="text-center">
     <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
-            <v-btn color="secondary" dark v-bind="attrs" v-on="on">
-                Zoraď
+            <v-btn color="info" dark v-bind="attrs" v-on="on">
+                Seřadit
             </v-btn>
         </template>
         <v-list>
@@ -19,27 +19,27 @@
 export default {
     data: () => ({
         items: [{
-                title: 'Komentar vzostupne',
+                title: 'Komentář vzestupně',
                 value: "CommentaryUp"
             },
             {
-                title: 'Komentar zostupne',
+                title: 'Komentář sestupně',
                 value: "CommentaryDown"
             },
             {
-                title: 'Perioda vylihnut vzostupne',
+                title: 'Perioda vylíhnutí vzestupně',
                 value: "PeriodUp"
             },
             {
-                title: 'Perioda vylihnuti zostupne',
+                title: 'Perioda vylíhnutí sestupně',
                 value: "PeriodDown"
             },
              {
-                title: 'Velikost vzostupne',
+                title: 'Velikost vzestupně',
                 value: "SizeUp"
             },
             {
-                title: 'Velikost zostupne',
+                title: 'Velikost sestupně',
                 value: "SizeDown"
             },
         ],

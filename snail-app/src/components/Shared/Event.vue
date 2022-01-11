@@ -1,5 +1,5 @@
 <template lang="">
-<v-card>
+<v-card v-if="event">
     <v-card-title class="secondary text-h6">
         {{format(event.datum)}} {{eventType.popis}}
     </v-card-title>

@@ -2,7 +2,7 @@
 <div>
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn v-bind="attrs" v-on="on" color="secondary">Uprav</v-btn>
+            <v-btn v-bind="attrs" v-on="on" color="info">Uprav</v-btn>
         </template>
         <v-form ref="form" v-model="valid">
             <v-card>
@@ -59,6 +59,12 @@ export default {
     computed: {
         taxonomies() {
             return this.$store.state.taxonomies
+        }
+    },
+    watch: {
+        levelSelected: function (val) {
+            if (!val)
+                this.taxonomy.fkTaxonomyTaxonomy = null
         }
     },
     methods: {

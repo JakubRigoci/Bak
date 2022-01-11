@@ -1,7 +1,6 @@
 export default {
     status: '',
     token: localStorage.getItem("token") || "",
-    activeBox: Number,
     user: {},
     users: [],
     errorMessage: "",

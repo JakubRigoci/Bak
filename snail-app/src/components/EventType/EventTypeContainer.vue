@@ -17,7 +17,6 @@
                 <span>Přidat typ události</span>
             </v-tooltip>
         </v-col>
-
     </v-row>
 </v-container>
 </template>

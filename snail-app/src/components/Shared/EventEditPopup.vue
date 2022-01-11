@@ -23,7 +23,7 @@
                             </v-menu>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="event.udalostTypId" :rules="selectRules" :items="eventTypes" item-text="popis" item-value="udalostTypId" label="Typ události*" required></v-select>
+                            <v-select color="secondary" item-color="secondary" v-model="event.udalostTypId" :rules="selectRules" :items="eventTypes" item-text="popis" item-value="udalostTypId" label="Typ události*" required></v-select>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -51,6 +51,9 @@ import {
 import {
     format
 } from "@/components/Shared/DateFormater"
+import {
+    translate
+} from "@/components/Shared/Translator.js"
 
 export default {
     props: {
@@ -69,9 +72,12 @@ export default {
             selectRules: selectRules,
         }
     },
+    created() {
+        this.$store.dispatch("getEventTypes")
+    },
     computed: {
         eventTypes() {
-            return this.$store.state.events
+            return this.$store.state.eventTypes.filter(e => e.typ === translate(this.type))
         },
         formatedDate() {
             return this.event.datum ? this.format(this.event.datum) : ''

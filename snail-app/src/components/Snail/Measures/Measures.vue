@@ -1,20 +1,18 @@
 <template>
 <div>
-    <v-data-table :headers="headers" :items="mereni" class="elevation-1">
-        <template v-slot:top>
-            <v-toolbar flat>
-                <v-toolbar-title>Měření</v-toolbar-title>
-                <v-divider class="mx-4" inset vertical></v-divider>
-                <v-spacer></v-spacer>
-                <MeasuresAddPopup class="ml-4" :snailId="snailId"></MeasuresAddPopup>
-            </v-toolbar>
-        </template>
-        <template v-slot:item.actions="{ item }">
-            <MeasuresDeletePopup :measureId="item.mereniSnekId"></MeasuresDeletePopup>
-            <MeasuresEditPopup :measureProp="Object.assign({}, item)"></MeasuresEditPopup>
-        </template>
-    </v-data-table>
-
+    <v-card>
+        <v-card-title>
+            <v-text-field color="secondary" v-model="search" append-icon="mdi-magnify" label="Hledat" single-line hide-details></v-text-field>
+            <v-spacer></v-spacer>
+            <MeasuresAddPopup class="ml-4" :snailId="snailId"></MeasuresAddPopup>
+        </v-card-title>
+        <v-data-table :headers="headers" :search="search" :items="mereni" class="elevation-1">
+            <template v-slot:item.actions="{ item }">
+                <MeasuresDeletePopup :measureId="item.mereniSnekId"></MeasuresDeletePopup>
+                <MeasuresEditPopup :measureProp="Object.assign({}, item)"></MeasuresEditPopup>
+            </template>
+        </v-data-table>
+    </v-card>
 </div>
 </template>
 
@@ -40,6 +38,7 @@ export default {
             show: false,
             showTable: false,
             dialogDelete: false,
+            search: '',
             headers: [{
                     text: "Komentář",
                     value: "komentar",

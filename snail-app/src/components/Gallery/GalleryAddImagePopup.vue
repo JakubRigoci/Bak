@@ -57,7 +57,6 @@ export default {
     },
     methods: {
         save() {
-            console.log(this.file)
             if (this.$refs.form.validate()) {
                 this.dialog = false
                 this.$store.dispatch("addFile", {

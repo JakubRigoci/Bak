@@ -13,7 +13,7 @@
                 </v-col>
             </v-row>
             <v-row>
-                <v-col>
+                <v-col v-if="box.prodejce">
                     <b>Prodejce:</b> {{box.prodejce}}
                 </v-col>
                 <v-col>

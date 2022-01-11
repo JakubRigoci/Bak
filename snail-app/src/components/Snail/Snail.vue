@@ -11,7 +11,7 @@
                 <b>Barva ulity:</b> {{snail.barvaUlita}}
             </v-col>
             <v-col v-if="snail.barvaTelo">
-                <b>Barva tela:</b> {{snail.barvaTelo}}
+                <b>Barva těla:</b> {{snail.barvaTelo}}
             </v-col>
         </v-row>
         <v-row>
@@ -62,7 +62,7 @@
     </div>
 
     <v-card-actions>
-        <v-btn color="secondary" @click="showTable = !showTable" text> Měření </v-btn>
+        <v-btn color="info" @click="showTable = !showTable" text> Měření </v-btn>
 
         <v-spacer></v-spacer>
         <v-btn icon @click="showTable = !showTable">
@@ -78,7 +78,7 @@
     </v-expand-transition>
 
     <v-card-actions>
-        <v-btn color="secondary" @click="showEvents = !showEvents" text> Události </v-btn>
+        <v-btn color="info" @click="showEvents = !showEvents" text> Události </v-btn>
 
         <v-spacer></v-spacer>
 
@@ -95,7 +95,7 @@
     </v-expand-transition>
 
     <v-card-actions>
-        <v-btn color="secondary" @click="showGallery = !showGallery" text> Galerie </v-btn>
+        <v-btn color="info" @click="showGallery = !showGallery" text> Galerie </v-btn>
 
         <v-spacer></v-spacer>
 

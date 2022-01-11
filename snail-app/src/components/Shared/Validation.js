@@ -10,6 +10,10 @@ export const commentRules = [
     v => v.length <= 60 || 'Komentář musí být méně než 60 znaků',
 ]
 
+export const commentNotRequired = [
+    v => v.length <= 60 || 'Komentář musí být méně než 60 znaků',
+]
+
 export const numberRules = [
     v => !!v || 'Velikost je povinná',
     v => v < 1000000 || 'Velikost musí být méně než 7 cifer',
@@ -39,7 +43,8 @@ export const emailRules = [
 
 export const passwordRules = [  
     v => !!v || 'Heslo je povinný',
-    v => /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*,:;])(?=.{8,})/.test(v) || 'Heslo musí obsahovat minimálne 8 znakú, velké písmeno, číslo a specialní znak'
+    v => /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*,:;])(?=.{8,})/.test(v) ||
+     'Heslo musí obsahovat minimálne 8 znakú, velké písmeno, číslo a specialní znak'
 ]
 
 export const phoneRules = [

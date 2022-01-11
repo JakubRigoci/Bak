@@ -13,11 +13,6 @@ export default {
     created() {
         this.$store.dispatch("getSnails")
     },
-    methods: {
-        log() {
-            console.log(this.snails)
-        }
-    },
     components: {
         SnailContainer
     }

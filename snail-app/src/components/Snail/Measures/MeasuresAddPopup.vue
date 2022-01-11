@@ -2,7 +2,7 @@
 <div>
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn v-bind="attrs" color="secondary" v-on="on" class="mt-4"> Přidat měření</v-btn>
+            <v-btn v-bind="attrs" color="info" v-on="on" class="mt-4"> Přidat měření</v-btn>
         </template>
         <v-form ref="form" v-model="valid">
             <v-card>
@@ -35,10 +35,10 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="dialog = false">
+                    <v-btn color="info" text @click="dialog = false">
                         Zavřít
                     </v-btn>
-                    <v-btn color="blue darken-1" text @click="save">
+                    <v-btn color="info" text @click="save">
                         Uložit
                     </v-btn>
                 </v-card-actions>

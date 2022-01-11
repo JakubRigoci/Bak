@@ -12,6 +12,7 @@ export default new Vuetify({
                     primary: "#FAFAFA",
                     secondary: "#CFD8DC",
                     info: "#78909C",
+                    btns: "#78909C",
                     buttonsText: "#42A5F5"
                 }      
             }

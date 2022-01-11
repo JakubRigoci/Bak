@@ -1,7 +1,7 @@
 <template>
 <div class="nav">
     <v-app-bar class="secondary" app flat>
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon v-if="this.$store.getters.isLoggedIn" @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title class="text-uppercase">
             <span @click="home" class="primary--text">
                 Snail app
@@ -40,9 +40,11 @@ export default {
     },
     methods: {
         logout() {
+            this.$store.reset()
             this.$store.dispatch("logout")
                 .then(() => {
                     this.$router.push("/login")
+                    
                 })
         },
         login() {

@@ -1,6 +1,6 @@
 <template lang="">
 <div>
-    <v-btn  color="secondary" @click="showFilter = !showFilter">
+    <v-btn  color="info" @click="showFilter = !showFilter">
         Filter
     </v-btn>
     <v-expand-transition>
