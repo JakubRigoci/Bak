@@ -3,7 +3,6 @@
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
             <v-card v-bind="attrs" v-on="on" allign="center" class="mx-auto primary justify-center d-flex" max-width="344" outlined>
-
                 <v-avatar class="d-flex " color="secondary" size='120'>
                     <v-icon x-large> mdi-plus-thick </v-icon>
                 </v-avatar>
@@ -18,33 +17,33 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="commentRules" v-model="snuska.komentar" label="Komentář*" required></v-text-field>
+                                <v-text-field color="info" :rules="commentRules" v-model="snuska.komentar" label="Komentář*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" v-model="menu" :close-on-content-click="false" offset-y min-width="auto">
                                     <template v-slot:activator="{on}">
-                                        <v-text-field readonly color="secondary" :value="formatedDate" v-on="on" label="Datum snesení*" required></v-text-field>
+                                        <v-text-field readonly color="info" :value="formatedDate" v-on="on" label="Datum snesení*" required></v-text-field>
                                     </template>
-                                    <v-date-picker color="secondary" @input="menu = false" v-model="snuska.datumSneseni"></v-date-picker>
+                                    <v-date-picker color="info" @input="menu = false" v-model="snuska.datumSneseni"></v-date-picker>
                                 </v-menu>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="numberRules.concat(intRules)" type="number" v-model="snuska.velikost" label="Velikost*" required></v-text-field>
+                                <v-text-field color="info" :rules="numberRules.concat(intRules)" type="number" v-model="snuska.velikost" label="Velikost*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-menu :close-on-content-click="false" transition="scale-transition" offset-y min-width="auto">
                                     <template v-slot:activator="{on}">
-                                        <v-text-field readonly color="secondary" :value="formatedHatchingPeriodDate" v-on="on" label="Perioda vylíhnutí*"></v-text-field>
+                                        <v-text-field readonly color="info" :value="formatedHatchingPeriodDate" v-on="on" label="Perioda vylíhnutí*"></v-text-field>
                                     </template>
-                                    <v-date-picker color="secondary" range v-model="hatchingPeriod"></v-date-picker>
+                                    <v-date-picker color="info" range v-model="hatchingPeriod"></v-date-picker>
                                 </v-menu>
                             </v-col>
                             <v-col cols="12">
-                                <v-select @change="getSnailsForGroup" item-color="secondary" color="secondary" v-model="snuska.skupinaId" :rules="selectRules" :items="groups" item-text="jmeno" item-value="skupinaId" label="Skupina*" required></v-select>
+                                <v-select @change="getSnailsForGroup" item-color="info" color="info" v-model="snuska.skupinaId" :rules="selectRules" :items="groups" item-text="jmeno" item-value="skupinaId" label="Skupina*" required></v-select>
                             </v-col>
                             <v-col cols="12">
-                                <v-checkbox color="secondary" v-model="motherSelected" label="Určit matku"></v-checkbox>
-                                <v-select v-if="motherSelected" item-color="secondary" color="secondary" v-model="snuska.matkaId" :items="snailsForGroup" item-text="jmeno" item-value="snekId" label="Matka" clearable></v-select>
+                                <v-checkbox color="info" v-model="motherSelected" label="Určit matku"></v-checkbox>
+                                <v-select v-if="motherSelected" item-color="info" color="info" v-model="snuska.matkaId" :items="snailsForGroup" item-text="jmeno" item-value="snekId" label="Matka" clearable></v-select>
                             </v-col>
                         </v-row>
                     </v-container>

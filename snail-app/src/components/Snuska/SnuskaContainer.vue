@@ -2,7 +2,6 @@
 <v-container fluid>
     <v-row class="d-flex justify-end ma-8 pa-2">
         <SnuskaFilter :class="$vuetify.breakpoint.smAndDown ? 'mb-2' : 'mr-2'" v-on:filter="(value) => this.filter(value)"></SnuskaFilter>
-
         <SnuskaSorter v-on:sort="(value) => this.sort(value)"></SnuskaSorter>
     </v-row>
     <v-row allign="center">

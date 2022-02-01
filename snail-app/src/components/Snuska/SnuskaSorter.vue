@@ -34,7 +34,7 @@ export default {
                 title: 'Perioda vylíhnutí sestupně',
                 value: "PeriodDown"
             },
-             {
+            {
                 title: 'Velikost vzestupně',
                 value: "SizeUp"
             },

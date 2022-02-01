@@ -2,11 +2,11 @@
 <v-container fluid>
     <p>Vyberte čas do kdy aktivace platí:</p>
     <v-col cols="12">
-        <v-menu transition="scale-transition"  v-model="menu" :close-on-content-click="false" offset-y min-width="auto">
+        <v-menu transition="scale-transition" v-model="menu" :close-on-content-click="false" offset-y min-width="auto">
             <template v-slot:activator="{on}">
                 <v-text-field readonly :value="formatedDate" v-on="on"></v-text-field>
             </template>
-            <v-date-picker  @input="emitValue" color="secondary" v-model="activeUntil"></v-date-picker>
+            <v-date-picker @input="emitValue" color="info" v-model="activeUntil"></v-date-picker>
         </v-menu>
     </v-col>
 </v-container>
@@ -32,7 +32,7 @@ export default {
             return this.$store.state.users.find(u => u.userId === this.userId)
         },
         formatedDate() {
-            return  this.activeUntil ? this.format(this.activeUntil) : ''
+            return this.activeUntil ? this.format(this.activeUntil) : ''
         }
     },
     methods: {

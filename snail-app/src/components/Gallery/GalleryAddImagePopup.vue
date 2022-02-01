@@ -2,7 +2,7 @@
 <div>
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-            <v-btn v-bind="attrs" allign="center" class="ma-6 mx-auto primary justify-center d-flex" v-on="on" color="secondary" > Přidat obrázek</v-btn>
+            <v-btn v-bind="attrs" allign="center" class="ma-6 mx-auto primary justify-center d-flex" v-on="on" color="info"> Přidat obrázek</v-btn>
         </template>
         <v-form ref="form" v-model="valid">
             <v-card>

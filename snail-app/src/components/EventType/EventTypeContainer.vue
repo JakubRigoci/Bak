@@ -6,7 +6,6 @@
                 <EventType :eventTypeId="eventType.udalostTypId"></EventType>
             </div>
         </v-col>
-
         <v-col>
             <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">

@@ -2,7 +2,7 @@
 <v-app>
     <Header></Header>
     <v-main class="primary">
-      <ErrorMessage></ErrorMessage>
+        <ErrorMessage></ErrorMessage>
         <v-container fluid class="mx-4">
             <router-view></router-view>
         </v-container>
@@ -30,7 +30,6 @@ export default {
 </script>
 
 <style>
-
 .v-alert {
     position: fixed;
 

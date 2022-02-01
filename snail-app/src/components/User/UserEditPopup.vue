@@ -3,20 +3,20 @@
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
             <v-icon v-bind="attrs" v-on="on" small class="mr-2">
-            mdi-pencil
-        </v-icon>
+                mdi-pencil
+            </v-icon>
         </template>
         <v-card>
             <v-card-title>
                 <span class="text-h5"> Upravit užívatele {{user.name}} </span>
                 <v-col cols="12">
-                <v-select item-color="secondary" color="secondary" v-model="selectedType" :items="type" required></v-select>
+                    <v-select item-color="info" color="info" v-model="selectedType" :items="type" required></v-select>
                 </v-col>
             </v-card-title>
             <v-card-subtitle>
-                            <UserRoleChanger v-on:change="(value) => this.roleChange(value)" :userId="userId" v-if="selectedType === 'ROLE'"></UserRoleChanger>
-            <UserActivation v-on:change="(value) => this.activeUntilChange(value)" v-if="selectedType === 'AKTIVOVAT'"></UserActivation>
-            <UserDeactivation v-if="selectedType === 'DEAKTIVOVAT'"></UserDeactivation>
+                <UserRoleChanger v-on:change="(value) => this.roleChange(value)" :userId="userId" v-if="selectedType === 'ROLE'"></UserRoleChanger>
+                <UserActivation v-on:change="(value) => this.activeUntilChange(value)" v-if="selectedType === 'AKTIVOVAT'"></UserActivation>
+                <UserDeactivation v-if="selectedType === 'DEAKTIVOVAT'"></UserDeactivation>
             </v-card-subtitle>
             <v-card-actions>
                 <v-spacer></v-spacer>
@@ -55,22 +55,31 @@ export default {
     }),
     computed: {
         user() {
-             return this.$store.state.users.find(u => u.userId === this.userId)
+            return this.$store.state.users.find(u => u.userId === this.userId)
         }
     },
     methods: {
         save() {
             switch (this.selectedType) {
                 case "ROLE":
-                    this.$store.dispatch("editUserRoles", {userId: this.userId, roles: this.selectedRoles})
+                    this.$store.dispatch("editUserRoles", {
+                        userId: this.userId,
+                        roles: this.selectedRoles
+                    })
                     break;
                 case "AKTIVOVAT":
-                    this.$store.dispatch("activateUser", {userId: this.userId, activeUntil: this.activeUntil})
+                    this.$store.dispatch("activateUser", {
+                        userId: this.userId,
+                        activeUntil: this.activeUntil
+                    })
                     break;
                 case "DEAKTIVOVAT":
-                    this.$store.dispatch("activateUser", {userId: this.userId, activeUntil: "1970-01-19"})
+                    this.$store.dispatch("activateUser", {
+                        userId: this.userId,
+                        activeUntil: "1970-01-19"
+                    })
                     break;
-                
+
             }
             this.dialog = false
         },

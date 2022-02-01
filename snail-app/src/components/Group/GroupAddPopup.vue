@@ -3,7 +3,6 @@
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
             <v-card allign="center" class="mt-6 mx-auto primary justify-center d-flex" max-width="344" outlined>
-
                 <v-btn v-bind="attrs" v-on="on" color="info" class="mt-4"> Přidat skupinu</v-btn>
             </v-card>
         </template>

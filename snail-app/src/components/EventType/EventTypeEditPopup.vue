@@ -13,10 +13,10 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="textRules" v-model="eventType.popis" label="Popis*" required></v-text-field>
+                                <v-text-field color="info" :rules="textRules" v-model="eventType.popis" label="Popis*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-select v-model="eventType.typ" :rules="selectRules" item-color="secondary" color="secondary" :items="targets" item-text="Typ" label="Typ*" required></v-select>
+                                <v-select v-model="eventType.typ" :rules="selectRules" item-color="info" color="info" :items="targets" item-text="Typ" label="Typ*" required></v-select>
                             </v-col>
                         </v-row>
                     </v-container>

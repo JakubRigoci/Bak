@@ -27,14 +27,12 @@
                 <v-col>
                     <b>Šírka:</b> {{box.sirka}}
                 </v-col>
-
             </v-row>
             <v-row>
                 <v-col>
                     <b>Hloubka:</b> {{box.hloubka}}
                 </v-col>
             </v-row>
-
         </div>
         <div class="buttons">
             <v-row>

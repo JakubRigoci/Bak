@@ -13,21 +13,21 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="lengthRules" v-model="measure.komentar" label="Komentář"></v-text-field>
+                                <v-text-field color="info" :rules="lengthRules" v-model="measure.komentar" label="Komentář"></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" offset-y min-width="auto">
                                     <template v-slot:activator="{on}">
                                         <v-text-field :value="formatedDate" v-on="on" label="Datum"></v-text-field>
                                     </template>
-                                    <v-date-picker color="secondary" v-model="measure.datum"></v-date-picker>
+                                    <v-date-picker color="info" v-model="measure.datum"></v-date-picker>
                                 </v-menu>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" type="number" :rules="numberRules" v-model="measure.vaha" label="Váha*" required></v-text-field>
+                                <v-text-field color="info" type="number" :rules="numberRules" v-model="measure.vaha" label="Váha*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" type="number" :rules="numberRules" v-model="measure.ulita" label="Ulita*" required></v-text-field>
+                                <v-text-field color="info" type="number" :rules="numberRules" v-model="measure.ulita" label="Ulita*" required></v-text-field>
                             </v-col>
                         </v-row>
                     </v-container>

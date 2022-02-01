@@ -15,14 +15,9 @@
                             <v-text-field color="secondary" :rules="usernameRules" outline label="Přihlasovací jméno*" type="text" v-model="user.username"></v-text-field>
                             <v-text-field color="secondary" :rules="nameRules" outline label="Jméno*" type="text" v-model="user.name"></v-text-field>
                             <v-text-field color="secondary" :rules="emailRules" outline label="E-mail*" type="text" v-model="user.email"></v-text-field>
-                            <v-text-field :append-icon="showPswd ? 'mdi-eye-off' : 'mdi-eye'"
-                                        @click:append="showPswd = !showPswd"
-                             color="secondary" :rules="passwordRules" outline label="Heslo*" :type="showPswd ? 'text' : 'password'" v-model="user.password">
-                                </v-text-field>
-                            <v-text-field color="secondary"
-                            :append-icon="showPswd2 ? 'mdi-eye-off' : 'mdi-eye'"
-                                        @click:append="showPswd2 = !showPswd2"
-                             :rules="[(this.user.password === this.passwordMatch) || 'Hesla se musí zhodovat']" outline label="Zopakovat heslo*" :type="showPswd2 ? 'text' : 'password'" v-model="passwordMatch"></v-text-field>
+                            <v-text-field :append-icon="showPswd ? 'mdi-eye-off' : 'mdi-eye'" @click:append="showPswd = !showPswd" color="secondary" :rules="passwordRules" outline label="Heslo*" :type="showPswd ? 'text' : 'password'" v-model="user.password">
+                            </v-text-field>
+                            <v-text-field color="secondary" :append-icon="showPswd2 ? 'mdi-eye-off' : 'mdi-eye'" @click:append="showPswd2 = !showPswd2" :rules="[(this.user.password === this.passwordMatch) || 'Hesla se musí zhodovat']" outline label="Zopakovat heslo*" :type="showPswd2 ? 'text' : 'password'" v-model="passwordMatch"></v-text-field>
                             <v-text-field color="secondary" :rules="phoneRules" outline label="Telefon" type="number" v-model="user.phone"></v-text-field>
                         </v-form>
                         <small>*Povinný</small>

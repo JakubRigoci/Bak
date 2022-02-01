@@ -1,30 +1,23 @@
 <template lang="">
 <v-container fluid class="primary">
     <v-card>
-    <v-card-title>
+        <v-card-title>
             <v-checkbox color="secondary" v-model="inactive" label="Neaktivní"></v-checkbox>
             <v-spacer></v-spacer>
-      <v-text-field
-        color="secondary"
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Hledat"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
+            <v-text-field color="secondary" v-model="search" append-icon="mdi-magnify" label="Hledat" single-line hide-details></v-text-field>
+        </v-card-title>
         <v-data-table :headers="headers" :search="search" :items="inactive ? inactiveUsers : users" class="elevation-1">
 
-        <template v-slot:item.roles="{ item }">
-            <div>
-                {{ item.roles.map(u => u.name).join(' , ') }}
-            </div>
-        </template>
-        <template v-slot:item.actions="{ item }">
-            <UserEditPopup :userId="item.userId"></UserEditPopup>
-        </template>
+            <template v-slot:item.roles="{ item }">
+                <div>
+                    {{ item.roles.map(u => u.name).join(' , ') }}
+                </div>
+            </template>
+            <template v-slot:item.actions="{ item }">
+                <UserEditPopup :userId="item.userId"></UserEditPopup>
+            </template>
         </v-data-table>
-  </v-card>
+    </v-card>
 </v-container>
 </template>
 

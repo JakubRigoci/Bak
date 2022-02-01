@@ -13,31 +13,31 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="nameRules" v-model="box.jmeno" label="Jméno*" required></v-text-field>
+                                <v-text-field color="info" :rules="nameRules" v-model="box.jmeno" label="Jméno*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="commentRules" v-model="box.komentar" label="Komentář*"></v-text-field>
+                                <v-text-field color="info" :rules="commentRules" v-model="box.komentar" label="Komentář*"></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="numberRules" type="number" v-model="box.vyska" label="Výška*" required></v-text-field>
+                                <v-text-field color="info" :rules="numberRules" type="number" v-model="box.vyska" label="Výška*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="numberRules" v-model="box.sirka" type="number" label="Šírka*" required></v-text-field>
+                                <v-text-field color="info" :rules="numberRules" v-model="box.sirka" type="number" label="Šírka*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="numberRules" v-model="box.hloubka" type="number" label="Hloubka*" required></v-text-field>
+                                <v-text-field color="info" :rules="numberRules" v-model="box.hloubka" type="number" label="Hloubka*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" v-model="menu" :close-on-content-click="false" offset-y min-width="auto">
                                     <template v-slot:activator="{on}">
                                         <v-text-field readonly :value="formatedDate" v-on="on" label="Datum pořízení"></v-text-field>
                                     </template>
-                                    <v-date-picker @input="menu = false" color="secondary" v-model="box.datumPorizeni"></v-date-picker>
+                                    <v-date-picker @input="menu = false" color="info" v-model="box.datumPorizeni"></v-date-picker>
                                 </v-menu>
                             </v-col>
 
                             <v-col cols="12">
-                                <v-text-field color="secondary" v-model="box.prodejce" label="Prodejce"></v-text-field>
+                                <v-text-field color="info" v-model="box.prodejce" label="Prodejce"></v-text-field>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -89,7 +89,6 @@ export default {
             if (this.$refs.form.validate()) {
                 this.dialog = false
                 this.$store.dispatch("editBox", this.box)
-                //this.$store.dispatch("getBoxes")
             }
         },
         format: format

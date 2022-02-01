@@ -13,38 +13,38 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="nameRules" v-model="snail.jmeno" label="Jméno*" required></v-text-field>
+                                <v-text-field color="info" :rules="nameRules" v-model="snail.jmeno" label="Jméno*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="commentRules" v-model="snail.komentar" label="Komentář*" required></v-text-field>
+                                <v-text-field color="info" :rules="commentRules" v-model="snail.komentar" label="Komentář*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.barvaUlita" label="Barva ulity"></v-text-field>
+                                <v-text-field color="info" :rules="lengthRules" v-model="snail.barvaUlita" label="Barva ulity"></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.barvaTelo" label="Barva tela"></v-text-field>
+                                <v-text-field color="info" :rules="lengthRules" v-model="snail.barvaTelo" label="Barva tela"></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="lengthRules" v-model="snail.vzorecUlita" label="Vzor ulity"></v-text-field>
+                                <v-text-field color="info" :rules="lengthRules" v-model="snail.vzorecUlita" label="Vzor ulity"></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-menu transition="scale-transition" v-model="menu" :close-on-content-click="false" offset-y min-width="auto">
                                     <template v-slot:activator="{on}">
                                         <v-text-field :value="formatedBornDate" v-on="on" label="Narozen"></v-text-field>
                                     </template>
-                                    <v-date-picker color="secondary" @input="menu = false" v-model="snail.narozen"></v-date-picker>
+                                    <v-date-picker color="info" @input="menu = false" v-model="snail.narozen"></v-date-picker>
                                 </v-menu>
                             </v-col>
                             <v-col cols="12">
-                                <v-checkbox color="secondary" v-model="snuskaSelected" label="Určit snúšku"></v-checkbox>
-                                <v-select @change="modifyBirth" v-if="snuskaSelected" item-color="secondary" :rules="selectRules" color="secondary" v-model="snail.snuskaId" :items="snuskas" item-text="komentar" item-value="snuskaId" label="Snúška*" required></v-select>
+                                <v-checkbox color="info" v-model="snuskaSelected" label="Určit snúšku"></v-checkbox>
+                                <v-select @change="modifyBirth" v-if="snuskaSelected" item-color="info" :rules="selectRules" color="info" v-model="snail.snuskaId" :items="snuskas" item-text="komentar" item-value="snuskaId" label="Snúška*" required></v-select>
                             </v-col>
                             <v-col cols="12">
-                                <v-checkbox color="secondary" v-model="taxonomySelected" label="Určit taxonomii"></v-checkbox>
+                                <v-checkbox color="info" v-model="taxonomySelected" label="Určit taxonomii"></v-checkbox>
                                 <TaxonomyTreeView v-on:change="(v) => {snail.taxonomyId = v[0]}" v-if="taxonomySelected"></TaxonomyTreeView>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" v-model="snail.puvodSneka" label="Púvod šneka"></v-text-field>
+                                <v-text-field color="info" v-model="snail.puvodSneka" label="Púvod šneka"></v-text-field>
                             </v-col>
                         </v-row>
                     </v-container>

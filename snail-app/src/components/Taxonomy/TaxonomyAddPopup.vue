@@ -3,7 +3,6 @@
     <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
             <v-card allign="center" class="mx-auto primary justify-center d-flex" max-width="344" outlined>
-
                 <v-avatar v-bind="attrs" v-on="on" class="d-flex " color="secondary" size='120'>
                     <v-icon x-large> mdi-plus-thick </v-icon>
                 </v-avatar>
@@ -18,11 +17,11 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="nameRules" v-model="taxonomy.jmeno" label="Jméno*" required></v-text-field>
+                                <v-text-field color="info" :rules="nameRules" v-model="taxonomy.jmeno" label="Jméno*" required></v-text-field>
                             </v-col>
                             <v-col>
-                                <v-checkbox color="secondary" v-model="levelSelected" label="Určit naddruh"></v-checkbox>
-                                <v-select v-if="levelSelected" item-color="secondary" color="secondary" v-model="taxonomy.fkTaxonomyTaxonomy" :items="taxonomies" item-text="jmeno" item-value="taxonomyId" label="Taxonomie" clearable></v-select>
+                                <v-checkbox color="info" v-model="levelSelected" label="Určit naddruh"></v-checkbox>
+                                <v-select v-if="levelSelected" item-color="info" color="info" v-model="taxonomy.fkTaxonomyTaxonomy" :items="taxonomies" item-text="jmeno" item-value="taxonomyId" label="Taxonomie" clearable></v-select>
                             </v-col>
                         </v-row>
                     </v-container>

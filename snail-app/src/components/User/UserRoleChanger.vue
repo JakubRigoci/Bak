@@ -1,21 +1,11 @@
 <template lang="">
 <v-container fluid>
     <p>Vyberte role:</p>
-    <v-checkbox
-      color="secondary"
-      v-model="selected"
-      label="ADMIN"
-      value="ADMIN"
-    ></v-checkbox>
-    <v-checkbox
-      disabled
-      color="secondary"
-      v-model="selected"
-      label="USER"
-      value="USER"
-    ></v-checkbox>
-  </v-container>
+    <v-checkbox color="info" v-model="selected" label="ADMIN" value="ADMIN"></v-checkbox>
+    <v-checkbox disabled color="info" v-model="selected" label="USER" value="USER"></v-checkbox>
+</v-container>
 </template>
+
 <script>
 export default {
     props: {
@@ -36,6 +26,7 @@ export default {
     },
 }
 </script>
+
 <style lang="">
-    
+
 </style>

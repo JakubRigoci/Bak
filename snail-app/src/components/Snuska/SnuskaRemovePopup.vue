@@ -42,7 +42,7 @@ export default {
         save() {
             this.dialog = false
             this.$store.dispatch("removeSnuska", this.id)
-            if (this.reroute){
+            if (this.reroute) {
                 this.$router.push('/snuskas')
             }
         }

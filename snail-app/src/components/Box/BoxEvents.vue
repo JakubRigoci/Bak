@@ -7,7 +7,6 @@
                 <Event type="box" :eventId="event.udalostId" :id="boxId"></Event>
             </v-timeline-item>
         </v-timeline>
-
     </div>
     <div v-if="events.length === 0">
         <span>Zatím nejsou žádné udalosti</span>

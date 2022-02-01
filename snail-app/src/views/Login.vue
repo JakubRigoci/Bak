@@ -13,11 +13,7 @@
                     <v-card-text>
                         <v-form>
                             <v-text-field color="secondary" outline label="Přihlasovací jméno" type="text" v-model="name"></v-text-field>
-                            <v-text-field color="secondary"
-                            :append-icon="showPswd ? 'mdi-eye-off' : 'mdi-eye'"
-                                        @click:append="showPswd = !showPswd"
-
-                             outline hide-details label="Heslo" :type="showPswd ? 'text' : 'password'" v-model="password"></v-text-field>
+                            <v-text-field color="secondary" :append-icon="showPswd ? 'mdi-eye-off' : 'mdi-eye'" @click:append="showPswd = !showPswd" outline hide-details label="Heslo" :type="showPswd ? 'text' : 'password'" v-model="password"></v-text-field>
                         </v-form>
                     </v-card-text>
                     <v-divider></v-divider>
@@ -38,7 +34,6 @@
 </template>
 
 <script>
-
 export default {
     name: "Login",
     data() {

@@ -13,10 +13,10 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field color="secondary" v-model="group.jmeno" :rules="nameRules" label="Jméno*" required></v-text-field>
+                                <v-text-field color="info" v-model="group.jmeno" :rules="nameRules" label="Jméno*" required></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field color="secondary" v-model="group.komentar" :rules="commentNotRequired" label="Komentář" required></v-text-field>
+                                <v-text-field color="info" v-model="group.komentar" :rules="commentNotRequired" label="Komentář" required></v-text-field>
                             </v-col>
                         </v-row>
                     </v-container>

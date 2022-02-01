@@ -1,12 +1,12 @@
 <template lang="">
 <div>
-    <v-btn  color="info" @click="showFilter = !showFilter">
+    <v-btn color="info" @click="showFilter = !showFilter">
         Filter
     </v-btn>
     <v-expand-transition>
         <div v-if="showFilter">
             Filter
-            <v-text-field @change="emitValue" color="secondary" label="Komentář" v-model="commentaryFilter"></v-text-field>
+            <v-text-field @change="emitValue" color="info" label="Komentář" v-model="commentaryFilter"></v-text-field>
         </div>
     </v-expand-transition>
 </div>

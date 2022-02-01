@@ -11,14 +11,14 @@
             <v-divider></v-divider>
             <GroupContainer v-if="!showSnails" :ids="groups.map(g => g.skupinaId)"></GroupContainer>
             <SnailContainer v-if="showSnails && groups[0]" :groupId="groups[0].skupinaId"></SnailContainer>
-             <v-tooltip v-if="showSnails" bottom>
+            <v-tooltip v-if="showSnails" bottom>
                 <template v-slot:activator="{ on, attrs }">
                     <div v-bind="attrs" v-on="on">
                         <GroupAddPopup :boxId="boxId"></GroupAddPopup>
                     </div>
                 </template>
                 <span>Přidat skupinu</span>
-            </v-tooltip>    
+            </v-tooltip>
         </div>
     </v-expand-transition>
     <h1 class="pt-8 subheading grey--text">Události</h1>
@@ -66,9 +66,9 @@ export default {
             return this.$store.state.groupsForBox;
         },
         showSnails() {
-            if(this.groups)
+            if (this.groups)
                 return this.groups.length <= 1
-            
+
             return false
         }
     },

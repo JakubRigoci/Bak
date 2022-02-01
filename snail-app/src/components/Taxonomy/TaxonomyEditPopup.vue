@@ -13,11 +13,11 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field color="secondary" :rules="nameRules" v-model="taxonomy.jmeno" label="Jméno*" required></v-text-field>
+                                <v-text-field color="info" :rules="nameRules" v-model="taxonomy.jmeno" label="Jméno*" required></v-text-field>
                             </v-col>
                             <v-col>
-                                <v-checkbox color="secondary" v-model="levelSelected" label="Určit naddruh"></v-checkbox>
-                                <v-select v-if="levelSelected" item-color="secondary" color="secondary" v-model="taxonomy.fkTaxonomyTaxonomy" :items="taxonomies" item-text="jmeno" item-value="taxonomyId" label="Taxonomie" clearable></v-select>
+                                <v-checkbox color="info" v-model="levelSelected" label="Určit naddruh"></v-checkbox>
+                                <v-select v-if="levelSelected" item-color="info" color="info" v-model="taxonomy.fkTaxonomyTaxonomy" :items="taxonomies" item-text="jmeno" item-value="taxonomyId" label="Taxonomie" clearable></v-select>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -49,10 +49,10 @@ export default {
     },
     data() {
         return {
-                    dialog: false,
-        valid: false,
-        levelSelected: this.taxonomy.fkTaxonomyTaxonomy !== null,
-        nameRules: nameRules,
+            dialog: false,
+            valid: false,
+            levelSelected: this.taxonomy.fkTaxonomyTaxonomy !== null,
+            nameRules: nameRules,
 
         }
     },

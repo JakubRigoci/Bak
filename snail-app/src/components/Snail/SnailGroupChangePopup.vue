@@ -9,7 +9,7 @@
                 <span class="text-h5">Změnit skupinu šneka</span>
             </v-card-title>
             <v-card-text>
-                <v-select item-color="secondary" color="secondary" v-model="selectedGroup" :items="groups" item-text="jmeno" item-value="skupinaId" label="Skupiny*" required></v-select>
+                <v-select item-color="info" color="info" v-model="selectedGroup" :items="groups" item-text="jmeno" item-value="skupinaId" label="Skupiny*" required></v-select>
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>

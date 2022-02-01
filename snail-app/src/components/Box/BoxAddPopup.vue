@@ -4,7 +4,7 @@
         <template v-slot:activator="{ on, attrs }">
             <v-card width="100%" v-bind="attrs" v-on="on" allign="center" class="mx-auto primary justify-center d-flex" outlined>
 
-                <v-avatar color="info" size='120'>
+                <v-avatar color="secondary" size='120'>
                     <v-icon x-large> mdi-plus-thick </v-icon>
                 </v-avatar>
             </v-card>
