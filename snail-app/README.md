@@ -1,5 +1,11 @@
 # snail-app
 
+# Set api endpoint
+```
+navigate to src/config/config.json
+set 'url' to address of api endpoints
+```
+
 ## Project setup
 ```
 npm install
@@ -15,10 +21,4 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
