@@ -38,7 +38,7 @@
                                     <template v-slot:activator="{on}">
                                         <v-text-field readonly :value="formatedDate" v-on="on" label="Datum pořízení"></v-text-field>
                                     </template>
-                                    <v-date-picker @input="menu = false" color="info" v-model="box.datumPorizeni"></v-date-picker>
+                                    <v-date-picker :max="new Date().toISOString()" @input="menu = false" color="info" v-model="box.datumPorizeni"></v-date-picker>
                                 </v-menu>
                             </v-col>
 

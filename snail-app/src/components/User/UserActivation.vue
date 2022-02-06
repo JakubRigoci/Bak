@@ -6,7 +6,7 @@
             <template v-slot:activator="{on}">
                 <v-text-field readonly :value="formatedDate" v-on="on"></v-text-field>
             </template>
-            <v-date-picker @input="emitValue" color="info" v-model="activeUntil"></v-date-picker>
+            <v-date-picker :min="new Date().toISOString()" @input="emitValue" color="info" v-model="activeUntil"></v-date-picker>
         </v-menu>
     </v-col>
 </v-container>

@@ -21,7 +21,7 @@
                                 <template v-slot:activator="{on}">
                                     <v-text-field :value="formatedDate" v-on="on" label="Datum"></v-text-field>
                                 </template>
-                                <v-date-picker color="info" v-model="measure.datum"></v-date-picker>
+                                <v-date-picker :max="new Date().toISOString()" color="info" v-model="measure.datum"></v-date-picker>
                             </v-menu>
                         </v-col>
                         <v-col cols="12">

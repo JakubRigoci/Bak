@@ -24,7 +24,7 @@
                                     <template v-slot:activator="{on}">
                                         <v-text-field readonly color="info" :value="formatedDate" v-on="on" label="Datum snesení*" required></v-text-field>
                                     </template>
-                                    <v-date-picker color="info" @input="menu = false" v-model="snuska.datumSneseni"></v-date-picker>
+                                    <v-date-picker color="info" :max="new Date().toISOString()"  @input="menu = false" v-model="snuska.datumSneseni"></v-date-picker>
                                 </v-menu>
                             </v-col>
                             <v-col cols="12">
@@ -35,7 +35,7 @@
                                     <template v-slot:activator="{on}">
                                         <v-text-field readonly color="info" :value="formatedHatchingPeriodDate" v-on="on" label="Perioda vylíhnutí*"></v-text-field>
                                     </template>
-                                    <v-date-picker color="info" range v-model="hatchingPeriod"></v-date-picker>
+                                    <v-date-picker :max="new Date().toISOString()" color="info" range v-model="hatchingPeriod"></v-date-picker>
                                 </v-menu>
                             </v-col>
                             <v-col cols="12">
@@ -108,7 +108,7 @@ export default {
             return this.$store.state.groups
         },
         snailsForGroup() {
-            return this.$store.getters.snailsByGroup(this.snuska.skupinaId)
+            return this.$store.getters.snailsByGroup(this.snuska.skupinaId) || []
         },
         formatedDate() {
             return this.snuska.datumSneseni ? this.format(this.snuska.datumSneseni) : ''

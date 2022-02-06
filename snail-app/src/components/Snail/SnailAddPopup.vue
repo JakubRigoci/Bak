@@ -32,7 +32,7 @@
                                     <template v-slot:activator="{on}">
                                         <v-text-field :value="formatedDate" v-on="on" label="Narozen"></v-text-field>
                                     </template>
-                                    <v-date-picker @input="menu = false" color="info" v-model="snail.narozen"></v-date-picker>
+                                    <v-date-picker :max="new Date().toISOString()" @input="menu = false" color="info" v-model="snail.narozen"></v-date-picker>
                                 </v-menu>
                             </v-col>
                             <v-col cols="12">
