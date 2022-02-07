@@ -16,7 +16,7 @@
                                 <v-text-field color="info" :rules="nameRules" v-model="taxonomy.jmeno" label="Jméno*" required></v-text-field>
                             </v-col>
                             <v-col>
-                                <v-checkbox color="info" v-model="levelSelected" label="Určit naddruh"></v-checkbox>
+                                <v-checkbox color="info" v-model="levelSelected" label="Určit podřazený taxon"></v-checkbox>
                                 <v-select v-if="levelSelected" item-color="info" color="info" v-model="taxonomy.fkTaxonomyTaxonomy" :items="taxonomies" item-text="jmeno" item-value="taxonomyId" label="Taxonomie" clearable></v-select>
                             </v-col>
                         </v-row>
